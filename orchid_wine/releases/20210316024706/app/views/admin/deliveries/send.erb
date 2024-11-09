@@ -1,0 +1,156 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">集装箱发货</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>业务管理</li>
+    <li>发货管理</li>
+    <li class="active">集装箱发货</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">发货管理</p>
+          <hr/>
+          <dl class="dl-horizontal">
+            <dt>预约号：</dt>
+            <dd><%== @delivery.booking_number %></dd>
+            <dt>货代名称：</dt>
+            <dd><%== @delivery.shipping_company %> (<%== @delivery.shipping_company_telephone %>)</dd>
+            <dt>出口公司：</dt><dd><%== @delivery.export_company_name %></dd>
+            <dt>进口公司：</dt><dd><%== @delivery.import_company_name %></dd>
+            <dt>是否需要隔热棉：</dt>
+            <dd><%== (@delivery.cotton_insulation == 1 ? '是' : '否') %></dd>
+            <dt>是否需要海运保险：</dt>
+            <dd><%== (@delivery.ocean_insurance == 1 ? '是' : '否') %></dd>
+          </dl>
+          <hr/>
+          <dl class="dl-horizontal">
+            <dt>出口方公司名称：</dt><dd><%== @delivery.export_company_name %></dd>
+            <dt>出口方联系人：</dt><dd><%== @delivery.export_company_contacts %> </dd>
+            <dt>出口方电话：</dt><dd><%== @delivery.export_company_telephone %></dd>
+            <dt>出口方电子邮箱：</dt><dd><%== @delivery.export_company_email %></dd>
+            <dt>出口方地址：</dt><dd><%== @delivery.export_company_address %></dd>
+          </dl>
+          <hr/>
+          <dl class="dl-horizontal">
+            <dt>进口方公司名称：</dt><dd><%== @delivery.import_company_name %></dd>
+            <dt>进口方联系人：</dt><dd><%== @delivery.import_company_contacts %> </dd>
+            <dt>进口方电话：</dt><dd><%== @delivery.import_company_telephone %></dd>
+            <dt>进口方电子邮箱：</dt><dd><%== @delivery.import_company_email %></dd>
+            <dt>进口方社会统一信用代码：</dt><dd><%== @delivery.import_company_uscc %></dd>
+            <dt>进口方地址：</dt><dd><%== @delivery.import_company_address %></dd>
+          </dl>
+        </div>
+      </div>
+      <%= form_tag("/admin/deliveries/#{@delivery.id}/send_put", method: :put, class: 'form-horizontal', id: 'send_put-edit') do -%>
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">集装箱列表</h3>
+        </div>
+        <div class="panel-body">
+          <% if @delivery.containers.present? %>
+          <div class="table-responsive">
+            <table class="table table-vcenter">
+              <tbody>
+                <%
+                @delivery.containers.map do |container|
+                %>
+                <tr <%== 'class="bg-gray"' if params[:container_id].to_i == container.id %>>
+                  <th class="text-left">集装箱 NO-<%== container.id %></th>
+                  <th></th>
+                  <th>
+                    <%= text_field_tag "container_#{container.id}_number_copy", params["container_#{container.id}_number"], placeholder: '填写集装箱号', class: "form-control container_number_input_copy", autocomplete: 'off'%>
+                  </th>
+                </tr>
+                <% if @order_production_deliveries[container.id].present? %>
+                <% @order_production_deliveries[container.id].map do |order_production_delivery| %>
+                <tr>
+                  <td>
+                    <%== order_production_delivery.order_id %> /
+                    <%== order_production_delivery.user.name %>
+                  </td>
+                  <td><%== order_production_delivery.show_in_delivery %></td>
+                </tr>
+                <%end %>
+                <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% else %>
+          <h5 class="text-main">暂无集装箱。</h5>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">发货信息</h3>
+        </div>
+        <div class="panel-body">
+          <p><b>总瓶数：<%== @delivery.total_bottle_num %>，发往：<%== @delivery.port_of_discharge %>。</b></p>
+          <hr/>
+          
+          <div class="col-sm-12">
+            <input type="hidden" id="hidden-packing_list" name='packing_list' value="<%== @delivery.packing_list %>">
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> WEA出口许可证号</label>
+              <div class="col-sm-3">
+                <%= text_field_tag 'wea_number', params[:wea_number], class: "form-control"%>
+              </div>
+            </div>
+
+            <% @delivery.containers.map do |container| %>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 集装箱 NO-<%== container.id %> 号</label>
+              <div class="col-sm-3">
+                <%= text_field_tag "container_#{container.id}_number", params["container_#{container.id}_number"], placeholder: '填写集装箱号', class: "form-control container_number_input", autocomplete: 'off'%>
+              </div>
+            </div>
+            <% end %>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 上传发货单</label>
+              <div class="col-sm-6">
+                <span class="pull-left btn btn-default btn-file">
+                  <i>选择（PDF）文件... </i><input id='packing_list' type="file" class="file-upload">
+                </span>
+                <small class="help-block">（注：文件格式PDF，大小不超过5M。）</small>
+              </div>
+              <div class="col-sm-6 col-sm-offset-2">
+                <div class="col-sm-12 control-label text-left" id="preview-packing_list">
+                  <% if @delivery.packing_list.present? %>
+                  已上传：<a class="btn-link" href="<%== @delivery.packing_list %>"><%== @delivery.packing_list.split('/').last %></a>
+                  <% else %>
+                  <!-- 未上传文件 -->
+                  <% end %>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <div class="col-sm-8 col-sm-offset-2">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end -%>
+  </div>
+</div>

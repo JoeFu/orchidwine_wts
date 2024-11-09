@@ -1,0 +1,6 @@
+---
+0.0.1 chunky_png:>= 0,rqrcode:>= 0|checksum:9cca58d3b7e4cf356bfc0c86b3178f0178c4d376bee93431566a35fdec3b8e99
+0.1.0 chunky_png:>= 0,rqrcode:>= 0|checksum:1caed154ccd19b9f8d59d2ab042babb0fb56941b305022498a0cbf4e4f70f7bc
+0.1.1 chunky_png:>= 0,rqrcode:>= 0|checksum:184ec53cbf5a14e6e4786a1d3c7b4fb0a91be54ac926e4c6b64056c38d46f1c2
+0.1.2 chunky_png:>= 0,rqrcode:>= 0|checksum:eae7e137751d1e739b64b4fb2fbb51d3c3d4283b6884f46b81adcd7ab0dd33aa
+0.1.5 chunky_png:>= 0,rqrcode:>= 0|checksum:ec5739f1ec48c769e478329ceabfae676ee33e372609697e7e6713691cc01a92

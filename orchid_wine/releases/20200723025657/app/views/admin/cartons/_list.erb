@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th class="text-center">纸箱编码</th>
+        <th class="text-center">纸箱描述</th>
+        <th class="text-center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cartons.map do |carton|%>
+      <tr>
+        <td class="text-center"><%== carton.id %></td>
+        <td class="text-center"><%== carton.desc %></td>
+        <td class="text-center">
+          <%== edit_btn_tag(carton) %>
+          <% if can? :destroy, :Carton %>
+          <%== destroy_btn_tag(carton) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

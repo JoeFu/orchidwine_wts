@@ -1,0 +1,67 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑 管理员/销售</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>用户管理</li>
+    <li>管理员/销售 列表</li>
+    <li class="active">编辑 <%== @admin.true_name %></li>
+  </ol>
+</div>
+
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/admins/#{@admin.id}/passwd_post", method: :put, class: 'form-horizontal', id: 'admins-passwd') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @admin.show_name %>」 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label" >登录账号</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'user_name', @admin.user_name, class: "form-control", readonly: true%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">旧密码</label>
+              <div class="col-sm-6">
+                <%= password_field_tag 'old_password', nil, placeholder: "旧密码", class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">新密码</label>
+              <div class="col-sm-6">
+                <%= password_field_tag 'new_password', nil, placeholder: "新密码", class: "form-control"%>
+              </div>
+            </div>
+
+             <div class="form-group">
+              <label class="col-sm-3 control-label">新密码确认</label>
+              <div class="col-sm-6">
+                <%= password_field_tag 'confirm_new_password', nil, placeholder: "新密码确认", class: "form-control"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <button type='submit' class="btn btn-info btn-labeled"><i class="btn-label ion-archive"></i> 保存</button>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

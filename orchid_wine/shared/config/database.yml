@@ -1,0 +1,18 @@
+base: &base
+  adapter: mysql2
+  host: '127.0.0.1'
+  encoding: utf8
+  reconnect: ture
+  timeout: 1000
+  pool: 30
+  username: root
+  password:
+  database: orchid_wine
+
+development:
+  <<: *base
+
+production:
+  <<: *base
+  username: root
+  password: R8o3H9Y79gX2c46C

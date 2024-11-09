@@ -1,0 +1,85 @@
+<%= form_tag(@form_action + '?step=4', method: @form_method, class: 'form-horizontal', id: 'orders-new-trade') do -%>
+<div class="panel trade-panel">
+	<div class="panel-body">
+		<div class="col-sm-6 col-sm-offset-3">
+			<% {
+			'seller' => "卖方",
+			'export' => "出口方",
+			'import' => '进口接货方<span class="text-warning">（必须具有中国进出口接货资质）</span>',
+			'buyer' => '买方'
+			}.map do |k, v| %>
+			<p class="bord-btm pad-ver text-main text-bold"><%== v %></p>
+			<% if ['seller', 'export'].include?(k) %>
+			<div class="form-group">
+				<div class="col-sm-4 col-sm-offset-2">
+					<div class="checkbox">
+						<input id="<%== k %>-checkbox" class="magic-checkbox" type="checkbox" <%== 'checked="checked"' if @order.send("#{k}_default?") %>>
+						<label for="<%== k %>-checkbox">澳麒销售</label>
+					</div>
+				</div>
+			</div>
+			<% end %>
+			<div class="form-group">
+				<label class="col-sm-2 control-label"><b class="text-danger">*</b> 公司名称</label>
+				<div class="col-sm-4">
+					<%= text_field_tag "#{k}_company_name",
+					@order.send("#{k}_company_name"),
+					placeholder: "公司名称",
+					'data-default': Const::ORCHID_INFO[:company_name],
+					class: "form-control",
+					"#{@order.send("#{k}_default?") ? 'readonly' : '' rescue ''}": ''
+						%>
+				</div>
+				
+				<label class="col-sm-2 control-label">联系人</label>
+				<div class="col-sm-4">
+					<%= text_field_tag "#{k}_company_contacts",
+					@order.send("#{k}_company_contacts"),
+					placeholder: "联系人",
+					'data-default': Const::ORCHID_INFO[:company_contacts],
+					class: "form-control",
+					"#{@order.send("#{k}_default?") ? 'readonly' : '' rescue ''}": ''
+						%>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">电话</label>
+				<div class="col-sm-4">
+					<%= text_field_tag "#{k}_company_telephone",
+					@order.send("#{k}_company_telephone"),
+					placeholder: "电话",
+					'data-default': Const::ORCHID_INFO[:company_telephone],
+					class: "form-control",
+					"#{@order.send("#{k}_default?") ? 'readonly' : '' rescue ''}": ''
+						%>
+				</div>
+				
+				<label class="col-sm-2 control-label">电子邮箱</label>
+				<div class="col-sm-4">
+					<%= text_field_tag "#{k}_company_email",
+					@order.send("#{k}_company_email"),
+					placeholder: "电子邮箱",
+					'data-default': Const::ORCHID_INFO[:company_email],
+					class: "form-control",
+					"#{@order.send("#{k}_default?") ? 'readonly' : '' rescue ''}": ''
+						%>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label"><b class="text-danger">*</b> 地址</label>
+				<div class="col-sm-10">
+					<%= text_field_tag "#{k}_company_address",
+					@order.send("#{k}_company_address"),
+					placeholder: "地址",
+					'data-default': Const::ORCHID_INFO[:company_address],
+					class: "form-control",
+					"#{@order.send("#{k}_default?") ? 'readonly' : '' rescue ''}": ''
+						%>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<% end -%>

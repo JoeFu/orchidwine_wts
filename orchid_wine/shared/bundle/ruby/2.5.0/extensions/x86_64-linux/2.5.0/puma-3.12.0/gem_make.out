@@ -1,0 +1,43 @@
+current directory: /home/orchid/orchid_wine/shared/bundle/ruby/2.5.0/gems/puma-3.12.0/ext/puma_http11
+/home/orchid/.rvm/rubies/ruby-2.5.0/bin/ruby -I /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/site_ruby/2.5.0 -r ./siteconf20190410-28791-2d2wy6.rb extconf.rb
+checking for BIO_read() in -lcrypto... yes
+checking for SSL_CTX_new() in -lssl... yes
+checking for openssl/bio.h... yes
+creating Makefile
+
+current directory: /home/orchid/orchid_wine/shared/bundle/ruby/2.5.0/gems/puma-3.12.0/ext/puma_http11
+make "DESTDIR=" clean
+
+current directory: /home/orchid/orchid_wine/shared/bundle/ruby/2.5.0/gems/puma-3.12.0/ext/puma_http11
+make "DESTDIR="
+compiling http11_parser.c
+compiling io_buffer.c
+compiling mini_ssl.c
+mini_ssl.c: 在函数‘engine_init_server’中:
+mini_ssl.c:153:3: 警告：ISO C90 不允许混合使用声明和代码 [-Wdeclaration-after-statement]
+   ID sym_cert = rb_intern("cert");
+   ^
+mini_ssl.c:158:3: 警告：ISO C90 不允许混合使用声明和代码 [-Wdeclaration-after-statement]
+   ID sym_ca = rb_intern("ca");
+   ^
+mini_ssl.c:189:3: 警告：ISO C90 不允许混合使用声明和代码 [-Wdeclaration-after-statement]
+   DH *dh = get_dh1024();
+   ^
+mini_ssl.c:193:3: 警告：ISO C90 不允许混合使用声明和代码 [-Wdeclaration-after-statement]
+   EC_KEY *ecdh = EC_KEY_new_by_curve_name(NID_secp521r1);
+   ^
+mini_ssl.c: 在函数‘raise_error’中:
+mini_ssl.c:250:6: 警告：function might be candidate for attribute ‘noreturn’ [-Wsuggest-attribute=noreturn]
+ void raise_error(SSL* ssl, int result) {
+      ^
+mini_ssl.c: 在文件作用域：
+cc1: 警告：无法识别的命令行选项“-Wno-self-assign” [默认启用]
+cc1: 警告：无法识别的命令行选项“-Wno-constant-logical-operand” [默认启用]
+cc1: 警告：无法识别的命令行选项“-Wno-parentheses-equality” [默认启用]
+cc1: 警告：无法识别的命令行选项“-Wno-tautological-compare” [默认启用]
+compiling puma_http11.c
+linking shared-object puma/puma_http11.so
+
+current directory: /home/orchid/orchid_wine/shared/bundle/ruby/2.5.0/gems/puma-3.12.0/ext/puma_http11
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 puma_http11.so ./.gem.20190410-28791-kwfc38/puma

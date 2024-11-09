@@ -1,0 +1,56 @@
+<div class="table-responsive">
+	<table class="table table-bordered table-vcenter">
+		<thead>
+			<tr>
+				<th class="text-center">销售人员</th>
+				<th>产品描述</th>
+				<th class="text-right">销售数量</th>
+				<th class="text-right">售价</th>
+				<th class="text-right">成本</th>
+				<th class="text-right">销售金额</th>
+				<th class="text-right">毛利%</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+			@sales_statistics.map do |seller_name, productions|
+			rowspan = productions.count
+			i = 0
+			num_count = 0
+			total_fee = 0
+			sunprodroduct = 0
+			productions.map do |id, production|
+			num_count += production[:total]
+			total_fee += production[:total] * production[:price]
+			margin = (production[:price] - production[:cost]) / production[:price]
+			sunprodroduct += production[:total] * margin
+			i += 1
+			%>
+			<tr>
+				<% if i == 1 %>
+				<td rowspan="<%== rowspan %>" class="text-center"><%== seller_name %></td>
+				<% end %>
+				<td><%== production[:bulk_wine_name] %></td>
+				<td class="text-right"><%== production[:total].ts %></td>
+				<td class="text-right">$ <%== '%.2f' % production[:price] %></td>
+				<td class="text-right">$ <%== '%.2f' % production[:cost] %></td>
+				<td class="text-right">$ <%== '%.2f' % (production[:total] * production[:price]) %></td>
+				<td class="text-right">
+					<%== '%.2f' % (margin * 100) %>%
+				</td>
+			</tr>
+			<% if i == rowspan %>
+			<tr class="bg-warning-5">
+				<td colspan="2"></td>
+				<td class="text-right"><%== num_count.ts %></td>
+				<td></td>
+				<td></td>
+				<td class="text-right">$ <%== '%.2f' % total_fee %></td>
+				<td class="text-right"><%== '%.2f' % (sunprodroduct / num_count * 100) %>%</td>
+			</tr>
+			<% end %>
+			<% end %>
+			<% end %>
+		</tbody>
+	</table>
+</div>

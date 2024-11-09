@@ -1,0 +1,169 @@
+<nav id="mainnav-container">
+  <div id="mainnav">
+    
+    <div id="mainnav-menu-wrap">
+      <div class="nano">
+        <div class="nano-content">
+          <div id="mainnav-profile" class="mainnav-profile">
+            <div class="profile-wrap text-center">
+              <a href="javascript:void(0);" class="box-block">
+                <p class="mnp-name"><%== @admin_session.show_name %></p>
+                <span class="mnp-desc"><%== @admin_session.role_show %></span>
+              </a>
+            </div>
+            
+          </div>
+          <ul id="mainnav-menu" class="list-group">
+            
+            <% if can? :index, :Dashboard %>
+            <li class="list-divider"></li>
+            <li <%=="class='active-sub'" if :Dashboard == @controller %>>
+              <a href="/admin/dashboard">
+                <i class="ion-home"></i>
+                <% if @admin_session.role == 2 %>
+                <span class="menu-title">下订单</span>
+                <% else %>
+                <span class="menu-title">Dashboard</span>
+                <% end %>
+              </a>
+            </li>
+            <% end %>
+            
+            <% if can? :index, :Order %>
+            <li class="list-divider"></li>
+            <li class="list-header">业务管理</li>
+            <% end %>
+            <% if can? :create, :Quotation %>
+            <li <%=="class='active-sub'" if [:OrdersNew, :Quotation].include?(@controller) %>>
+              <a href="/admin/quotations">
+                <i class="ion-clipboard"></i>
+                <span class="menu-title">购物车</span>
+              </a>
+            </li>
+            <% end %>
+            <% if can? :index, :Order %>
+            <li <%=="class='active-sub'" if :Order == @controller %>>
+              <a href="/admin/orders">
+                <i class="ion-printer"></i>
+                <span class="menu-title">订单管理</span>
+              </a>
+            </li>
+            <% end %>
+            <% if can? :index, :Delivery %>
+            <li <%=="class='active-sub'" if [:Delivery].include?(@controller) %>>
+              <a href="/admin/deliveries">
+                <i class="ion-navigate"></i>
+                <span class="menu-title">发货管理</span>
+              </a>
+            </li>
+            <% end %>
+            <% if can?(:index, :Bottle) || can?(:index, :BulkWine)%>
+            <li class="list-divider"></li>
+            <li class="list-header">基础数据</li>
+            <% end %>
+            
+            <% if can? :index, :BulkWine %>
+            <% active = [:BulkWineVendor, :BulkWine, :BulkWineStock, :BulkWineYear, :BulkWineArea, :BulkWineVariety, :BulkWineSort].include?(@controller) %>
+            <li <%=="class='active-sub'" if active %>>
+              <a href="#" data-original-title="" title="">
+                <i class="ion-soup-can"></i>
+                <span class="menu-title">产品信息管理</span>
+                <i class="arrow"></i>
+              </a>
+              
+              <ul class="collapse <%== 'in' if active %>" aria-expanded="true">
+                <% if can? :index, :BulkWine %>
+                <li <%=="class='active-link'" if :BulkWine == @controller %>><a href="/admin/bulk_wines">产品注册</a></li>
+                <% end %>
+                <% if can? :index, :BulkWineStock %>
+                <li <%=="class='active-link'" if :BulkWineStock == @controller %>><a href="/admin/bulk_wine_stocks">产品库存</a></li>
+                <% end %>
+                <% if can? :index, :BulkWineVendor %>
+                <li <%=="class='active-link'" if :BulkWineVendor == @controller %>><a href="/admin/bulk_wine_vendors">供应商管理</a></li>
+                <% end %>
+                <% if can? :index, :BulkWineYear %>
+                <li <%=="class='active-link'" if :BulkWineYear == @controller %>><a href="/admin/bulk_wine_years">年份管理</a></li>
+                <% end %>
+                <% if can? :index, :BulkWineArea %>
+                <li <%=="class='active-link'" if :BulkWineArea == @controller %>><a href="/admin/bulk_wine_areas">产区管理</a></li>
+                <% end %>
+                <% if can? :index, :BulkWineVariety %>
+                <li <%=="class='active-link'" if :BulkWineVariety == @controller %>><a href="/admin/bulk_wine_varieties">产品品种管理</a></li>
+                <% end %>
+                <% if can? :index, :BulkWineSort %>
+                <li <%=="class='active-link'" if :BulkWineSort == @controller %>><a href="/admin/bulk_wine_sorts">商品类别管理</a></li>
+                <% end %>
+              </ul>
+            </li>
+            <% end %>
+            <% if can? :index, :Cork %>
+            <% active = [:Cork, :Bottle, :Divider, :Carton, :CapColor].include?(@controller) %>
+            <li <%=="class='active-sub'" if active %>>
+              <a href="#" data-original-title="" title="">
+                <i class="ion-cube"></i>
+                <span class="menu-title">包材管理</span>
+                <i class="arrow"></i>
+              </a>
+              
+              <ul class="collapse <%== 'in' if active %>" aria-expanded="true">
+                <li <%=="class='active-link'" if :Bottle == @controller %>><a href="/admin/bottles">酒瓶</a></li>
+                <li <%=="class='active-link'" if :Cork == @controller %>><a href="/admin/corks">酒塞酒帽</a></li>
+                <li <%=="class='active-link'" if :CapColor == @controller %>><a href="/admin/cap_colors">酒帽颜色</a></li>
+                <li <%=="class='active-link'" if :Divider == @controller %>><a href="/admin/dividers">分隔板</a></li>
+                <li <%=="class='active-link'" if :Carton == @controller %>><a href="/admin/cartons">纸箱</a></li>
+              </ul>
+            </li>
+            <% end %>
+            
+            <% if can?(:index, :User) || can?(:index, :ImportCompany)%>
+            <li class="list-divider"></li>
+            <li class="list-header">客户信息</li>
+            <% if can? :index, :User %>
+            <li <%=="class='active-sub'" if :User == @controller %>>
+              <a href="/admin/users">
+                <i class="ion-person-stalker"></i>
+                <span class="menu-title">客户管理</span>
+              </a>
+            </li>
+            <% end %>
+            <% if can? :index, :ImportCompany %>
+            <li <%=="class='active-sub'" if :ImportCompany == @controller %>>
+              <a href="/admin/import_companies">
+                <i class="ion-flag"></i>
+                <span class="menu-title">进口接货方</span>
+              </a>
+            </li>
+            <% end %>
+            <% end %>
+            <% if can? :index, :Admin %>
+            <li class="list-divider"></li>
+            <li class="list-header">用户管理</li>
+            <li <%=="class='active-sub'" if :Admin == @controller %>>
+              <a href="/admin/admins">
+                <i class="ion-happy"></i>
+                <span class="menu-title">销售/管理员</span>
+              </a>
+            </li>
+            <% end %>
+            <% if can?(:index, :WebProduct) %>
+            <li class="list-divider"></li>
+            <li class="list-header">官网产品配置</li>
+            <li <%=="class='active-sub'" if :WebProductCategory == @controller %>>
+              <a href="/admin/web_product_categories">
+                <i class="ion-grid"></i>
+                <span class="menu-title">产品分类管理</span>
+              </a>
+            </li>
+            <li <%=="class='active-sub'" if :WebProduct == @controller %>>
+              <a href="/admin/web_products">
+                <i class="ion-wineglass"></i>
+                <span class="menu-title">产品管理</span>
+              </a>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

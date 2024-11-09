@@ -1,0 +1,149 @@
+<div class="row">
+  <%= form_tag("/admin/order_productions/#{@order_production.id}/ajax_update", method: :put, class: 'form-horizontal', id: 'order_productions-edit') do -%>
+  <input type="hidden" id="hidden-status" name='status' value="<%== @order_production.order.status %>">
+  <input type="hidden" id="hidden-order_production_id" name='order_production_id' value="<%== @order_production.id %>">
+  <input type="hidden" id="hidden-default-bottle-type" name='default_bottle_type' value="<%== @order_production.bulk_wine_stock.bottle.seal_type rescue 'C' %>">
+  <input type="hidden" id="hidden-is-hb" name='is_hb' value="<%== @order_production.is_hb %>">
+  <% if @order_production.is_hb == 0 %>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">产品筛选</label>
+    <div class="col-sm-2">
+      <select name="sort_id" class="form-control">
+        <option value="0">请筛选产品类型</option>
+        <%== options_for_select(BulkWineSort.options.invert, (@order_production.bulk_wine.sort_id rescue nil)) %>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <select name="year" class="form-control">
+        <option value="">请筛选年份</option>
+        <%== options_for_select(BulkWine.used_years, (@order_production.bulk_wine.year rescue nil)) %>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <select name="variety_id" class="form-control">
+        <option value="">请筛选品种</option>
+        <%== options_for_select(BulkWineVariety.options.invert, (@order_production.bulk_wine.variety_id_one rescue nil)) %>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label"><b class="text-danger">*</b> 产品</label>
+    <div class="col-sm-6">
+      <select name="bulk_wine_code" class="form-control">
+        <option value="">请选择产品</option>
+        <%== BulkWine.select_options(@order_production.bulk_wine).join %>
+      </select>
+    </div>
+  </div>
+  <% end %>
+  <div class="form-group">
+    <label class="col-sm-3 control-label"><b class="text-danger">*</b> 商标名称</label>
+    <div class="col-sm-4">
+      <input type="text" name="brand" placeholder="商标名称" class="form-control" value="<%== @order_production.brand %>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label"><b class="text-danger">*</b> 订货数量</label>
+    <div class="col-sm-4">
+      <input type="number" name="production_num" placeholder="订货数量" class="form-control"
+      data-min="<%== @bulk_wine_stock.min_number rescue nil %>" data-custom="<%== @bulk_wine_stock.custom_number rescue nil %>"
+      data-stock="<%== @bulk_wine_stock.can_sell_stock rescue nil %>" value="<%== @order_production.production_num %>">
+      <!-- <p class="text-danger hide" id="production-num-error"><br /> 订货数量不能低于起订量：</p> -->
+    </div>
+    <label class="control-label col-sm-1 text-left text-muted">瓶</label>
+    <label class="control-label col-sm-5 col-sm-offset-3 text-left text-muted" id="stock-info">
+      <%== @bulk_wine_stock.tips rescue nil %>
+    </label>
+  </div>
+  
+  <label class="col-sm-10 col-sm-offset-1"><hr class="hr-sm"></label>
+  <!-- <div class="row" id="custom-packing-materials"> -->
+  <div class="form-group">
+    <label class="col-sm-3 control-label"><b class="text-danger">*</b> 包装方式</label>
+    <div class="col-sm-4">
+      <select name="package" id="" class="form-control">
+        <%== options_for_select(OrderProduction::PACKAGES, @order_production.package) %>
+      </select>
+    </div>
+    <!-- <label class="control-label col-sm-3 text-left text-muted" id="boxes-info">
+      <%== @order_production.boxes rescue nil %> 箱
+    </label> -->
+  </div>
+  <!--  <label class="col-sm-10 col-sm-offset-1">
+    <hr class="hr-sm">
+  </label> -->
+  <div class="form-group" id="bottle_type_group">
+    <label class="col-sm-3 control-label"><b class="text-danger">*</b> 封瓶方式</label>
+    <div class="col-sm-2">
+      <div class="radio">
+        <input id="bottle_type-radio-2" class="magic-radio" type="radio" name="bottle_type" value="C"
+        <%== 'checked' if @bottle_type == 'C' %>>
+        <label for="bottle_type-radio-2">木塞</label>
+        <input id="bottle_type-radio-3" class="magic-radio" type="radio" name="bottle_type" value="B"
+        <%== 'checked' if @bottle_type == 'B' %>>
+        <label for="bottle_type-radio-3">螺旋盖</label>
+      </div>
+    </div>
+  </div>
+  
+  <%== hidden_field_tag :default_packing, (@order_production.bulk_wine.stock.info.to_json rescue nil) %>
+  <%== render 'admin/order_productions/c_bottle' if @bottle_type == "C" %>
+  <%== render 'admin/order_productions/b_bottle' if @bottle_type == "B" %>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">分隔板</label>
+    <div class="col-sm-4">
+      <select name="divider_id" class="form-control">
+        <option value="0">请选择</option>
+        <!-- <option value="0">客供</option> -->
+        <%== Divider.select_options(@order_production.package, @order_production.divider_id) %>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select name="divider_provider" class="form-control">
+        <%== options_for_select(OrderProduction::PROVIDERS.invert, @order_production.divider_provider) %>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">纸箱</label>
+    <div class="col-sm-4">
+      <select name="carton_id" class="form-control">
+        <option value="0">请选择</option>
+        <!-- <option value="0">客供</option> -->
+        <%== Carton.select_options(@order_production.package, @order_production.carton_id) %>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select name="carton_provider" class="form-control">
+        <%== options_for_select(OrderProduction::PROVIDERS.invert, @order_production.carton_provider) %>
+      </select>
+    </div>
+  </div>
+  
+  <label class="col-sm-10 col-sm-offset-1"><hr class="hr-sm"></label>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">单价</label>
+    <div class="col-sm-2">
+      <input type="text" name="unit_price" placeholder="单价" class="form-control"
+      value="<%== @order_production.unit_price %>">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">附加费用</label>
+    <div class="col-sm-2">
+      <input type="text" name="fee_name" placeholder="费用名称" class="form-control"
+      value="<%== @order_production.fee_name %>">
+    </div>
+    <div class="col-sm-2">
+      <input type="text" name="fee" placeholder="金额" class="form-control" value="<%== @order_production.fee %>">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label">备注</label>
+    <div class="col-sm-6">
+      <textarea name="remark" class="form-control"><%== @order_production.remark %></textarea>
+    </div>
+  </div>
+  <% end -%>
+</div>

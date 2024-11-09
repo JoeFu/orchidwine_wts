@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th class="text-center">分隔板编码</th>
+        <th class="text-center">分隔板描述</th>
+        <th class="text-center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dividers.map do |divider|%>
+      <tr>
+        <td class="text-center"><%== divider.divider_code %></td>
+        <td class="text-center"><%== divider.divider_type %></td>
+        <td class="text-center">
+          <%== edit_btn_tag(divider) %>
+          <% if can? :destroy,Divider %>
+          <%== destroy_btn_tag(divider) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

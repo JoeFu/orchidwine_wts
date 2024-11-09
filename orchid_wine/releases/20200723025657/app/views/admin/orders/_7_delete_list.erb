@@ -1,0 +1,78 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h3 class="panel-title down-up">订单列表</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="table-responsive">
+					<table class="table table-striped table-vcenter">
+						<thead>
+							<tr>
+								<th>订单号</th>
+								<th>客户</th>
+								<th>产品</th>
+								<th class="text-center">总数(瓶)</th>
+								<th class="text-center">销售</th>
+								<th class="text-center">状态</th>
+								<th class="text-center">更新时间</th>
+								<th class="text-center">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @orders.map do |order|%>
+							<tr>
+								<td>
+									<% if order.seller_id == @admin_session.id || can?(:show, :Order) %>
+									<%== order.a_link %>
+									<% else %>
+									<%== order.order_number %>
+									<% end %>
+								</td>
+								<td>
+									<% if order.seller_id == @admin_session.id || @admin_session.role == 0 %>
+									<a class="btn-link" href="/admin/users/<%== order.user_id %>"><%== order.user.name %></a>
+									<% else %>
+									<%== order.user.name %>
+									<% end %>
+								</td>
+								<td>
+									<% order.order_productions.map do |o_product| %>
+									<%== o_product.show_in_order %><br/>
+									<% end %>
+								</td>
+								<td class="text-center"><%== order.total_bottle_num.ts %></td>
+								<td class="text-center"><%== order.seller.true_name rescue '-' %></td>
+								<td class="text-center"><%== order.status_show %></td>
+								<td class="text-center"><%== time_human(order.updated_at) %></td>
+								<td class="text-center">
+									<% if @admin_session.role != 2 || order.seller_id == @admin_session.id %>
+									<% if order.status == 7 && can?(:restore, :Order) %>
+									<a href="/admin/orders/<%== order.id %>/restore"
+										data-str="恢复到购物车"
+										class="mtd-patch btn btn-sm btn-rounded btn-labeled btn-warning">
+										<i class="btn-label ion-refresh"></i>恢复到购物车
+									</a>
+									<% end %>
+									<%  if order.status == 8 && can?(:renew, :Order) %>
+									<!-- <a href="/admin/orders/<%== order.id %>/renew"
+										data-str="续存订单"
+										class="mtd-patch btn btn-sm btn-rounded btn-labeled btn-primary">
+										<i class="btn-label ion-clock"></i>订单续存
+									</a> -->
+									<% end %>
+									<%== '-'  if order.status == 10 %>
+									<% end %>
+								</td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<%== table_footer_tag(@orders) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

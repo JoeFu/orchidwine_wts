@@ -1,0 +1,48 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">添加年份管理</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>产品信息管理</li>
+    <li>年份管理</li>
+    <li class="active">添加年份管理</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <%= form_tag("/admin/bulk_wine_years", method: :post, class: 'form-horizontal', id: 'bulk_wine_years-new') do -%>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">添加 年份 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 年份</label>
+              <div class="col-sm-6">
+                <input type="text" name="year" class="form-control" value="<%== params[:year] %>">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

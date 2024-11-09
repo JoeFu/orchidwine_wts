@@ -1,0 +1,31 @@
+<div class="table-responsive">
+  <table class="table table-vcenter">
+    <tbody>
+      <%
+      @delivery.containers.map do |container|
+      %>
+      <tr <%== 'class="bg-gray"' if params[:container_id].to_i == container.id %>>
+        <th class="text-left min-width">集装箱 NO-<%== container.id %></th>
+        <th><%== Container::SIZE[container.size] %></th>
+        <th class="min-width">
+          <%== edit_btn_tag(container, '编辑', "/admin/deliveries/#{@delivery.id}/manager?container_id=#{container.id}") if params[:container_id].to_i != container.id %>
+        </th>
+        <th class="min-width"><%== destroy_btn_tag(container) %></th>
+      </tr>
+      <% if @order_production_deliveries[container.id].present? %>
+      <% @order_production_deliveries[container.id].map do |order_production_delivery| %>
+      <tr>
+        <td>
+          <%== order_production_delivery.order_id %> /
+          <%== order_production_delivery.user.name %>
+        </td>
+        <td><%== order_production_delivery.show_in_delivery %></td>
+        <!-- <td></td> -->
+        <!-- <td></td> -->
+      </tr>
+      <%end %>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

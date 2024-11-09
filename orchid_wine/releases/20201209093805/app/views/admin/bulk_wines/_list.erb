@@ -1,0 +1,34 @@
+<table class="table table-striped table-vcenter">
+	<thead>
+		<tr>
+			<th>产品编码</th>
+			<th class="text-center">年份</th>
+			<th>供应商</th>
+			<th>产地</th>
+			<th>品种</th>
+			<th class="text-center">酒精度</th>
+			<th class="text-center">状态</th>
+			<th class="text-center">操作</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @bulk_wines.map do |bulk_wine|%>
+		<tr>
+			<td><a class="btn-link" href="/admin/bulk_wines/<%== bulk_wine.id %>??bulk_wine_id=<%== bulk_wine.id %>"><%== bulk_wine.code %></a></td>
+			<td class="text-center"><%== bulk_wine.year_show %></td>
+			<td><%== bulk_wine.vendor.name %></td>
+			<td><%== bulk_wine.areas_show %></td>
+			<td><%== bulk_wine.varieties_show %></td>
+			<td class="text-center"><%== int_float(bulk_wine.alcoholic_strength) %></td>
+			<td class="text-center"><%== bulk_wine.status_show %></td>
+			<td class="text-center">
+				<%== edit_btn_tag(bulk_wine) %>
+				<%== status_btn_tag(bulk_wine, args = {:texts => {0 =>'上架', 1 =>'下架'}}) %>
+				<% if can? :destroy, ::BulkWine %>
+				<%== destroy_btn_tag(bulk_wine) %>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,37 @@
+I"(function() {
+  $(document).on('nifty.ready', function() {}).on('change', 'select[name=import_company_id]', function(e) {
+    $('input[name=import_company_name]').val($(this).find('option:selected').data('name'));
+    $('input[name=import_company_contacts]').val($(this).find('option:selected').data('contacts'));
+    $('input[name=import_company_telephone]').val($(this).find('option:selected').data('telephone'));
+    $('input[name=import_company_email]').val($(this).find('option:selected').data('email'));
+    $('input[name=import_company_uscc]').val($(this).find('option:selected').data('uscc'));
+    return $('input[name=import_company_address]').val($(this).find('option:selected').data('address'));
+  }).on('change', 'input.container_number_input', function(e) {
+    var name;
+    name = $(this).attr('name');
+    return $('input[name=' + name + '_copy]').val($(this).val());
+  }).on('change', 'input.container_number_input_copy', function(e) {
+    var name;
+    name = $(this).attr('name').replace('_copy', '');
+    return $('input[name=' + name + ']').val($(this).val());
+  }).on('click', 'input#seller-checkbox, input#export-checkbox', function(e) {
+    var i, id, j, k, len, len1, names, obj;
+    id = $(this).attr('id').split('-')[0];
+    names = [id + '_company_name', id + '_company_contacts', id + '_company_telephone', id + '_company_email', id + '_company_abn', id + '_company_address'];
+    if ($(this)[0].checked) {
+      for (j = 0, len = names.length; j < len; j++) {
+        i = names[j];
+        obj = $("input[name=" + i + "]");
+        obj.val(obj.data('default'));
+        obj.attr('readonly', 'yes');
+      }
+    } else {
+      for (k = 0, len1 = names.length; k < len1; k++) {
+        i = names[k];
+        $("input[name=" + i + "]").removeAttr('readonly');
+      }
+    }
+  });
+
+}).call(this);
+:ET

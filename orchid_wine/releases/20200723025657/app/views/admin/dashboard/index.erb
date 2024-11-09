@@ -1,0 +1,96 @@
+<div id="page-head">
+	<div id="page-title">
+		<h1 class="page-header text-overflow">Dashboard</h1>
+	</div>
+	<ol class="breadcrumb">
+		<li><i class="ion-home"></i></li>
+		<li>首页</li>
+		<li>Dashboard</li>
+	</ol>
+</div>
+<div id="page-content">
+	<% if @admin_session.role == 2 %>
+	<%= render 'admin/dashboard/nav' %>
+	<% end %>
+	<% if @admin_session.role.in?([0, 1, 4]) %>
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">销售统计</h3>
+				</div>
+				<div class="panel-body">
+					<div class="pad-btm form-inline">
+						<%= form_tag("#", method: :get, class: 'form-horizontal') do -%>
+						<div class="row">
+							<div class="col-sm-3 table-toolbar-left">
+								<%== export_btn_tag "/admin/dashboard/export?date_start=#{@date_start}&date_end=#{@date_end}&sort=#{@sort}", '导出列表' %>
+							</div>
+							<div class="col-sm-9 table-toolbar-right">
+								<div class="form-group">
+									<select class="form-control" name='sort' id='dashboard-search-sort' style="min-width: 200px">
+										<%== options_for_select({
+										1 => '预订单销售汇总',
+										2 => '财务复核销售汇总',
+										# 3 => '排产销售汇总',
+										}.invert, @sort) %>
+									</select>
+								</div>
+								
+								<div class="form-group">
+									<div class="input-daterange input-group" id="datepicker">
+										<%= text_field_tag 'date_start', @date_start, class: "form-control", autocomplete: 'off'%>
+										<span class="input-group-addon">至</span>
+										<%= text_field_tag 'date_end', @date_end, class: "form-control", autocomplete: 'off'%>
+									</div>
+								</div>
+								<%== submit_tag %>
+								<%== clear_tag "/admin/dashboard" %>
+							</div>
+						</div>
+						<% end -%>
+					</div>
+					<!-- <div class="row"> -->
+					<%= render 'admin/dashboard/statistics' %>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+	<% if @admin_session.role.in?([0, 1, 2, 5]) %>
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">产品库存</h3>
+				</div>
+				<div class="panel-body">
+					<div class="pad-btm form-inline">
+						<%= form_tag("/admin/dashboard", method: :get) do -%>
+						<div class="row">
+							<div class="col-sm-3 table-toolbar-left"></div>
+							<div class="col-sm-9 table-toolbar-right">
+								<div class="form-group">
+									<div class="form-group">
+										<select class="selectpicker form-control" name="sort_id">
+											<option value="">所有类别</option>
+											<%== options_for_select(BulkWineSort.options.invert, params[:sort_id])%>
+										</select>
+									</div>
+									<%= text_field_tag 'q', params[:q], placeholder: '搜索产品编码', class: "form-control"%>
+									<%= text_field_tag 'desc', params[:desc], placeholder: '描述', class: "form-control", autocomplete: 'off' %>
+								</div>
+								<%== submit_tag %>
+								<%== clear_tag "/admin/dashboard" %>
+							</div>
+						</div>
+						<% end -%>
+					</div>
+					<%= render 'admin/bulk_wine_stocks/list' %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<% end %>
+</div>

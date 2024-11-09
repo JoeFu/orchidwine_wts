@@ -1,0 +1,46 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">管理员/销售 详情</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>用户管理</li>
+    <li>管理员/销售 列表</li>
+    <li class="active"><%== @admin.true_name %> 详情</li>
+  </ol>
+</div>
+<!-- Content Row -->
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <dl class="dl-horizontal">
+              <dt>真实姓名</dt><dd><%== @admin.user_name rescue '_'%></dd>
+              <dt>登录名</dt><dd><%== @admin.true_name rescue '_'%></dd>
+              <dt>类型</dt><dd> <%== @admin.name %></dd>
+              <dt>联系电话</dt><dd><%== @admin.mobile rescue '_'%></dd>
+              <dt>绑定邮箱</dt><dd><%== @admin.email rescue '_'%></dd>
+            </dl>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <dl class="dl-horizontal">
+              <dt></dt>
+              <dd><%== edit_btn_tag(@admin) %></dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

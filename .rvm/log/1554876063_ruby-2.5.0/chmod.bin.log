@@ -1,0 +1,25 @@
+[2019-04-10 06:03:33] __rvm_set_executable
+__rvm_set_executable () 
+{ 
+    for __file in "$@";
+    do
+        [[ -x "${__file}" ]] || chmod +x "${__file}";
+    done
+}
+current path: /home/orchid/.rvm/src/ruby-2.5.0
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin
+command(8): __rvm_set_executable /home/orchid/.rvm/rubies/ruby-2.5.0/bin/erb /home/orchid/.rvm/rubies/ruby-2.5.0/bin/gem /home/orchid/.rvm/rubies/ruby-2.5.0/bin/irb /home/orchid/.rvm/rubies/ruby-2.5.0/bin/rake /home/orchid/.rvm/rubies/ruby-2.5.0/bin/rdoc /home/orchid/.rvm/rubies/ruby-2.5.0/bin/ri /home/orchid/.rvm/rubies/ruby-2.5.0/bin/ruby
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/erb ]]
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/gem ]]
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/irb ]]
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/rake ]]
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/rdoc ]]
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/ri ]]
+++ for __file in '"$@"'
+++ [[ -x /home/orchid/.rvm/rubies/ruby-2.5.0/bin/ruby ]]

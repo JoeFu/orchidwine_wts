@@ -1,0 +1,49 @@
+<div id="page-head">
+	<div id="page-title">
+		<h1 class="page-header text-overflow">订单列表</h1>
+	</div>
+	<ol class="breadcrumb">
+		<li><i class="ion-home"></i></li>
+		<li>业务管理</li>
+		<li>订单管理</li>
+		<li class="active">订单列表</li>
+	</ol>
+</div>
+<div id="page-content">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel">
+				<div class="btn-group btn-group-justified btn-group-lg nav-group">
+					<a href="/admin/orders" class="btn <%== params[:status].blank? && params[:has_status].blank? ? "btn-success" : "btn-default" %>">订单汇总（<%== @all_order_count %>）</a>
+					<% Order::TAB_STATUS.map do |k,st| %>
+					<a href="/admin/orders?status=<%== k %>" class="btn <%== params[:status].to_i == k ? "btn-success" : "btn-default" %>"><%== st %>（<%== @status_count[k].to_i %>）</a>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<% if params[:status].blank? %>
+			<%== render '/admin/orders/total' %>
+			
+			<% elsif params[:status].to_i == 1 %>
+			<%== render '/admin/orders/1_selling_list' %>
+			
+			<% elsif params[:status].to_i == 2 %>
+			<%== render '/admin/orders/2_recheck_list' %>
+			
+			<% elsif params[:status].to_i == 3 %>
+			<%== render '/admin/orders/3_produce_list' %>
+			<% elsif params[:status].to_i == 4 %>
+			<%== render '/admin/orders/4_produced_list' %>
+			<% elsif params[:status].to_i == 5 %>
+			<%== render '/admin/orders/5_pay_list' %>
+			<% elsif params[:status].to_i == 6 %>
+			<%== render '/admin/orders/6_done_list' %>
+			<% elsif params[:status].to_i == 7 %>
+			<%== render '/admin/orders/7_delete_list' %>
+			<% end %>
+		</div>
+	</div>
+</div>

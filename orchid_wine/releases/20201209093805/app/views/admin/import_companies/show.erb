@@ -1,0 +1,64 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">客户详情</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>用户管理</li>
+    <li>客户列表</li>
+    <li class="active"><%== @user.name %> 详情</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5">
+              <dl class="dl-horizontal">
+                <dt>真实姓名</dt><dd><%== @user.name rescue '_'%></dd>
+                <dt>登录名</dt><dd><%== @user.user_name rescue '_'%></dd>
+                <dt>性别</dt><dd><%== @user.sex_show rescue '_'%></dd>
+              </dl>
+            </div>
+            <div class="col-sm-7">
+              <dl class="dl-horizontal">
+                <dt>公司名称</dt><dd><%== @user.company rescue '_'%></dd>
+                <dt>公司简码</dt><dd><%== @user.company_code rescue '_'%></dd>
+                <dt>联系电话</dt><dd><%== @user.telphone rescue '_'%></dd>
+                <dt>绑定邮箱</dt><dd><%== @user.email rescue '_'%></dd>
+                <dt>销售</dt><dd><%== @user.admin_name rescue '_'%></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <dl class="dl-horizontal">
+              <dt></dt>
+              <dd><%== edit_btn_tag(@user) %></dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">订单列表</h3>
+        </div>
+        <div class="panel-body">
+          <%== render '/admin/orders/total_list', :@orders => @user.orders.preload(:order_productions, :user, :seller) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

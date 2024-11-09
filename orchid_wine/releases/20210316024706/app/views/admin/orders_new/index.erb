@@ -1,0 +1,159 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow"><%== @title %></h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>业务管理</li>
+    <li>订单管理</li>
+    <li class="active"><%== @title %> <%== "：#{@order.order_number}" if @order.id.present? %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-body" style="padding-bottom: 15px;">
+          <div class="form-inline">
+            <div class="row">
+              <div class="col-sm-3">
+                <%== return_list_tag %>
+              </div>
+              <% if @order.id.present? %>
+              <div class="col-sm-6">
+                <p class="text-main text-center text-bold mar-no" style="line-height: 30px;margin-bottom: 0;">
+                  订单号：「<%== @order.order_number %>」，
+                  客户：<%== @order.user.name %>
+                </p>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="wz-heading pad-top">
+          <div id="order-cls-wz">
+            <ul class="row wz-step wz-icon-bw wz-nav-off mar-top wz-steps">
+              <% if @order.status == 0 %>
+              <li
+                class="col-xs-6 <%== 'active' if [0].include?(params[:step].to_i) %>">
+                <a data-toggle="tab" href="#order-cls-tab1" aria-expanded="true">
+                  <span class="text-warning"><i class="ion-person-stalker icon-2x"></i></span>
+                  <p class="text-semibold mar-no">客户信息</p>
+                </a>
+              </li>
+              <li class="col-xs-6 <%== 'active' if params[:step].to_i == 1 %>">
+                <a data-toggle="tab" href="#order-cls-tab2" aria-expanded="false">
+                  <span class="text-info"><i class="ion-wineglass icon-2x"></i></span>
+                  <p class="text-semibold mar-no">产品信息</p>
+                </a>
+              </li>
+              <% else %>
+              <li class="col-xs-3 <%== 'active' if [0].include?(params[:step].to_i) %>">
+                <a data-toggle="tab" href="#order-cls-tab1" aria-expanded="true">
+                  <span class="text-warning"><i class="ion-person-stalker icon-2x"></i></span>
+                  <p class="text-semibold mar-no">客户信息</p>
+                </a>
+              </li>
+              <li class="col-xs-3 <%== 'active' if params[:step].to_i == 1 %>">
+                <a data-toggle="tab" href="#order-cls-tab2" aria-expanded="false">
+                  <span class="text-info"><i class="ion-wineglass icon-2x"></i></span>
+                  <p class="text-semibold mar-no">产品信息<%== @order.status %></p>
+                </a>
+              </li>
+              <li class="col-xs-3 <%== 'active' if params[:step].to_i == 2 %>">
+                <a data-toggle="tab" href="#order-cls-tab3" aria-expanded="false">
+                  <span class="text-success"><i class="ion-planet icon-2x"></i></span>
+                  <p class="text-semibold mar-no">海运信息</p>
+                </a>
+              </li>
+              <li class="col-xs-3 <%== 'active' if params[:step].to_i == 3 %>">
+                <a data-toggle="tab" href="#order-cls-tab4" aria-expanded="false">
+                  <span class="text-mint"><i class="ion-earth icon-2x"></i></span>
+                  <p class="text-semibold mar-no">出口交易信息</p>
+                </a>
+              </li>
+              <% end %>
+            </ul>
+            <div class="progress progress-xs">
+              <div class="progress-bar progress-bar-dark" style="width: 33.33%;"></div>
+            </div>
+            <div class="panel-body">
+              <div class="tab-content">
+                <div id="order-cls-tab1" class="tab-pane <%== 'active in' if 0 == params[:step].to_i %>">
+                  <% if @order.status > 2 %>
+                  <%== render 'admin/orders_new/customer_disabled' %>
+                  <% else %>
+                  <%== render 'admin/orders_new/customer' %>
+                  <% end %>
+                </div>
+                <div id="order-cls-tab2" class="tab-pane <%== 'active in' if params[:step].to_i == 1 %>">
+                  <% if @order.id.present? %>
+                  <% if ([0, 1].include?(@order.status) && @admin_session.role == 2) ||
+                  ([2, 52].include?(@order.status) && @admin_session.role.in?([0, 1, 5]))
+                  %>
+                  <%== render 'admin/orders_new/production' %>
+                  <% else %>
+                  <%== render 'admin/orders_new/production_disabled' %>
+                  <% end %>
+                  <% else %>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="alert alert-primary">
+                        <strong><i class="ion-arrow-up-a"></i></strong> 请按照步骤，先填写客户信息。
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+                
+                <div id="order-cls-tab3" class="tab-pane <%== 'active in' if params[:step].to_i == 2 %>">
+                  <% if @order.id.present? %>
+                  <%== render 'admin/orders_new/ocean' %>
+                  <% else %>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="alert alert-primary">
+                        <strong><i class="ion-arrow-up-a"></i></strong> 请按照步骤，先填写客户信息。
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+                </div>
+
+                <div id="order-cls-tab4" class="tab-pane <%== 'active in' if params[:step].to_i == 3 %>"">
+                <% if @order.id.present? %>
+                <%== render 'admin/orders_new/trade' %>
+                <% else %>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="alert alert-primary">
+                      <strong><i class="ion-arrow-up-a"></i></strong> 请按照步骤，先填写客户信息。
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+
+              </div>
+            </div>
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col-sm-12" style="text-align: center">
+                  <div class="box-inline" style="margin: 0 auto;">
+                    <button type="button" class="previous btn btn-success disabled">上一步</button>
+                    <button type="button" class="next btn btn-success">下一步</button>
+                    <button type="button" class="finish btn btn-info btn-labeled" id='orders-new-finish'
+                    style="display: none;" disabled="">
+                    <i class="btn-label ion-archive"></i>完成</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

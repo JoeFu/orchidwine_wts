@@ -1,0 +1,96 @@
+<div class="table-responsive">
+  <table class="table table-vcenter">
+    <thead>
+      <tr>
+        <th class="min-width">#</th>
+        <th>产品信息</th>
+        <th><dl class="dl-horizontal"><dt>包材</dt></dl></th>
+        <th class="text-center">数量</th>
+        <th class="text-center">价格</th>
+        <% if @order.status == 0 %>
+        <th class="text-center">库存</th>
+        <% end %>
+        <th class="text-center min-width">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+      i = 0
+      is_hb = nil
+      @order.order_productions.preload(:bulk_wine_stock).order('is_hb asc, id asc').map do |order_production|
+      order_production.destroy and next if order_production.can_use? == false
+      i += 1
+      is_hb = nil if is_hb != order_production.is_hb
+      %>
+      <% if is_hb.nil? %>
+      <% if i > 1 %>
+      <tr><td colspan="7"><br/></td></tr>
+      <% end %>
+      <tr class="bg-gray">
+        <td></td>
+        <td colspan="6">
+          <strong><%== order_production.is_hb == 0 ? '产品报价' : '灌装报价'%></strong>
+        </td>
+      </tr>
+      <% is_hb = order_production.is_hb %>
+      <% end %>
+      <tr>
+        <td class="text-center"><%== i %></td>
+        <td>
+          [<%== order_production.brand %>]<br />
+          <% if order_production.is_hb == 1 %>
+          灌装服务
+          <% else %>
+          <%== order_production.bulk_wine_desc %>
+          <% end %>
+        </td>
+        <td><%== order_production.packing_show %></td>
+        <td class="text-center">
+          <%== order_production.production_num_show %><br />
+          <%== order_production.package %>
+        </td>
+        <td class="text-center">
+          <%== order_production.unit_price %><br />
+          <% if order_production.fee_name.present? %>
+          <!-- 附加费用<br /> -->
+          （<%== [order_production.fee_name, order_production.fee].join('：') %>）
+          <br />
+          <% end %>
+        </td>
+        <% if @order.status == 0 %>
+        <td class="text-center">
+          <% if order_production.is_hb == 1 %>
+          -
+          <% else %>
+          <% if order_production.bulk_wine_stock.blank? ||
+          order_production.bulk_wine_stock.stock < order_production.production_num %>
+          <b class="text-danger">
+          <%== order_production.bulk_wine_stock.stock.ts rescue 0 %>
+          </b>
+          <% else %>
+          <%== order_production.bulk_wine_stock.stock.ts %>
+          <% end %>
+          <% end %>
+        </td>
+        <% end %>
+        <td class="text-center">
+          <a href="javascript:void(0)" class="btn btn-sm btn-labeled btn-rounded btn-primary order-new-pedit"
+            data-id='<%== order_production.id %>'>
+          <i class="btn-label ion-edit"></i> 编辑</a>
+          <% if @admin_session.role < 3 %>
+          <%== destroy_btn_tag(order_production) %>
+          <% end %>
+        </td>
+      </tr>
+      <% if order_production.remark.present? %>
+      <tr>
+        <td colspan="1" class="no-border"></td>
+        <td colspan="6" class="no-border bg-gray-light">
+          备注：<%== order_production.remark %><br />
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

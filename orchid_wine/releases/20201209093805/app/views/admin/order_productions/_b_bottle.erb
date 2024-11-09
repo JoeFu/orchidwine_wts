@@ -1,0 +1,47 @@
+<div class="form-group bottle-b <%== 'hide' if @bottle_type != "B" %>">
+  <label class="col-sm-3 control-label"><b class="text-danger">*</b> 酒瓶</label>
+  <div class="col-sm-2">
+    <select class="form-control" name="bottle_id">
+      <% if @order_production.is_hb == 1 %>
+      <option value="">请选择...</option>
+      <% end %>
+      <%== Bottle.select_options('B', @order_production.bottle, @order_production.package) %>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <select name="bottle_customize" class="form-control">
+      <%== options_for_select(Bottle::CUSTOMIZE.invert, @order_production.bottle_customize) %>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <select name="bottle_provider" class="form-control">
+      <%== options_for_select(OrderProduction::PROVIDERS.invert, @order_production.bottle_provider) %>
+    </select>
+  </div>
+</div>
+<div class="form-group bottle-b <%== 'hide' if @bottle_type != "B" %>">
+  <label class="col-sm-3 control-label">螺旋盖</label>
+  <div class="col-sm-2">
+    <select class="form-control" name="cap_id">
+      <!-- <option value="0">请选择</option> -->
+      <!-- <option value="0">客供</option> -->
+      <%== Cap.select_options('B', @order_production.cap_id) %>
+    </select>
+  </div>
+  <!-- <div class="col-sm-2">
+    <select class="form-control" name="cap_print">
+      <%== options_for_select({'无需印刷' => 0,  '需要印刷' => 1}, @order_production.cap_print) %>
+    </select>
+  </div> -->
+  <div class="col-sm-2 bottle-b <%== 'hide' if @bottle_type != "B" %>">
+    <select class="form-control" name="cap_color">
+      <option value="">无</option>
+      <%== options_for_select(CapColor.select_options, @order_production.cap_color) %>
+    </select>
+  </div>
+  <div class="col-md-2">
+    <select name="cap_provider" class="form-control">
+      <%== options_for_select(OrderProduction::PROVIDERS.invert, @order_production.cap_provider) %>
+    </select>
+  </div>
+</div>

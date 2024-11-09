@@ -1,0 +1,89 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑进口公司</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>客户管理</li>
+    <li>进口公司列表</li>
+    <li class="active">编辑 <%== @import_company.name %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/import_companies/#{@import_company.id}", method: :put, class: 'form-horizontal', id: 'import_companies-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @import_company.name %>」 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 公司名称</label>
+              <div class="col-sm-6">
+                <input type="text" name='name' placeholder="公司名称" class="form-control" value="<%== @import_company.name %>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 联系人</label>
+              <div class="col-sm-6">
+                <input type="text" name="contacts" placeholder="联系人" class="form-control" value="<%== @import_company.contacts %>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 电话号码</label>
+              <div class="col-sm-6">
+                <input type="text" name='telephone' placeholder="电话号码" class="form-control" value="<%== @import_company.telephone %>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 电子邮箱</label>
+              <div class="col-sm-6">
+                <input type="text" name='email' placeholder="电子邮箱" class="form-control" value="<%== @import_company.email %>">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 社会统一信用代码</label>
+              <div class="col-sm-6">
+                <input type="text" name='uscc' placeholder="社会统一信用代码" class="form-control" value="<%== @import_company.uscc %>">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 归属销售</label>
+              <div class="col-sm-6">
+                <select class="selectpicker form-control" name="admin_id">
+                  <option value="">请选择</option>
+                  <%== options_for_select(Hash[Admin.sellers_pluck].invert, @import_company.admin_id) %>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 地址</label>
+              <div class="col-sm-6">
+                <input type="text" name='address' placeholder="地址" class="form-control" value="<%== @import_company.address %>">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

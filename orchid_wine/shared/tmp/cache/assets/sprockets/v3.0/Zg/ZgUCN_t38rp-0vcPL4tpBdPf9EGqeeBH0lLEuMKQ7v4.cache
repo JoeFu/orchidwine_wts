@@ -1,0 +1,95 @@
+I"(function() {
+  $(document).on('change', 'select[name=provience_id]', function(e) {
+    var father_id;
+    e.preventDefault();
+    e.stopPropagation();
+    father_id = $(this).val();
+    $.ajax({
+      url: '/admin/areas/cities',
+      dataType: "html",
+      data: 'father_id=' + father_id,
+      error: function() {},
+      success: function(result) {
+        return $('select[name=city_id').html(result).selectpicker('refresh');
+      }
+    });
+  }).on('change', 'select[name=city_id]', function(e) {
+    var father_id;
+    e.preventDefault();
+    e.stopPropagation();
+    father_id = $(this).val();
+    $.ajax({
+      url: '/admin/areas/counties',
+      dataType: "html",
+      data: 'father_id=' + father_id,
+      error: function() {},
+      success: function(result) {
+        return $('select[name=area_id').html(result).selectpicker('refresh');
+      }
+    });
+  }).on("click", "button.show-progress-log", function(e) {
+    return $(this).siblings('.progress-log').toggle();
+  }).on('nifty.ready', function() {
+    var error, success;
+    error = $('input#flash-error').val();
+    success = $('input#flash-success').val();
+    if (error) {
+      $.niftyNoty({
+        type: "danger",
+        container: "#page-content",
+        icon: 'ion-flash',
+        title: "操作失败提醒！",
+        message: error,
+        closeBtn: true,
+        timer: 10000
+      });
+    }
+    if (success) {
+      $.niftyNoty({
+        type: "success",
+        container: "floating",
+        icon: 'ion-checkmark',
+        title: "操作成功提示！",
+        message: success,
+        closeBtn: true,
+        timer: 10000
+      });
+    }
+    $('select.chosen-select').chosen();
+    return $('.input-daterange').datepicker({
+      format: "yyyy-mm-dd",
+      todayBtn: false,
+      autoclose: true,
+      todayHighlight: true,
+      language: "zh-CN",
+      maxDate: $.now()
+    });
+  }).on('change', 'input#import-hb-service-price', function(e) {
+    var file, formData, uploadUrl, xhr;
+    file = $(this)[0].files[0];
+    xhr = new XMLHttpRequest();
+    uploadUrl = '/admin/bottles/service_fee_upload';
+    xhr.open('POST', uploadUrl, true);
+    formData = new FormData();
+    formData.append('file', $(this)[0].files[0]);
+    xhr.upload.addEventListener("progress", function(evt) {
+      return true;
+    }, false);
+    xhr.onreadystatechange = function(response) {
+      var data;
+      if (xhr.readyState === 4 && xhr.status === 200 && xhr.responseText !== "") {
+        data = JSON.parse(xhr.responseText);
+        if (data.success === true) {
+          return window.location.href = '/admin/bottles?tab=hb-service-fee';
+        }
+      } else if (xhr.readyState === 4 && xhr.status !== 200 && xhr.responseText) {
+        return alert('上传失败');
+      }
+    };
+    return xhr.send(formData);
+  });
+
+  return;
+
+}).call(this);
+:ET

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if
+  [[ -s "/home/orchid/.rvm/gems/ruby-2.5.0@orchid_wine/environment" ]]
+then
+  source "/home/orchid/.rvm/gems/ruby-2.5.0@orchid_wine/environment"
+  exec ruby "$@"
+else
+  echo "ERROR: Missing RVM environment file: '/home/orchid/.rvm/gems/ruby-2.5.0@orchid_wine/environment'" >&2
+  exit 1
+fi

@@ -1,0 +1,36 @@
+<table class="table table-striped table-vcenter">
+	<thead>
+		<tr>
+			<th width="10%">供应商编码</th>
+			<th width="20%">供应商名称</th>
+			<th width="30%">地址</th>
+			<th width="15%">联系方式</th>
+			<% if can? :destroy, :BulkWineVendor %>
+			<th width="10%" class="text-center">编辑</th>
+			<th width="10%" class="text-center">删除</th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% @bulk_wine_vendors.map do |bulk_wine_vendor|%>
+		<tr>
+			<td><a><%== bulk_wine_vendor.vendor_code %></a></td>
+			<td><%== bulk_wine_vendor.name %></td>
+			<td><%== bulk_wine_vendor.address %></td>
+			<td><%== bulk_wine_vendor.telphone %></td>
+			<% if can? :destroy, :BulkWineVendor %>
+			<td class="text-center">
+				<%== edit_btn_tag(bulk_wine_vendor) %>
+			</td>
+			<td class="text-center">
+				<% if bulk_wine_vendor.bulk_wines.present? %>
+				已使用，不能删除。
+				<% else %>
+				<%== destroy_btn_tag(bulk_wine_vendor) %>
+				<% end %>
+			</td>
+			<% end %>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

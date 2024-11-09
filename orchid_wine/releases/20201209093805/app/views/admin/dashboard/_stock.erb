@@ -1,0 +1,25 @@
+<div class="table-responsive">
+	<table class="table table-striped table-vcenter">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>产品</th>
+				<th class="text-center">瓶数</th>
+				<th class="text-center">升数</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% i = 0
+			@out_stocks.map do |bulk_wine_id, stock|
+			i += 1
+			%>
+			<tr>
+				<td><%== i %></td>
+				<td><%== stock[:bulk_wine].desc %></td>
+				<td class="text-center"><%== stock[:number].ts %> x 750ml</td>
+				<td class="text-center"><%== stock[:number] * 750 / 1000 %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,13 @@
+I"Q(function() {
+  $(document).on('nifty.ready', function() {
+    return true;
+  }).on('click', "form#unbottleds-edit button[type=submit]", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.bottle-c.hide').remove();
+    $('.bottle-b.hide').remove();
+    return $("form#unbottleds-edit").submit();
+  });
+
+}).call(this);
+:ET

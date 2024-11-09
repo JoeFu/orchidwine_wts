@@ -1,0 +1,234 @@
+<!-- 订单汇总 -->
+<div class="panel">
+	<div class="panel-heading">
+		<h3 class="panel-title">筛选条件</h3>
+	</div>
+	<div class="panel-body">
+		<%= form_tag("/admin/orders", method: :get, class: 'form-horizontal') do -%>
+		<!-- 产品 start -->
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-4 control-label">产品类型</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="bulk_wine_sort_id">
+							<option value="">全部</option>
+							<%== options_for_select(BulkWineSort.options.invert, params[:bulk_wine_sort_id]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-4 control-label">供应商</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="bulk_wine_vendor_id">
+							<option value="">全部</option>
+							<%== options_for_select(BulkWineVendor.options.invert, params[:bulk_wine_vendor_id]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-4 control-label">年份</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="bulk_wine_year">
+							<option value="">全部</option>
+							<%== options_for_select(BulkWineYear.options, params[:bulk_wine_year]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-4 control-label">品种</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="bulk_wine_variety_id">
+							<option value="">全部</option>
+							<%== options_for_select(BulkWineVariety.options.invert, params[:bulk_wine_variety_id]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 产品 end -->
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-4 control-label">产品编码</label>
+					<div class="col-sm-8">
+						<select class="form-control selectpicker" name="bulk_wine_id" data-live-search="true"
+							data-width="100%" tabindex="-98">
+							<option value="">全部产品</option>
+							<%== options_for_select(BulkWine.code_options.invert, params[:bulk_wine_id]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-4 control-label">客户名</label>
+					<div class="col-sm-8">
+						<input type="text" name="user_name" class="form-control" size="26" placeholder="请输入客户名称"
+						value="<%== params[:user_name] %>" autocomplete='off'>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 control-label">订单号</label>
+					<div class="col-sm-8">
+						<input type="text" name="order_number" class="form-control" size="26" placeholder="请输入订单号"
+						value="<%== params[:order_number] %>" autocomplete='off'>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 control-label">瓶型</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="bottle_code">
+							<option value="">所有瓶型</option>
+							<%== options_for_select(@bottle_codes, params[:bottle_code]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 control-label">状态</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="search_status">
+								<%== options_for_select({
+									99 => "监控订单", 
+									0 => '所有状态',
+									1 => '预确定订单', 
+									2 => '财务复核', 
+									3 => '未排灌装', 
+									4 => '已排灌装', 
+									5 => '生产完成未发货', 
+									6 => '待付尾款', 
+									7 => '已完成', 
+								}.invert, params[:search_status]) %>
+						</select>
+					</div>
+				</div>
+			</div>
+			<% if @admin_session.role != 2 %>
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label class="col-sm-4 control-label">销售</label>
+					<div class="col-sm-8">
+						<select class="form-control" name="seller_id">
+							<%== options_for_select(Admin.sellers_options.to_h.invert, params[:seller_id])%>
+						</select>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="panel-footer">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="col-sm-8 col-lg-offset-2">
+					<%== submit_tag %>
+					<%== clear_tag "/admin/orders" %>
+				</div>
+			</div>
+		</div>
+		<% end -%>
+	</div>
+</div>
+<div class="panel">
+	<div class="panel-heading">
+		<h3 class="panel-title">订单汇总</h3>
+	</div>
+	<div class="panel-body">
+		<% if can? :export, :Order %>
+		<div class="pad-btm form-inline">
+			<div class="row">
+				<div class="col-sm-12 table-toolbar-left">
+					<%== export_btn_tag "/admin/orders/export?#{request.query_string}", '导出列表' %>
+				</div>
+			</div>
+		</div>
+		<% end %>
+		<div class="row">
+			<div class="col-sm-12">
+				<%== render '/admin/orders/total_list' %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">产品汇总</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-vcenter">
+						<thead>
+							<tr>
+								<th>产品</th>
+								<th class="text-center">在谈订单<br/>（升）</th>
+								<th class="text-center">预订单<br/>（升）</th>
+								<th class="text-center">已下单<br/>（升）</th>
+								<th class="text-center">合计<br/>（升）</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @bulk_wine_info.map do |k,v|%>
+							<% next if v[:submited] == 0 && v[:ordered] == 0 %>
+							<tr>
+								<td><%== k %></td>
+								<td class="text-center"><%== v[:selling].ts %></td>
+								<td class="text-center"><%== v[:submited].ts %></td>
+								<td class="text-center"><%== v[:ordered].ts %></td>
+								<td class="text-center"><%== (v[:submited] + v[:ordered]).ts %></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">瓶型汇总</h3>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-striped table-vcenter">
+						<thead>
+							<tr>
+								<th class="text-center">瓶型</th>
+								<th class="text-center">在谈订单<br/>（个）</th>
+								<th class="text-center">预订单<br/>（个）</th>
+								<th class="text-center">已下单<br/>（个）</th>
+								<th class="text-center">合计<br/>（个）</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @bottle_info.map do |k,v|%>
+							<% next if v[:submited] == 0 && v[:ordered] == 0 %>
+							<tr>
+								<td class="text-center"><%== k %></td>
+								<td class="text-center"><%== v[:selling].ts %></td>
+								<td class="text-center"><%== v[:submited].ts %></td>
+								<td class="text-center"><%== v[:ordered].ts %></td>
+								<td class="text-center"><%== (v[:submited] + v[:ordered]).ts %></td>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,85 @@
+<!-- 预订单 -->
+<div class="panel">
+	<div class="panel-heading">
+		<h3 class="panel-title down-up">预订单列表</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="table-responsive">
+					<table class="table table-striped table-vcenter">
+						<thead>
+							<tr>
+								<th>订单号</th>
+								<th>客户</th>
+								<th>产品</th>
+								<th class="text-center">总数（瓶）</th>
+								<th class="text-center">销售</th>
+								<th class="text-center">提交时间</th>
+								<% if [2].include?(@admin_session.role) %>
+								<th class="text-center min-width">编辑</th>
+								<th class="text-center min-width">下单</th>
+								<% end %>
+								<% if [0, 1, 2, 5].include?(@admin_session.role) %>
+								<th class="text-center min-width">删除</th>
+								<% end %>
+							</tr>
+						</thead>
+						<tbody>
+							<% @orders.map do |order|%>
+							<tr>
+								<td>
+									<% if order.seller_id == @admin_session.id || can?(:show, :Order) %>
+									<%== order.a_link %>
+									<% else %>
+									<%== order.order_number %>
+									<% end %>
+								</td>
+								<td>
+									<% if order.seller_id == @admin_session.id || @admin_session.role == 0 %>
+									<a class="btn-link"
+									href="/admin/users/<%== order.user_id %>"><%== order.user.name %></a>
+									<% else %>
+									<%== order.user.name %>
+									<% end %>
+								</td>
+								<td>
+									<% order.order_productions.map do |o_product| %>
+									<%== o_product.show_in_order %><br />
+									<% end %>
+								</td>
+								<td class="text-center"><%== order.total_bottle_num.ts %></td>
+								<td class="text-center"><%== order.seller_name %></td>
+								<td class="text-center"><%== time_human(order.date_submit) %></td>
+								<% if [2].include?(@admin_session.role) %>
+								<td class="text-center">
+									<%== edit_btn_tag(order, '编辑', "/admin/orders/#{order.id}/edit?step=1") %>
+								</td>
+								<td class="text-center">
+									<a href="/admin/orders/<%== order.id %>/confirm"
+										class="order-confirm btn btn-sm btn-rounded btn-labeled btn-info">
+										<i class="btn-label ion-checkmark-circled"></i>确定下单
+									</a>
+								</td>
+								<% end %>
+								
+								<% if [0, 1, 2, 5].include?(@admin_session.role) %>
+								<td class="text-center">
+								<% if [0, 1, 2].include?(@admin_session.role) %>
+									<a href="/admin/orders/<%== order.id %>/cancel_submit" data-option="撤消订单" class="mtd-patch btn btn-xs btn-rounded btn-labeled btn-warning"><i class="btn-label ion-arrow-return-left"></i> 撤消订单</a>
+								<% end %>
+									<%== destroy_btn_tag(order) %>
+								</td>
+								<% end %>
+							</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+				<div class="row">
+					<%== table_footer_tag(@orders) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

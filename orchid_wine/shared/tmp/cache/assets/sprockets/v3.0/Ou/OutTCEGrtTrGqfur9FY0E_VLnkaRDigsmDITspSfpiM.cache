@@ -1,0 +1,13 @@
+I"O(function() {
+  $(document).on('nifty.ready', function() {
+    return true;
+  }).on('click', "form#bulk_wine-edit button[type=submit]", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.bottle-c.hide').remove();
+    $('.bottle-b.hide').remove();
+    return $("form#bulk_wine-edit").submit();
+  });
+
+}).call(this);
+:ET

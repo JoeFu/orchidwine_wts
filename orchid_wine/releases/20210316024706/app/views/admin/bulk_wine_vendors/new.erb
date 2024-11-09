@@ -1,0 +1,68 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">添加供应商</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>业务管理</li>
+    <li>基础资源</li>
+    <li>供应商管理</li>
+    <li class="active">添加供应商</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <%= form_tag("/admin/bulk_wine_vendors", method: :post, class: 'form-horizontal', id: 'bulk_wine_vendors-new') do -%>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">添加 供应商 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 供应商编码</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'vendor_code', params[:vendor_code], placeholder: "供应商编码", class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 供应商名称</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'name', params[:name], placeholder: "供应商名称", class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 地址</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'address', params[:address], placeholder: "地址", class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 联系方式</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'telphone', params[:telphone], placeholder: "联系方式", class: "form-control"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

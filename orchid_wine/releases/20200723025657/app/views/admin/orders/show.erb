@@ -1,0 +1,265 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">订单详情</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>用户管理</li>
+    <li>订单列表</li>
+    <li class="active">订单 <%== @order.order_number %> 详情</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline no-print">
+            <div class="row">
+              <div class="col-sm-6 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+              <div class="col-sm-6 table-toolbar-right">
+                <% if (@admin_session.role == 2 && @order.status == 0) || (@admin_session.role.in?([0,1,4,5]) && @order.status == 2) %>
+                <a href="/admin/orders/<%== @order.id %>/edit?step=1" class="btn btn-labeled btn-rounded btn-primary"><i class="btn-label ion-edit"></i> 编辑</a>
+                <% end %>
+                <a href="javascript:window.print();" class="btn btn-dark btn-rounded btn-labeled"><i class="btn-label ion-printer"></i> 打印 </a>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">订单 「<%== @order.order_number %>」 详情</p><br>
+          <h5>客户信息：<%== can?(:show, :User) ? @order.user.a_link : @order.user.name %></h5>
+          <h5>交付方式：<%== @order.delivery_way %></h5>
+          <h5>订单状态：<%== @order.status > 2 ? "财务复核完成" : @order.status_show %></h5>
+          <h5>提交时间：<%== @order.date_submit.strftime('%Y/%m/%d %H:%M') rescue '-' %></h5>
+          <h5>确认下单：<%== @order.date_confirm.strftime('%Y/%m/%d %H:%M') rescue '-' %></h5>
+          <h5>财务复核：<%== @order.date_recheck.strftime('%Y/%m/%d %H:%M') rescue '-' %></h5>
+          
+          <hr/>
+          <h5>产品清单</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-center">#</th>
+                <th>分类</th>
+                <th>描述</th>
+                <th class="text-center">数量 x 单价</th>
+              </tr>
+            </thead>
+            <tbody class="bg-f5">
+              <% i = 0; @order_productions.preload(:bulk_wine).map do |order_production|
+                next if order_production.bulk_wine.blank?
+              line = 5
+              line = 6 if order_production.bottle_code.last == "C"
+              %>
+              <tr>
+                <td rowspan="<%== line %>" class="text-center bg-fff">
+                  Item-<%== i += 1 %><br/>
+                  <strong><%== order_production.package %></strong>
+                </td>
+                <td>Bulk Wine</td>
+                <td>
+                  <small>[<%== order_production.brand %>]</small><br/>
+                  <% if order_production.is_hb == 1 %>
+                  <strong>灌装服务</strong>
+                  <% else %>
+                  <strong><%== order_production.bulk_wine_desc %></strong>
+                  <% end %>
+                </td>
+                <td rowspan="1" class="text-center bg-fff">
+                  <%== order_production.production_num_show %> x <%== order_production.unit_price.to_f2 rescue '-'%>
+                </td>
+              </tr>
+              <tr>
+                <td>Glass</td>
+                <td>
+                  <%== order_production.bottle.bottle_code_show rescue nil%>，
+                  <%== Bottle::CUSTOMIZE[order_production.bottle_customize] %>，
+                  <%== OrderProduction::PROVIDERS[order_production.bottle_provider] %>
+                </td>
+                <td rowspan="<%== line - 1 %>" class="text-center bg-fff">
+                  <%== order_production.produced_show %><br/>
+                  <%== order_production.shipped_show %><br/>
+                  <%== order_production.paid_show %>尾款
+                </td>
+              </tr>
+              <% if order_production.bottle_code.last == "C" %>
+              <tr>
+                <td>Cork</td>
+                <td>
+                  <%== order_production.cork_desc rescue '-'%>，
+                  <%== order_production.cork_print_show rescue '-'%>，
+                  <%== OrderProduction::PROVIDERS[order_production.cork_provider] %>
+                </td>
+              </tr>
+              <% end %>
+              <tr>
+                <% if order_production.bottle.present?%>
+                <% if order_production.bottle.seal == 1 %>
+                <td>Capsule</td>
+                <% elsif order_production.bottle.seal == 2 %>
+                <td>S.cap</td>
+                <% else %>
+                <td></td>
+                <% end %>
+                <td>
+                  <%== order_production.cap.desc rescue '-'%>，
+                  <%== order_production.cap_color_show %>，
+                  <%== OrderProduction::PROVIDERS[order_production.cap_provider] %>
+                </td>
+              </tr>
+              <% end %>
+              <tr>
+                <td>Divider</td>
+                <td>
+                  <%== order_production.divider.divider_type rescue '-'%>，
+                  <%== OrderProduction::PROVIDERS[order_production.divider_provider] %>
+                </td>
+                <!-- <td class="text-center"><%== order_production.production_num_show %></td> -->
+              </tr>
+              <tr>
+                <td>Carton</td>
+                <td>
+                  <%== order_production.carton.desc rescue '-'%>，
+                  <%== OrderProduction::PROVIDERS[order_production.carton_provider] %>
+                </td>
+                <!-- <td class="text-center"><%== order_production.boxes.ts %></td> -->
+              </tr>
+              
+              <tr class="bg-fff">
+                <td colspan="1"></td>
+                <td colspan="<%== line %>">
+                  <% if order_production.remark.present? %>
+                  备注：<%== order_production.remark %><br />
+                  <% end %>
+                  <br /><br />
+                </td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+          <!-- <hr/> -->
+          <h5>订单报价</h5>
+          <table class="table table-striped table-vcenter">
+            <thead>
+              <tr>
+                <th width="49%">产品编号</th>
+                <th width="17%">产品总价</th>
+                <th width="17%">附加费用</th>
+                <th width="17%">合计</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order.order_productions.map do |order_production| %>
+              <tr>
+                <td><%== order_production.show_in_order %></td>
+                <td><%== order_production.price_show %></td>
+                <td><%== order_production.fee_show %></td>
+                <td><%== order_production.total_price_show %></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+          <!-- <hr> -->
+          <h5 class="text-right">订单总价：<u><%== @order.currency_icon %> <%== @order.total_price.ts %></u></h5>
+          <h5 class="text-right">币种：<%== Order::CURRENCY[@order.currency] %> </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 no-print">
+      <div class="panel">
+        <div class="panel-body">
+          <h5>海运信息</h5>
+          <table class="table table-bordered table-vcenter">
+            <tbody>
+              <tr><td class="min-width text-right">起运港口</td><td><%== Order::SELLER_ELIVERY_WHARF[@order.ocean_start_id] %></td></tr>
+              <tr><td class="min-width text-right">目的港口</td><td><%== @order.ocean_dest_name %></td></tr>
+              <tr><td class="min-width text-right">海运保险</td><td><%== @order.ocean_insurance == 1 ? '是' : '否' %></td></tr>
+              <tr><td class="min-width text-right">海运承运方</td><td><%== @order.ocean_assign == 1 ? '澳麒指定（Orchid Wine Arrange）' : '客户指定（Customer Arrange）'  %></td></tr>
+              <tr><td class="min-width text-right">隔热棉要求</td><td><%== @order.ocean_felt == 1 ? '否' : '是'  %></td></tr>
+            </tbody>
+          </table>
+          <!--  <dt>海运公司名称：</dt><dd><%== @order.ocean_company_name %></dd>
+          <dt>联系人：</dt><dd><%== @order.ocean_company_contacts %></dd>
+          <dt>电话：</dt><dd><%== @order.ocean_company_telephone %></dd>
+          <dt>电子邮箱：</dt><dd><%== @order.ocean_company_email %></dd> -->
+          <hr>
+          <h5>卖方公司</h5>
+          <table class="table table-bordered table-vcenter">
+            <tbody>
+              <tr><td class="min-width text-right">公司名称</td><td><%== @order.seller_company_name%></td></tr>
+              <tr><td class="min-width text-right">公司地址</td><td><%== @order.seller_company_address%></td></tr>
+              <tr><td class="min-width text-right">联系人</td><td><%== @order.seller_company_contacts%></td></tr>
+              <tr><td class="min-width text-right">电话</td><td><%== @order.seller_company_telephone%></td></tr>
+              <tr><td class="min-width text-right">邮件</td><td><%== @order.seller_company_email%></td></tr>
+              <% if @order.delivery_way_id == 1%>
+              <tr><td class="min-width text-right">提货仓库</td><td><%== @order.seller_company_warehouse%></td></tr>
+              <%end%>
+              <% if @order.delivery_way_id == 2%>
+              <tr><td class="min-width text-right">交货码头</td><td><%== @order.seller_elivery_wharf%></td></tr>
+              <%end %>
+            </tbody>
+          </table>
+          <hr>
+          <% if @order.delivery_way_id == 4%>
+          <h5>出口公司</h5>
+          <table class="table table-bordered table-vcenter">
+            <tbody>
+              <tr><td class="min-width text-right">公司名称</td><td><%== @order.export_company_name%></td></tr>
+              <tr><td class="min-width text-right">公司地址</td><td><%== @order.export_company_address%></td></tr>
+              <tr><td class="min-width text-right">联系人</td><td><%== @order.export_company_contacts%></td></tr>
+              <tr><td class="min-width text-right">电话</td><td><%== @order.export_company_telephone%></td></tr>
+              <tr><td class="min-width text-right">邮件</td><td><%== @order.export_company_email%></td></tr>
+            </tbody>
+          </table>
+          <hr>
+          <h5>清关公司</h5>
+          <table class="table table-bordered table-vcenter">
+            <tbody>
+              <tr><td class="min-width text-right">公司名称</td><td><%== @order.clearance_company_name%></td></tr>
+              <tr><td class="min-width text-right">联系人</td><td><%== @order.clearance_company_contacts%></td></tr>
+              <tr><td class="min-width text-right">电话</td><td><%== @order.clearance_company_telephone%></td></tr>
+              <tr><td class="min-width text-right">邮件</td><td><%== @order.clearance_company_email%></td></tr>
+              <tr><td class="min-width text-right">交货码头</td><td><%== @order.clearance_delivery_wharf rescue '-'%></td></tr>
+            </tbody>
+          </table>
+          <hr>
+          <h5>进口公司</h5>
+          <table class="table table-bordered table-vcenter">
+            <tbody>
+              <tr><td class="min-width text-right">公司名称</td><td><%== @order.import_company_name%></td></tr>
+              <tr><td class="min-width text-right">公司地址</td><td><%== @order.import_company_address%></td></tr>
+              <tr><td class="min-width text-right">联系人</td><td><%== @order.import_company_contacts%></td></tr>
+              <tr><td class="min-width text-right">电话</td><td><%== @order.import_company_telephone%></td></tr>
+              <tr><td class="min-width text-right">邮件</td><td><%== @order.import_company_email%></td></tr>
+            </tbody>
+          </table>
+          <hr>
+          <%end%>
+          <h5>买方公司</h5>
+          <table class="table table-bordered table-vcenter">
+            <tbody>
+              <tr><td class="min-width text-right">公司名称</td><td><%== @order.buyer_company_name%></td></tr>
+              <tr><td class="min-width text-right">公司地址</td><td><%== @order.buyer_company_address%></td></tr>
+              <tr><td class="min-width text-right">联系人</td><td><%== @order.buyer_company_contacts%></td></tr>
+              <tr><td class="min-width text-right">电话</td><td><%== @order.buyer_company_telephone%></td></tr>
+              <tr><td class="min-width text-right">邮件</td><td><%== @order.buyer_company_email%></td></tr>
+              <%if @order.delivery_way_id == 3%>
+              <tr><td class="min-width text-right">买方交货码头地址</td><td><%== @order.buyer_elivery_wharf%></td></tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer">
+          <% if can?(:edit, :Order) && @order.status.in?([1, 2, 3, 4]) %>
+          <div class="row">
+            <div class="col-sm-12">
+              <a href="/admin/orders/<%== @order.id %>/edit?step=2" class="btn btn-sm btn-labeled btn-rounded btn-primary no-print"><i class="btn-label ion-edit"></i> 修改贸易信息</a>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

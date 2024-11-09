@@ -1,0 +1,26 @@
+<div class="table-responsive">
+	<table class="table table-striped table-vcenter">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>产品</th>
+				<th class="text-center">瓶数</th>
+				<th class="text-center">升数</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% i = 0
+			@merges.map do |merge|
+			i += 1
+			%>
+			<tr>
+				<td><%== i %></td>
+				<td><%== merge.bulk_wine_desc %></td>
+				<td class="text-center"><%== merge.real_num.ts %> x 750ml</td>
+				<td class="text-center"><%== merge.real_num * 750 / 1000 %></td>
+			</tr>
+			<% end %>
+			
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,41 @@
+BulkWine.add_vendor_name
+exit
+exit
+Delivery.where(status:2).update_all status:3
+exit
+Order.where(status:0).update :send_mail => 1
+eit
+exit
+OrderProduction.update_desc
+exit
+BulkWine.update_desc
+exit
+Delivery.back_transitions
+exit
+GmailCpts.order_new Order.last
+exit
+GmailCpts.order_new Order.last
+exit
+ Time.at 1595328582
+exit
+GmailCpts.order_new Order.last
+exit
+GmailCpts.order_new Order.last
+GmailCpts.order_new Order.last
+GmailCpts.order_new Order.last
+exit
+GmailCpts.order_new Order.last
+GmailCpts.get_token_test
+exit
+GmailCpts.get_token_test
+exit
+GmailCpts.get_token_test
+exit
+GmailCpts.get_token_test
+Time.at 1595328582
+exit
+GmailCpts.get_token_test
+GmailCpts.order_new Order.last
+Time.at 1595334227
+Time.now
+exit

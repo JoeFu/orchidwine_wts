@@ -1,0 +1,32 @@
+<div class="panel">
+	<div class="panel-body order-products-panel">
+		<div class="pad-btm form-inline">
+			<% if @order.status == 0 %>
+			<div class="row">
+				<div class="col-sm-12 table-toolbar-left">
+					<% if @order.sort == 1 %>
+					<a href="/admin/order_productions/new?order_id=<%== @order.id.to_i %>" class="btn btn-sm btn-labeled btn-rounded btn-purple" id="order-new-create">
+						<i class="btn-label ion-plus-circled"></i> 添加产品
+					</a>
+					<% elsif @order.sort == 2 %>
+					<a href="/admin/order_productions/new?order_id=<%== @order.id.to_i %>&is_hb=1" class="btn btn-sm btn-labeled btn-rounded btn-info" id="order-new-create">
+						<i class="btn-label ion-plus-circled"></i> 添加灌装产品
+					</a>
+					<% end %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<% if @order.order_productions.present? %>
+		<%== render 'admin/orders_new/production_table' %>
+		<% else %>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="alert alert-primary">
+					<strong><i class="ion-arrow-up-a"></i></strong> 点击添加按键，添加产品到该订单。
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+</div>

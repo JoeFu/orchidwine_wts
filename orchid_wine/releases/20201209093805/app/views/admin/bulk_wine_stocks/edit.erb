@@ -1,0 +1,139 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑产品</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>产品管理</li>
+    <li class="active">编辑产品</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/bulk_wine_stocks/#{@bulk_wine_stock.id}", method: :put, class: 'form-horizontal', id: 'bulk_wine-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @bulk_wine_stock.bulk_wine.code %>」 标准配置</p><br>
+          <div class="row">
+            <% if @admin_session.role != 5 %>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 销售单价</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'price', @bulk_wine_stock.bulk_wine.price, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 成本（含包材）</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'cost', @bulk_wine_stock.bulk_wine.cost, class: "form-control" %>
+              </div>
+            </div>
+            <% else %>
+            <%== hidden_field_tag :price, @bulk_wine_stock.bulk_wine.price %>
+            <%== hidden_field_tag :cost, @bulk_wine_stock.bulk_wine.cost %>
+            <% end %>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 最低购买量</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'min_number', @bulk_wine_stock.min_number, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 自定义包材起量</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'custom_number', @bulk_wine_stock.custom_number, class: "form-control" %>
+              </div>
+            </div>
+            
+            <hr/>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">包装方式</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="package">
+                  <%== options_for_select(OrderProduction::PACKAGES, @bulk_wine_stock.package ) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">酒瓶</label>
+              <div class="col-sm-3">
+                <select class="form-control" name="bottle_id">
+                  <%== options_for_select(Bottle.select_options_full, @bulk_wine_stock.bottle_id ) %>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select name="bottle_customize" class="form-control">
+                  <%== options_for_select(Bottle::CUSTOMIZE.invert, @bulk_wine_stock.bottle_customize) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">木塞</label>
+              <div class="col-sm-3">
+                <select id="editable-select1" class="form-control cork_id" name="cork_id">
+                  <option value="">无</option>
+                  <%== Cork.select_options(@bulk_wine_stock.cork_id) %>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <select class="form-control" name="cork_print">
+                  <%== options_for_select({'无需印刷' => 0,  '需要印刷' => 1}, @bulk_wine_stock.cork_print) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">胶帽 或 螺旋盖</label>
+              <div class="col-sm-3">
+                <select class="form-control" name="cap_id">
+                  <%== Cap.select_options('All', @bulk_wine_stock.cap_id) %>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <select class="form-control" name="cap_color">
+                  <%== options_for_select(CapColor.select_options, @bulk_wine_stock.cap_color) %>
+                </select>
+              </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">分隔板</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="divider_id">
+                  <%== options_for_select(Divider.select_options_withid(@bulk_wine_stock.package), @bulk_wine_stock.divider_id ) %>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">纸箱</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="carton_id">
+                  <%== options_for_select(Carton.select_options(@bulk_wine_stock.package), @bulk_wine_stock.carton_id ) %>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

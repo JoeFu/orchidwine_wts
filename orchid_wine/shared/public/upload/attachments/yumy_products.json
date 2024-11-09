@@ -1,0 +1,49 @@
+[
+  {
+    "appstorelink": "macappstore://itunes.apple.com/us/app/music-tag-editor-pro/id1229106549?mt=12",
+    "name": "Music Tag Editor Pro",
+    "desc": "Music Tag Editor can help you to edit your Music Tag info easily and effectively,Batch edit all tags and batch rename with metadata, you can also use it to convert the text encoding of Music Tag, In situations,it can repair the messy code in Music Tags. You also can download the album image for MP3 from internet.",
+    "imageurl": "http://www.yumysoft.com/wp-content/uploads/2013/03/MusicTagEditor.png",
+    "screenshot": "MusicTagEditor_st.png",
+    "currentversion": "2.4.2"
+  },
+  {
+    "appstorelink": "macappstore://itunes.apple.com/us/app/movie-collage-creator/id517581588?mt=12",
+    "name": "Movie Collage Creator",
+    "desc": "Want to catch the content of the latest movies at the first time? How about creating an amazing overview for all the latest movies? Movie Thumbnail Maker is the all-in-one solution, you don't need guess the content of the movie any more.",
+    "imageurl": "http://www.yumysoft.com/wp-content/uploads/2013/05/Movie_Thumbnail_Maker.png",
+    "screenshot": "MovieCC_st.png",
+    "currentversion": "2.1.0"
+  },
+  {
+    "appstorelink": "macappstore://itunes.apple.com/us/app/swift-converter/id511172407?mt=12",
+    "name": "Swift Converter",
+    "desc": "Swift Converter is a video utility tool for converting formats between video and audio. you can easily edit(split,trim,crop) and convert your video or audio with Swift Converter. Convert any formats to your apple device.\nAlso Swift Converter can help you easily extract and convert the audio content from video formats.",
+    "imageurl": "http://www.yumysoft.com/wp-content/uploads/2013/03/LSConverter.png",
+    "screenshot": "SwiftConverter_st.png",
+    "currentversion": "2.1.0"
+  },
+{
+    "appstorelink": "macappstore://itunes.apple.com/us/app/ultra-music-converter/id541791511?mt=12",
+    "name": "Ultra Music Converter",
+    "imageurl": "http://www.yumysoft.com/wp-content/uploads/2013/03/UltraMusicConverter.170x170-75.png",
+    "screenshot": "UltraMC_st.png",
+    "currentversion": "2.1"
+  },
+{
+    "appstorelink": "macappstore://itunes.apple.com/us/app/my-image-marker/id611611703?mt=12",
+    "name": "My Image Marker",
+    "desc": "My Image Marker is An utility tool for marking your pictures,It provide an easy and comfortable way to mark your image and share with your friend.",
+    "imageurl": "http://www.yumysoft.com/wp-content/uploads/2013/05/MyImageMarker.png",
+    "screenshot": "MyImgMarker_st.png",
+    "currentversion": "1.0.1"
+  },
+{
+    "appstorelink": "macappstore://itunes.apple.com/us/app/flactunes/id680194244?mt=12",
+    "name": "FLACTunes",
+    "desc": "Photo Batch Processor is a convenient photo batch process tool for adjust photos's size and watermark for lots of photos at one time. after editings(adjust size or add watermark),you can export with daily used image formats. ",
+    "imageurl": "http://www.yumysoft.com/wp-content/uploads/2013/05/PhotoBatchProcesser.png",
+    "screenshot": "FlacTunes_st.png",
+    "currentversion": "1.0.5"
+  }
+]

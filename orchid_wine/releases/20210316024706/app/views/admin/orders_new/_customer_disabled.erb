@@ -1,0 +1,25 @@
+<form class="form-horizontal">
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 control-label" >客户</label>
+  <div class="col-lg-6 col-md-6">
+    <%== hidden_field_tag :order_id, @order.id %>
+    <%== hidden_field_tag :sort, @order.sort %>
+    <%== hidden_field_tag :user_id, @order.user_id %>
+    <input class="form-control" type="text" value="<%== @order.user.full_show %>" readonly />
+  </div>
+</div>
+<% if @order.sort == 1 %>
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 control-label">交付方式</label>
+  <div class="col-lg-6 col-md-6">
+    <input class="form-control" type="text" value="<%== Order::DELIVERY_WAY[@order.delivery_way_id] %>" readonly />
+  </div>
+</div>
+<% end %>
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 control-label">支付币种</label>
+  <div class="col-lg-6 col-md-6">
+    <input class="form-control" type="text" value="<%== Order::CURRENCY[@order.currency] %>" readonly />
+  </div>
+</div>
+</form>

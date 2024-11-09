@@ -1,0 +1,8 @@
+base: &base
+  host: 127.0.0.1
+  password:
+
+production:
+  <<: *base
+  port: 4630
+  password: RQ3gd387WVv2jK6D

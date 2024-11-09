@@ -1,0 +1,84 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑 管理员/销售</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>用户管理</li>
+    <li>管理员/销售 列表</li>
+    <li class="active">编辑 <%== @admin.true_name %></li>
+  </ol>
+</div>
+
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/admins/#{@admin.id}", method: :put, class: 'form-horizontal', id: 'admins-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @admin.true_name %>」 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 登录账号</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'user_name', @admin.user_name, class: "form-control", readonly: true%>
+              </div>
+            </div>
+            <% if @admin_session.role == 0 %>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">密码</label>
+              <div class="col-sm-6">
+                <%= password_field_tag 'password', nil, placeholder: "不更改则留空。", class: "form-control"%>
+              </div>
+            </div>
+            <% end %>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 真实姓名</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'true_name', @admin.true_name, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 手机号码</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'mobile', @admin.mobile, class: "form-control"%>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">电子邮箱</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'email', @admin.email, class: "form-control"%>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">管理者身份</label>
+              <div class="col-sm-6">
+                <select  class="form-control" name="role">
+                  <%== options_for_select(Hash[Admin::CREATE_ADMIN_ROLE].invert, @admin.role ) %>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

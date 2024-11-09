@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="table-responsive">
+      <table class="table table-striped table-vcenter">
+        <thead>
+          <tr>
+            <th>订单号</th>
+            <th>客户</th>
+            <th>产品</th>
+            <th class="text-center">总瓶数</th>
+            <th class="text-center">发往 </th>
+            <th class="text-center">复核日期</th>
+            <th class="text-center">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transition_orders.map do |order|%>
+          <tr>
+            <td>
+              <% if order.seller_id == @admin_session.id || can?(:show, :Order) %>
+              <%== order.a_link %>
+              <% else %>
+              <%== order.order_number %>
+              <% end %>
+            </td>
+            <td>
+              <% if order.seller_id == @admin_session.id || @admin_session.role == 0 %>
+              <%== order.user.a_link %>
+              <% else %>
+              <%== order.user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%
+              total_bottle_num = 0
+              order.order_production_transitions.preload(:order_production).map do |order_production_transition|
+              total_bottle_num += order_production_transition.num
+              %>
+              <%== order_production_transition.show_in_delivery %><br/>
+              <% end %>
+            </td>
+            <td class="text-center"><%== total_bottle_num.ts %></td>
+            <td class="text-center"><%== order.ocean_dest_name %></td>
+            <td class="text-center"><%== order.date_recheck.to_ymd %></td>
+            <td class="text-center">
+              <a href="/admin/deliveries/<%= order.id %>/no_need"
+                data-option="此订单无需发货"
+                class="mtd-patch btn btn-sm btn-labeled btn-rounded btn-warning">
+              <i class='btn-label ion-close-circled'></i> 无需发货</a>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

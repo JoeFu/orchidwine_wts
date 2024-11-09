@@ -1,0 +1,14 @@
+=== puma startup: 2019-04-10 06:44:41 +0000 ===
+* Listening on unix:///home/orchid/orchid_wine/shared/tmp/sockets/puma.sock
+* Restarting...
+Refreshing Gemfile
+Puma starting in single mode...
+* Version 3.12.0 (ruby 2.5.0-p0), codename: Llamas in Pajamas
+* Min threads: 0, max threads: 16
+* Environment: production
+* Daemonizing...
+=== puma startup: 2019-04-10 06:48:44 +0000 ===
+* Inherited unix:///home/orchid/orchid_wine/shared/tmp/sockets/puma.sock
+- Gracefully stopping, waiting for requests to finish
+=== puma shutdown: 2019-04-10 06:49:39 +0000 ===
+- Goodbye!

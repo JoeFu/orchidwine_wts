@@ -1,0 +1,64 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">待处理订单</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>业务管理</li>
+    <li>发货管理</li>
+    <li class="active">待处理订单</li>
+  </ol>
+</div>
+<div id="page-content">
+  <%= render 'admin/deliveries/nav' %>
+  
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">筛选条件</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_tag("/admin/deliveries/transition", method: :get, class: 'form-horizontal') do -%>
+          <input type="hidden" name='status' value="<%== params[:status] %>">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="col-sm-4 col-sm-4 control-label">客户名</label>
+                <div class="col-sm-8">
+                  <input type="text" name="user_name" class="form-control" size="26" placeholder="搜索客户名称" value="<%== params[:user_name] %>" autocomplete='off'>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">订单号</label>
+                <div class="col-sm-8">
+                  <input type="text" name="order_number" class="form-control" size="26" placeholder="搜索订单号" value="<%== params[:order_number] %>" autocomplete='off'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-1">
+              <%== submit_tag %>
+              <%== clear_tag "/admin/deliveries/transition" %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+      
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title down-up">订单列表</h3>
+        </div>
+        <div class="panel-body">
+          <%= render 'admin/deliveries/transition_list' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

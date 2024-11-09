@@ -1,0 +1,5 @@
+=== puma startup: 2024-11-09 03:36:04 +1030 ===
+[4682] - Worker 0 (pid: 7567) booted, phase: 0
+[4682] - Worker 1 (pid: 7571) booted, phase: 0
+[4682] - Worker 2 (pid: 7582) booted, phase: 0
+[4682] - Worker 3 (pid: 7597) booted, phase: 0

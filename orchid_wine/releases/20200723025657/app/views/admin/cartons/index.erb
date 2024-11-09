@@ -1,0 +1,34 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">纸箱</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>包材管理</li>
+    <li class="active">纸箱</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">纸箱列表</h3>
+        </div>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-3 table-toolbar-left">
+                <%== new_btn_tag "/admin/cartons/new", '添加纸箱' %>
+              </div>
+              <div class="col-sm-9 table-toolbar-right">
+              </div>
+            </div>
+          </div>
+          <%= render 'admin/cartons/list' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

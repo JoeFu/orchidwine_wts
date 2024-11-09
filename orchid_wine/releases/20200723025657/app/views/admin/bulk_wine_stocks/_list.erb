@@ -1,0 +1,30 @@
+<table data-toggle="table"
+  data-url="/admin/bulk_wine_tables/data.json?<%== request.query_string %>"
+  data-sort-name="id"
+  data-page-list="[15, 30, 45]"
+  data-page-size="15"
+  data-pagination="true" data-show-pagination-switch="false">
+  <thead>
+    <tr>
+      <th data-field="code" data-sortable="true">产品编码</th>
+      <th data-field="desc" data-sortable="true">描述</th>
+      <% if @admin_session.role != 2 %>
+      <th data-field="price" data-sortable="true" class="text-center">标准售价</th>
+      <th data-field="cost" data-sortable="true" class="text-center">成本</th>
+      <th data-field="total_stock" data-sortable="true" class="text-center">总库存</th>
+      <th data-field="sold_count" data-sortable="true" class="text-center">已销量</th>
+      <% end %>
+      <th data-field="can_sell_stock" data-sortable="true" class="text-center">可售库存</th>
+      <% if @admin_session.role != 2 %>
+      <th data-field="sellings" data-sortable="true" class="text-center">购物车<br>不占库存</th>
+      <% end %>
+      <th data-field="min_number" data-sortable="true" class="text-center">下单起量</th>
+      <th data-field="custom_number" data-sortable="true" class="text-center">自定义起量</th>
+      <% if @admin_session.role != 2 %>
+      <th data-field="show_btn" data-sortable="false" class="text-center">标准品信息</th>
+      <th data-field="add_stock_btn" data-sortable="false" class="text-center">库存</th>
+      <th data-field="edit_btn" data-sortable="false" class="text-center">操作</th>
+      <% end %>
+    </tr>
+  </thead>
+</table>

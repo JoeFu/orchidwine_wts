@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th width="10%">ID</th>
+        <th width="10%">帐号</th>
+        <th width="10%">类型</th>
+        <th width="15%">姓名</th>
+        <th width="15%">电话</th>
+        <th width="20%">邮箱</th>
+        <th width="20%" class="text-center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admins.map do |admin|%>
+      <tr>
+        <td><a class="btn-link" href="/admin/admins/<%== admin.id %>">OCR-<%== admin.id %></a></td>
+        <td><a class="btn-link" href="/admin/admins/<%== admin.id %>"><%== admin.user_name %></a></td>
+        <td><%== admin.role_show %></td>
+        <td><%== admin.true_name %></td>
+        <td><%== admin.mobile %></td>
+        <td><%== admin.email %></td>
+        <td class="text-center">
+          <% if can? :edit, :Admin %>
+            <% unless admin.user_name == 'admin'%>
+              <%== edit_btn_tag(admin) %>
+            <% end %>
+          <% end %>
+          <% if can? :destroy, :Admin %>
+              <%== destroy_btn_tag(admin) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+      
+    </tbody>
+  </table>
+</div>

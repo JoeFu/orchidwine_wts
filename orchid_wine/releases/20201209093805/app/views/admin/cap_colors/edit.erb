@@ -1,0 +1,55 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑酒帽颜色</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>包材管理</li>
+    <li>酒帽颜色</li>
+    <li class="active">编辑 <%== @cap_color.color_code %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/cap_colors/#{@cap_color.id}", method: :put, class: 'form-horizontal', id: 'cap_colors-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @cap_color.color_code %>」 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 编号</label>
+              <div class="col-sm-6">
+                <input type="text" name="color_code" class="form-control" value="<%== @cap_color.color_code %>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 酒帽颜色</label>
+              <div class="col-sm-6">
+                <input type="text" name="color_value" class="form-control" value="<%== @cap_color.color_value %>">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

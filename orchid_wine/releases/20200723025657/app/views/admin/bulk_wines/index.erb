@@ -1,0 +1,49 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">产品</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>产品管理</li>
+    <li class="active">产品</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">产品列表</h3>
+    </div>
+    <div class="panel-body">
+      <div class="pad-btm form-inline">
+        <%= form_tag("/admin/bulk_wines", method: :get) do -%>
+        <div class="row">
+          <div class="col-sm-3 table-toolbar-left">
+            <%== new_btn_tag "/admin/bulk_wines/new", '添加产品' %>
+          </div>
+          <div class="col-sm-9 table-toolbar-right">
+            <div class="form-group">
+              <%= text_field_tag 'q', params[:q], placeholder: '搜索编码', class: "form-control", autocomplete: 'off' %>
+              <%= text_field_tag 'year', params[:year], placeholder: '年份', class: "form-control", autocomplete: 'off' %>
+              <%= text_field_tag 'vendor', params[:vendor], placeholder: '供应商', class: "form-control", autocomplete: 'off' %>
+              <div class="form-group">
+                <select class="selectpicker form-control" name="status">
+                  <option value="">所有状态</option>
+                  <%== options_for_select(Hash[BulkWine::STATUS].invert, params[:status])%>
+                </select>
+              </div>
+
+            </div>
+            <%== submit_tag %>
+            <%== clear_tag "/admin/bulk_wines" %>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+      <%= render 'admin/bulk_wines/list' %>
+      <div class="row">
+        <%== table_footer_tag @bulk_wines %>
+      </div>
+    </div>
+  </div>
+</div>

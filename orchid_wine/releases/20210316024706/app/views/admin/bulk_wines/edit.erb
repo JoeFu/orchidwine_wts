@@ -1,0 +1,137 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑产品</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>产品管理</li>
+    <li>产品注册</li>
+    <li class="active">编辑 <%== @bulk_wine.code %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/bulk_wines/#{@bulk_wine.id}", method: :put, class: 'form-horizontal', id: 'bulk_wines-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @bulk_wine.code %>」 信息</p><br>
+          <div class="row">
+            <input type="hidden" id="hidden-lip" name='lip' value="<%== @bulk_wine.lip %>">
+            <input type="hidden" id="hidden-analysis" name='analysis' value="<%== @bulk_wine.analysis %>">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">批次</label>
+              <div class="col-sm-6">
+                <%== select_tag "batch", options_for_select(BulkWine::BATCHS, @bulk_wine.batch), class: 'form-control' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 商品类别</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="sort_id">
+                  <%== options_for_select(BulkWineSort.options.invert, @bulk_wine.sort_id) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 供应商</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="vendor_id">
+                  <%== options_for_select(BulkWineVendor.options.invert, @bulk_wine.vendor_id) %>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 年份</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="year">
+                  <%== options_for_select(BulkWineYear.options, @bulk_wine.year) %>
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 产地1</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="area_id_one">
+                  <%== options_for_select(BulkWineArea.options.invert, @bulk_wine.area_id_one) %>
+                </select>
+              </div>
+              
+              <div class="col-sm-3">
+                <div class="checkbox">
+                  <input id="bulk_wine-area-single" class="magic-checkbox" type="checkbox" <%== 'checked' if @bulk_wine.area_id_one == @bulk_wine.area_id_two %>>
+                  <label for="bulk_wine-area-single">单一产区</label>
+                </div>
+              </div>
+              
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 产地2</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="area_id_two">
+                  <%== options_for_select(BulkWineArea.options.invert, @bulk_wine.area_id_two) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 品种1</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="variety_id_one">
+                  <%== options_for_select(BulkWineVariety.options.invert, @bulk_wine.variety_id_one) %>
+                </select>
+              </div>
+              <div class="col-sm-3">
+                <div class="checkbox">
+                  <input id="bulk_wine-variety-single" class="magic-checkbox" type="checkbox" <%== 'checked' if @bulk_wine.variety_id_one == @bulk_wine.variety_id_two && @bulk_wine.variety_id_one == @bulk_wine.variety_id_three %>>
+                  <label for="bulk_wine-variety-single">单一品种</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 品种2</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="variety_id_two">
+                  <%== options_for_select(BulkWineVariety.options.invert, @bulk_wine.variety_id_two) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 品种3</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="variety_id_three">
+                  <%== options_for_select(BulkWineVariety.options.invert, @bulk_wine.variety_id_three) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 酒精度</label>
+              <div class="col-sm-6">
+                <%= text_field_tag 'alcoholic_strength', @bulk_wine.alcoholic_strength.to_f2, placeholder: "酒精度", class: "form-control"%>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

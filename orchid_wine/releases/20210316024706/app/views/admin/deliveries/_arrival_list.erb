@@ -1,0 +1,48 @@
+<div class="table-responsive">
+	<table class="table table-vcenter">
+		<thead>
+			<tr>
+				<th>预约号</th>
+        <th>进出口信息</th>
+				<th width="180px">订单号/客户</th>
+				<th>产品</th>
+				<th class="text-center">总数(瓶) </th>
+				<th class="text-center">文件</th>
+				<th class="text-center">发往</th>
+				<th class="text-center">日期</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+			@deliveries.map do |delivery|
+			rows = delivery.order_production_deliveries.size
+			row = 0
+			delivery.order_production_deliveries.map do |order_production_delivery|
+			row += 1
+			%>
+			<tr>
+				<% if row == 1 %>
+				<td rowspan="<%== rows %>"><%== delivery.a_link %></td>
+				<td rowspan="<%== rows %>"><%== delivery.shipping_company_show %></td>
+				<% end %>
+				<td>
+					<%== order_production_delivery.show_order_number %> /
+					<%== order_production_delivery.user.name %>
+				</td>
+				<td><%== order_production_delivery.show_in_delivery %></td>
+				<td class="text-center"><%== delivery.total_bottle_num.ts %></td>
+				<td class="text-center">
+					<% if delivery.packing_list.present? %>
+					<a class="btn-link" href="<%== delivery.packing_list %>"><i class='ion-document'></i> 发货单</a><br>
+					<% end %>
+				</td>
+        <% if row == 1 %>
+        <td class="text-center" rowspan="<%== rows %>"><%== delivery.port_of_discharge %></td>
+				<td class="text-center" rowspan="<%== rows %>"><%== delivery.updated_at.to_ymd %></td>
+				<% end %>
+			</tr>
+			<% end %>
+			<% end %>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,123 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑产品</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>官网产品配置</li>
+    <li>产品列表</li>
+    <li class="active">编辑 <%== @web_product.name %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-12">
+      <div class="panel">
+        <%= form_tag("/admin/web_products/#{@web_product.id}", method: :put, class: 'form-horizontal', id: 'web_products-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @web_product.name %>」 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-md-3 control-label" >名称</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'name', @web_product.name, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">分类</label>
+              <div class="col-md-6">
+                <select class="form-control" name="web_product_category_id">
+                  <%== options_for_select(Hash[WebProductCategory::all_pluck].invert, @web_product.web_product_category_id) %>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >评分</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'score', @web_product.score, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >葡萄品种</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'grape_variety', @web_product.grape_variety, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >葡萄产区</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'grape_area', @web_product.grape_area, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >酿酒师</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'wine_maker', @web_product.wine_maker, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >入口滋味</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'taste', @web_product.taste, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >餐饮搭配</label>
+              <div class="col-md-6">
+                <%= text_field_tag 'match', @web_product.match, class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >封面</label>
+              <div class="col-md-9">
+                <input type="hidden" id="hidden-cover" name="cover" value="<%== @web_product.cover %>">
+                <span class="pull-left btn btn-default btn-file">
+                  选择文件... <input id='cover' type="file" class="img-upload">
+                </span>
+              </div>
+              <div class="col-md-9 col-md-offset-3" id="preview-cover">
+                <img src="<%== @web_product.cover %>" style="width: 100px;height: 100px;">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >PDF</label>
+              <div class="col-md-6">
+                <input type="hidden" id="hidden-pdf" name="pdf" value="<%== @web_product.pdf %>">
+                <span class="pull-left btn btn-default btn-file">
+                  选择文件... <input id='pdf' type="file" class="file-upload">
+                </span>
+              </div>
+              <div class="col-md-9 col-md-offset-3" id="preview-pdf">
+                <a href="<%== @web_product.pdf %>"><%== @web_product.pdf %></a>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label" >产品特点</label>
+              <div class="col-md-6">
+                <textarea class="form-control" name='feature' style="width: 100%;height: 100px;"><%== @web_product.feature %></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-md-9 col-md-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>
+<!--===================================================-->
+<!--End page content-->

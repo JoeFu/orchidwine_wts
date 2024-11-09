@@ -1,0 +1,53 @@
+I"Š(function() {
+  var area_single, variety_single;
+
+  area_single = function() {
+    var flag, one, two;
+    one = $('select[name=area_id_one]').val();
+    two = $('select[name=area_id_two]').val();
+    flag = false;
+    if (one === two) {
+      flag = true;
+    }
+    return $('input#origin-area-single').prop('checked', flag);
+  };
+
+  variety_single = function() {
+    var flag, one, three, two;
+    one = $('select[name=variety_id_one]').val();
+    two = $('select[name=variety_id_two]').val();
+    three = $('select[name=variety_id_three]').val();
+    flag = false;
+    if (one === two && one === three) {
+      flag = true;
+    }
+    return $('input#origin-variety-single').prop('checked', flag);
+  };
+
+  $(document).on('nifty.ready', function() {}).on('click', 'input#origin-area-single', function(e) {
+    var v;
+    if (this.checked) {
+      v = $('select[name=area_id_one]').val();
+      return $('select[name=area_id_two]').val(v);
+    }
+  }).on('click', 'input#origin-variety-single', function(e) {
+    var v;
+    if (this.checked) {
+      v = $('select[name=variety_id_one]').val();
+      $('select[name=variety_id_two]').val(v);
+      return $('select[name=variety_id_three]').val(v);
+    }
+  }).on('change', 'select[name=area_id_one]', function(e) {
+    return area_single();
+  }).on('change', 'select[name=area_id_two]', function(e) {
+    return area_single();
+  }).on('change', 'select[name=variety_id_one]', function(e) {
+    return variety_single();
+  }).on('change', 'select[name=variety_id_two]', function(e) {
+    return variety_single();
+  }).on('change', 'select[name=variety_id_three]', function(e) {
+    return variety_single();
+  });
+
+}).call(this);
+:ET

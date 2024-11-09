@@ -1,0 +1,151 @@
+<div id="page-head">
+	<div id="page-title">
+		<h1 class="page-header text-overflow">购物车</h1>
+	</div>
+	<ol class="breadcrumb">
+		<li><i class="ion-home"></i></li>
+		<li>业务管理</li>
+		<li class="active">购物车</li>
+	</ol>
+</div>
+<div id="page-content">
+	<!-- 订单汇总 -->
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">筛选条件</h3>
+		</div>
+		<div class="panel-body">
+			<%= form_tag("/admin/quotations", method: :get, class: 'form-horizontal') do -%>
+			
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 col-sm-4 control-label">产品类型</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="bulk_wine_sort_id">
+								<%== options_for_select({0 => '全部'}.merge(BulkWineSort.options).invert, params[:bulk_wine_sort_id]) %>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 col-sm-4 control-label">供应商</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="bulk_wine_vendor_id">
+								<%== options_for_select({0 => '全部'}.merge(BulkWineVendor.options).invert, params[:bulk_wine_vendor_id]) %>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 col-sm-4 control-label">年份</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="bulk_wine_year">
+								<%== options_for_select([['全部']] + BulkWineYear.options, params[:bulk_wine_year]) %>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 col-sm-4 control-label">品种</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="bulk_wine_variety_id">
+								<%== options_for_select({0 => '全部'}.merge(BulkWineVariety.options).invert, params[:bulk_wine_variety_id]) %>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<% if @admin_session.role != 2 %>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">销售</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="seller_id">
+								<option value="">全部</option>
+								<%== options_for_select(Hash[Admin.sellers_pluck(@seller_ids)].invert, params[:seller_id]) %>
+							</select>
+						</div>
+					</div>
+				</div>
+				<% end %>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">客户名</label>
+						<div class="col-sm-8">
+							<input type="text" name="user_name" class="form-control" size="26" placeholder="请输入客户名称" value="<%== params[:user_name] %>" autocomplete='off'>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">类型</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="sort">
+								<%== options_for_select(Hash[{0 => '全部'}.merge(Order::SORT)].invert, params[:sort])%>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% if @bulk_wine.present? %>
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label class="col-sm-4 control-label">产品</label>
+						<div class="col-sm-8">
+							<input type="hidden" name="bulk_wine_id" value="<%== @bulk_wine.id %>"/>
+							<input type="text" name="bulk_wine_code" class="form-control" size="26" placeholder="请输入客户名称" value="<%== @bulk_wine.code %>" readonly='yes'>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<div class="panel-footer">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="col-sm-8 col-lg-offset-2">
+						<%== submit_tag %>
+						<%== clear_tag "/admin/quotations" %>
+					</div>
+				</div>
+			</div>
+			<% end -%>
+		</div>
+	</div>
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">购物车</h3>
+		</div>
+		<div class="panel-body">
+			<% if false && can?(:index, :OrdersNew) %>
+			<div class="pad-btm form-inline">
+				<div class="row">
+					<div class="col-sm-3 table-toolbar-left">
+						<%== new_btn_tag("/admin/orders_new", '创建购物车') if can?(:Quotation, :User) %>
+					</div>
+				</div>
+			</div>
+			<% end %>
+			<% if can? :export, :Order %>
+			<div class="pad-btm form-inline">
+				<div class="row">
+					<div class="col-sm-12 table-toolbar-left">
+						<%== export_btn_tag "/admin/quotations/export?#{request.query_string}", '导出列表' %>
+					</div>
+				</div>
+			</div>
+			<% end %>
+			<%= render 'admin/quotations/list' %>
+			<div class="row">
+				<%== table_footer_tag(@orders) %>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">供应商</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>产品管理</li>
+    <li class="active">供应商</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">供应商列表</h3>
+    </div>
+    <div class="panel-body">
+      <div class="pad-btm form-inline">
+        <%= form_tag("/admin/bulk_wine_vendors", method: :get) do -%>
+        <div class="row">
+          <div class="col-sm-3 table-toolbar-left">
+            <%== new_btn_tag "/admin/bulk_wine_vendors/new", '添加供应商' %>
+          </div>
+          <div class="col-sm-9 table-toolbar-right">
+            <div class="form-group">
+              <%= text_field_tag 'q', params[:q], placeholder: '搜索名称', class: "form-control"%>
+            </div>
+            <%== submit_tag %>
+            <%== clear_tag "/admin/bulk_wine_vendors" %>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+      <%= render 'admin/bulk_wine_vendors/list' %>
+      <div class="row">
+        <%== table_footer_tag @bulk_wine_vendors %>
+      </div>
+    </div>
+  </div>
+</div>

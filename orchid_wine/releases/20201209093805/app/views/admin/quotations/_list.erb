@@ -1,0 +1,114 @@
+<div class="table-responsive">
+  <table class="table table-hover table-vcenter">
+    <thead>
+      <tr>
+        <th>订单号</th>
+        <th>客户</th>
+        <th>产品</th>
+        <th class="text-center">瓶型</th>
+        <th class="text-center">纸箱外包装</th>
+        <th class="text-center">库存</th>
+        <% if @admin_session.role != 2 %>
+        <th class="text-center">销售</th>
+        <% else %>
+        <th class="text-center">编辑</th>
+        <th class="text-center">下单</th>
+        <th class="text-center">删除</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.map do |order| %>
+      <% n = 0 %>
+      <% order_productions = order.order_productions.where('bulk_wine_id > 0') %>
+      <% lines = order_productions.size %>
+      <% order_productions.preload(:bulk_wine).map do |order_production|%>
+      <tr>
+        <% if n == 0 %>
+        <td rowspan="<%== lines %>"><%== order.a_link %></td>
+        <td rowspan="<%== lines %>"><%== can?(:show, :User) ? order.user.a_link : order.user.name %></td>
+        <% end %>
+        <td><%== order_production.show_in_order %></td>
+        <td class="text-center"><%== order_production.bottle_code %></td>
+        <td class="text-center"><%== order_production.outer_packing %></td>
+        <td class="text-center">
+          <% if order_production.is_hb == 1 %>
+          -
+          <% elsif @bulk_wine_stocks[order_production.bulk_wine_id] < order_production.real_num %>
+          <b class="text-danger">
+          <%== @bulk_wine_stocks[order_production.bulk_wine_id].ts %>
+          </b>
+          <% else %>
+          <%== @bulk_wine_stocks[order_production.bulk_wine_id].ts %>
+          <% end %>
+        </td>
+        <% if n == 0 %>
+        <% if @admin_session.role != 2 %>
+        <td rowspan="<%== lines %>" class="text-center">
+          <%== order.seller.true_name rescue '待确定' %>
+        </td>
+        <% else %>
+        <td class="text-center" rowspan="<%== lines %>">
+          <% if order.seller_id == @admin_session.id %>
+          <%== edit_btn_tag(order, '继续编辑',  "/admin/orders/#{order.id}/edit?step=1") %>
+          <% end %>
+        </td>
+        <td class="text-center" rowspan="<%== lines %>">
+          <%
+          can_saved = true;
+          order_productions.map do |_op|
+          next if _op.is_hb == 1
+          can_saved = false if @bulk_wine_stocks[_op.bulk_wine_id] < _op.real_num
+          can_saved = false if _op.bulk_wine.status.zero?
+          can_saved = false if _op.too_little == 1
+          end
+          %>
+          <% if can_saved %>
+          <a href="/admin/orders/<%== order.id %>/submit"
+            data-option="提交此订单"
+            class="mtd-patch btn btn-sm btn-rounded btn-labeled btn-info">
+            <i class="btn-label ion-checkmark-circled"></i> 提交预订单
+          </a>
+          <% else %>
+          无法提交
+          <% end %>
+        </td>
+        <td class="text-center" rowspan="<%== lines %>">
+          <%== destroy_btn_tag(order) %>
+        </td>
+        <% end %>
+        <% end %>
+      </tr>
+      <% n += 1 %>
+      <% end %>
+      <% if order_productions.blank? %>
+      <tr>
+        <td><%== order.a_link %></td>
+        <td><%== can?(:show, :User) ? order.user.a_link : order.user.name %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <% if @admin_session.role != 2 %>
+        <td class="text-center">
+          <%== order.seller.true_name rescue '待确定' %>
+        </td>
+        <% else %>
+        <td class="text-center">
+          <% if order.seller_id == @admin_session.id %>
+          <%== edit_btn_tag(order, '继续编辑',  "/admin/orders/#{order.id}/edit?step=1") %>
+          <% end %>
+        </td>
+        <td></td>
+        <td class="text-center">
+          <% if order.seller_id == @admin_session.id %>
+          <%== destroy_btn_tag(order) %>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

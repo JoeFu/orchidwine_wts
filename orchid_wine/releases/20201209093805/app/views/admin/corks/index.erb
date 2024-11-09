@@ -1,0 +1,49 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">酒塞/酒帽</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>包材管理</li>
+    <li class="active">酒塞/酒帽</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">酒塞列表</h3>
+        </div>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-3 table-toolbar-left">
+                <%== new_btn_tag "/admin/corks/new", '添加酒塞' %>
+              </div>
+            </div>
+          </div>
+          <%= render 'admin/corks/list' %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">酒帽列表</h3>
+        </div>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-3 table-toolbar-left">
+                <%== new_btn_tag "/admin/caps/new", '添加酒帽' %>
+              </div>
+            </div>
+          </div>
+          <%= render 'admin/caps/list' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

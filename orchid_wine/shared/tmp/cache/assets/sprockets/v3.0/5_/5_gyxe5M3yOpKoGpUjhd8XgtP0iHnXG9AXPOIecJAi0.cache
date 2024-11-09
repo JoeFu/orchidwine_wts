@@ -1,0 +1,79 @@
+I"((function() {
+  $(document).on('change', 'select[name=provience_id]', function(e) {
+    var father_id;
+    e.preventDefault();
+    e.stopPropagation();
+    father_id = $(this).val();
+    $.ajax({
+      url: '/admin/areas/cities',
+      dataType: "html",
+      data: 'father_id=' + father_id,
+      error: function() {},
+      success: function(result) {
+        return $('select[name=city_id').html(result).selectpicker('refresh');
+      }
+    });
+  }).on('change', 'select[name=city_id]', function(e) {
+    var father_id;
+    e.preventDefault();
+    e.stopPropagation();
+    father_id = $(this).val();
+    $.ajax({
+      url: '/admin/areas/counties',
+      dataType: "html",
+      data: 'father_id=' + father_id,
+      error: function() {},
+      success: function(result) {
+        return $('select[name=area_id').html(result).selectpicker('refresh');
+      }
+    });
+  }).on("click", "button.show-progress-log", function(e) {
+    return $(this).siblings('.progress-log').toggle();
+  }).on('nifty.ready', function() {
+    var error, success;
+    error = $('input#flash-error').val();
+    success = $('input#flash-success').val();
+    if (error) {
+      $.niftyNoty({
+        type: "danger",
+        container: "#page-content",
+        icon: 'ion-flash',
+        title: "操作失败提醒！",
+        message: error,
+        closeBtn: true,
+        timer: 10000
+      });
+    }
+    if (success) {
+      $.niftyNoty({
+        type: "success",
+        container: "floating",
+        icon: 'ion-checkmark',
+        title: "操作成功提示！",
+        message: success,
+        closeBtn: true,
+        timer: 10000
+      });
+    }
+    $('select.chosen-select').chosen();
+    $('.input-daterange').datepicker({
+      format: "yyyy-mm-dd",
+      todayBtn: false,
+      autoclose: true,
+      todayHighlight: true,
+      language: "zh-CN",
+      maxDate: $.now()
+    });
+    return $('.input-timepicker').timepicker({
+      minuteStep: 5,
+      showInputs: false,
+      disableFocus: true,
+      showMeridian: false,
+      defaultTime: '12:00 AM'
+    });
+  });
+
+  return;
+
+}).call(this);
+:ET

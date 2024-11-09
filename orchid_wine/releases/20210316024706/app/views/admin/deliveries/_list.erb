@@ -1,0 +1,91 @@
+<!-- 模态对话框结束 -->
+<div class="table-responsive">
+  <table class="table table-vcenter">
+    <thead>
+      <tr>
+        <th>预约号</th>
+        <th>进出口信息</th>
+        <% if params[:status].to_i == 2 %>
+        <th class="text-center">WEA许可证</th>
+        <% end %>
+        <th width="180px">集装箱/订单号/客户</th>
+        <th>产品</th>
+        <th class="text-center min-width">总瓶数</th>
+        <th class="text-center min-width">发往</th>
+        <% if can?(:status, :Delivery) && params[:status].to_i == 1 %>
+        <th class="text-center min-width">编辑</th>
+        <th class="text-center min-width">集装箱</th>
+        <th class="text-center min-width">发货</th>
+        <th class="text-center min-width">操作</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <%
+      @deliveries.map do |delivery|
+      rows = delivery.order_production_deliveries.size
+      row = 0
+      delivery.order_production_deliveries.map do |order_production_delivery|
+      row += 1
+      %>
+      <tr>
+        <% if row == 1 %>
+        <td rowspan="<%== rows %>"><%== delivery.a_link %></td>
+        <td rowspan="<%== rows %>"><%== delivery.shipping_company_show %></td>
+        <% if params[:status].to_i == 2 %>
+        <td  rowspan="<%== rows %>"class="text-center"><%== delivery.wea_number %></td>
+        <% end %>
+        <% end %>
+        <td>
+          <%== order_production_delivery.show_container %> /
+          <%== order_production_delivery.show_order_number %> /
+          <%== order_production_delivery.user.name %>
+        </td>
+        <td><%== order_production_delivery.show_in_delivery %></td>
+        <% if row == 1 %>
+        <td class="text-center" rowspan="<%== rows %>"><%== delivery.total_bottle_num.ts %></td>
+        <td class="text-center" rowspan="<%== rows %>">
+          <%== delivery.plan_date.to_ymd %><br/><%== delivery.port_of_discharge %>
+        </td>
+        <% if can?(:status, :Delivery) &&  delivery.status == 1 %>
+        <td class="text-center" rowspan="<%== rows %>"><%== edit_btn_tag(delivery) %></td>
+        <td class="text-center" rowspan="<%== rows %>">
+          <%== a_get_tag('管理', "/admin/deliveries/#{delivery.id}/manager", 'primary', 'ion-grid' ) %>
+        </td>
+        <td class="text-center" rowspan="<%== rows %>">
+          <% if delivery.can_shipped? %>
+          <%== a_get_tag('发货', "/admin/deliveries/#{delivery.id}/send", 'info', Delivery::STATUS_ICON[delivery.status + 1]) %>
+          <% else %>
+          未灌装完成
+          <% end %>
+        </td>
+        <td class="text-center" rowspan="<%== rows %>"><%== destroy_btn_tag(delivery) %></td>
+        <% end %>
+        <%end%>
+      </tr>
+      <%end%>
+      <% if delivery.order_production_deliveries.blank? %>
+      <tr style="background-color: #f5f5f5 ">
+        <td><%== delivery.a_link %></td>
+        <td><%== delivery.shipping_company_show %></td>
+        <td>-</td>
+        <td class="text-dark">未添加产品</td>
+        <td class="text-center">-</td>
+        <td class="text-center"><%== delivery.plan_date.to_ymd %><br/><%== delivery.port_of_discharge %></td>
+        <% if can?(:status, :Delivery)%>
+        <td class="text-center"><%== edit_btn_tag(delivery) %></td>
+        <td class="text-center">
+          <%== a_get_tag('管理', "/admin/deliveries/#{delivery.id}/manager", 'primary', 'ion-grid' ) %>
+        </td>
+        <td class="text-center">-</td>
+        <td class="text-center"><%== destroy_btn_tag(delivery) %></td>
+        <% end %>
+      </tr>
+      <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <%== table_footer_tag @deliveries %>
+</div>

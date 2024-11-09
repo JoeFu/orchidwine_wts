@@ -1,0 +1,14 @@
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+/home/orchid/.rvm/rubies/ruby-2.5.0/bin/ruby -I /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/site_ruby/2.5.0 -r ./siteconf20190410-23781-1chzgpe.rb extconf.rb
+
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+make "DESTDIR=" clean
+make: *** 没有规则可以创建目标“clean”。 停止。
+
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+make "DESTDIR="
+make: 对“all”无需做任何事。
+
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/gem-wrappers-1.4.0/ext/wrapper_generator
+make "DESTDIR=" install
+make: 对“install”无需做任何事。

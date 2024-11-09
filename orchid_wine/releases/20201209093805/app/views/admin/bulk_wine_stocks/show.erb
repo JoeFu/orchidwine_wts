@@ -1,0 +1,108 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">查看产品信息</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>产品管理</li>
+    <li class="active">查看产品信息</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%== render '/admin/orders/1_selling_list' %>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">「<%== @bulk_wine_stock.bulk_wine.desc %>」 产品信息</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <dl class="dl-horizontal">
+                <dt>总库存</dt>
+                <dd><%== @bulk_wine_stock.total_stock.ts %> 瓶</dd>
+                <dt>已销量</dt>
+                <dd><%== @bulk_wine_stock.sold_count.ts %> 瓶</dd>
+                <dt>自由库存</dt>
+                <dd><%== @bulk_wine_stock.can_sell_stock.ts %> 瓶</dd>
+                <dt>在谈数量（不关联库存）</dt>
+                <dd>
+                <% if @selling > 0 %>
+                <a target="_blank" class="btn-link" href="/admin/quotations?utf8=✓&bulk_wine_id=202&seller_id=&user_name=&sort=1">
+                  <%== @selling %>
+                </a>
+                <% else %>0
+                <% end %>
+                瓶
+                </dd>
+                <dt>下单起量</dt>
+                <dd><%== @bulk_wine_stock.min_number.ts %> 瓶</dd>
+                <dt>自定义起量</dt>
+                <dd><%== @bulk_wine_stock.custom_number.ts %> 瓶</dd>
+              </dl>
+              <hr/>
+              <dl class="dl-horizontal">
+                <dt>瓶型</dt><dd><%== @bulk_wine_stock.bottle.bottle_code rescue nil %></dd>
+                <dt>酒塞</dt><dd><%== @bulk_wine_stock.cork.desc rescue nil %></dd>
+                <dt>酒帽</dt><dd><%== @bulk_wine_stock.cap.desc rescue nil %></dd>
+                <dt>酒帽颜色</dt><dd><%== @bulk_wine_stock.cap_color rescue nil %></dd>
+                <dt>分隔板</dt><dd><%== @bulk_wine_stock.divider.divider_type rescue nil %></dd>
+                <dt>包装方式</dt><dd><%== @bulk_wine_stock.package rescue nil %></dd>
+                <dt>纸箱</dt><dd><%== @bulk_wine_stock.carton.desc rescue nil %></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-4">
+              <%== edit_btn_tag(@bulk_wine_stock) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">添加库存记录</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped table-vcenter">
+            <thead>
+              <tr>
+                <th width="33%">操作时间</th>
+                <th width="33%" class="text-center">操作人</th>
+                <th width="33%" class="text-center">添加瓶数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @bulk_wine_stock.bulk_wine.stock_logs.map do |stock_log|%>
+              <tr>
+                <td><%== stock_log.created_at.to_ymd %></td>
+                <td class="text-center"><%== stock_log.admin.show_name %></td>
+                <td class="text-center"><%== stock_log.stock %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

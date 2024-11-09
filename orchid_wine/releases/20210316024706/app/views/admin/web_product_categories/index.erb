@@ -1,0 +1,34 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">产品分类管理</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>官网产品配置</li>
+    <li class="active">产品分类管理</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-12">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">产品分类列表</h3>
+        </div>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== new_btn_tag "/admin/web_product_categories/new", '添加产品分类' %>
+              </div>
+            </div>
+          </div>
+          <%= render 'admin/web_product_categories/list' %>
+          <div class="row">
+            <%== table_footer_tag @web_product_categories %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

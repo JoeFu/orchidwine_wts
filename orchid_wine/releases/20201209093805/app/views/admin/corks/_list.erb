@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th class="text-center">材质编码</th>
+        <th class="text-center">材质描述</th>
+        <th class="text-center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @corks.map do |cork|%>
+      <tr>
+        <td class="text-center"><%== cork.texture_code %></td>
+        <td class="text-center"><%== cork.texture_des %></td>
+        <td class="text-center">
+          <%== edit_btn_tag(cork) %>
+          <% if can? :destroy, :Cork %>
+          <%== destroy_btn_tag(cork) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

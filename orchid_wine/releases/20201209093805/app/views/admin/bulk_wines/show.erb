@@ -1,0 +1,118 @@
+<div id="page-head">
+	<div id="page-title">
+		<h1 class="page-header text-overflow">产品：<%== @bulk_wine.code %></h1>
+	</div>
+	<ol class="breadcrumb">
+		<li><i class="ion-home"></i></li>
+		<li>基础数据</li>
+		<li>产品管理</li>
+		<li class="active">产品详情</li>
+	</ol>
+</div>
+<!-- Content Row -->
+<div id="page-content">
+	<div class="row">
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<div class="panel">
+				<div class="panel-body">
+					<div class="pad-btm form-inline">
+						<div class="row">
+							<div class="col-sm-12 table-toolbar-left">
+								<%== return_list_tag %>
+								<%== edit_btn_tag(@bulk_wine) %>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<dl class="dl-horizontal">
+							<dt>产品编码</dt><dd><%== @bulk_wine.code %></a></dd>
+							<dt>描述</dt><dd><%== @bulk_wine.desc %></a></dd>
+							<hr/>
+							<dt>供应商</dt><dd><%== @bulk_wine.vendor.vendor_code %></dd>
+							<dt>年份</dt><dd> <%== @bulk_wine.year_show %></dd>
+							<dt>产地</dt><dd><%== @bulk_wine.areas_show %></dd>
+							<dt>品种</dt><dd><%== @bulk_wine.varieties_show %></dd>
+							<dt>酒精度</dt><dd><%== @bulk_wine.alcoholic_strength.to_f2 %></dd>
+							<hr/>
+							<dt>状态</dt><dd><%== @bulk_wine.status_show %></dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-12 col-lg-6">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">标准品</h3>
+				</div>
+				<div class="panel-body">
+					<div class="pad-btm form-inline">
+						<div class="row">
+							<div class="col-sm-12 table-toolbar-left">
+								<%== edit_btn_tag(@bulk_wine, '编辑标准品', "/admin/bulk_wine_stocks/#{@bulk_wine.id}/edit") %>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8 col-sm-offset-2">
+							<dl class="dl-horizontal">
+								<dt>总库存</dt>
+								<dd><%== @bulk_wine.stock.total_stock.ts %> 瓶</dd>
+								<dt>已销量</dt>
+								<dd><%== @bulk_wine.stock.sold_count.ts %> 瓶</dd>
+								<dt>在谈数量</dt>
+								<dd><%== @bulk_wine.stock.selling_count.ts %> 瓶</dd>
+								<dt>可销售</dt>
+								<dd><%== @bulk_wine.stock.can_sell_stock.ts %> 瓶</dd>
+								<dt>下单起量</dt>
+								<dd><%== @bulk_wine.stock.min_number.ts %> 瓶</dd>
+								<dt>自定义起量</dt>
+								<dd><%== @bulk_wine.stock.custom_number.ts %> 瓶</dd>
+							</dl>
+							<hr/>
+							<dl class="dl-horizontal">
+								<dt>瓶型</dt><dd><%== @bulk_wine.stock.bottle.bottle_code rescue nil %></dd>
+								<dt>酒塞</dt><dd><%== @bulk_wine.stock.cork.desc rescue nil %></dd>
+								<dt>酒帽</dt><dd><%== @bulk_wine.stock.cap.desc rescue nil %></dd>
+								<dt>酒帽颜色</dt><dd><%== @bulk_wine.stock.cap_color rescue nil %></dd>
+								<dt>分隔板</dt><dd><%== @bulk_wine.stock.divider.divider_type rescue nil %></dd>
+								<dt>包装方式</dt><dd><%== @bulk_wine.stock.package rescue nil %></dd>
+								<dt>纸箱</dt><dd><%== @bulk_wine.stock.carton.desc rescue nil %></dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">订单列表</h3>
+				</div>
+				<div class="panel-body">
+					<div class="pad-btm form-inline">
+						<%= form_tag("/admin/bulk_wines/#{@bulk_wine.id}", method: :get) do -%>
+            <input type="hidden" name='bulk_wine_id' value="<%== @bulk_wine.id %>">
+						<div class="row">
+							<div class="col-sm-12 table-toolbar-right">
+								<div class="form-group">
+									<select class="form-control" name="search_status" style="min-width: 140px;">
+										<%== options_for_select({'全部' => nil}.merge(Hash[Order::TAB_STATUS.slice(0,1,2,3,4,5)].invert), params[:search_status])%>
+									</select>
+								</div>
+								<%== submit_tag %>
+								<%== clear_tag "/admin/bulk_wines/#{@bulk_wine.id}?bulk_wine_id=#{@bulk_wine.id}" %>
+							</div>
+						</div>
+						<% end -%>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<%== render '/admin/orders/total_list' %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

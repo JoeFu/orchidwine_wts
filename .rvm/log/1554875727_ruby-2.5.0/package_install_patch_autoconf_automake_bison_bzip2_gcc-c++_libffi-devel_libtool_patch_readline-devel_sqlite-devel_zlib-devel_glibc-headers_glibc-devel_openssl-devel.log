@@ -1,0 +1,331 @@
+[2019-04-10 05:55:27] requirements_centos_libs_install
+requirements_centos_libs_install () 
+{ 
+    __rvm_try_sudo yum install -y "$@" || return $?
+}
+current path: /home/orchid
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin
+command(16): requirements_centos_libs_install patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel
+++ __rvm_try_sudo yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel
+++ typeset -a command_to_run
+++ typeset sudo_path sbin_path missing_paths
+++ command_to_run=("$@")
+++ ((  UID == 0  ))
+++ case "$rvm_autolibs_flag_number" in
+++ is_a_function __rvm_sudo
+++ typeset -f __rvm_sudo
+++ missing_paths=
+++ for sbin_path in /sbin /usr/sbin /usr/local/sbin
+++ [[ -d /sbin ]]
+++ [[ :/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin: != *\:\/\s\b\i\n\:* ]]
+++ missing_paths+=:/sbin
+++ for sbin_path in /sbin /usr/sbin /usr/local/sbin
+++ [[ -d /usr/sbin ]]
+++ [[ :/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin: != *\:\/\u\s\r\/\s\b\i\n\:* ]]
+++ for sbin_path in /sbin /usr/sbin /usr/local/sbin
+++ [[ -d /usr/local/sbin ]]
+++ [[ :/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin: != *\:\/\u\s\r\/\l\o\c\a\l\/\s\b\i\n\:* ]]
+++ [[ -n :/sbin ]]
+++ command_to_run=(/usr/bin/env PATH="${PATH}${missing_paths}" "${command_to_run[@]}")
+++ command_to_run=(__rvm_sudo -p "%p password required for '$*': " "${command_to_run[@]}")
+++ __rvm_sudo -p '%p password required for '\''yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel'\'': ' /usr/bin/env PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin:/sbin yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel
+++ command sudo -p '%p password required for '\''yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel'\'': ' /usr/bin/env PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin:/sbin yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel
+++ sudo -p '%p password required for '\''yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel'\'': ' /usr/bin/env PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin:/sbin yum install -y patch autoconf automake bison bzip2 gcc-c++ libffi-devel libtool patch readline-devel sqlite-devel zlib-devel glibc-headers glibc-devel openssl-devel
+已加载插件：fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.serversaustralia.com.au
+ * epel: d2lzkl7pfhq30w.cloudfront.net
+ * extras: centos.mirror.serversaustralia.com.au
+ * updates: centos.mirror.serversaustralia.com.au
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 autoconf.noarch.0.2.69-11.el7 将被 安装
+--> 正在处理依赖关系 m4 >= 1.4.14，它被软件包 autoconf-2.69-11.el7.noarch 需要
+--> 正在处理依赖关系 perl(Data::Dumper)，它被软件包 autoconf-2.69-11.el7.noarch 需要
+---> 软件包 automake.noarch.0.1.13.4-3.el7 将被 安装
+--> 正在处理依赖关系 perl(Thread::Queue)，它被软件包 automake-1.13.4-3.el7.noarch 需要
+--> 正在处理依赖关系 perl(TAP::Parser)，它被软件包 automake-1.13.4-3.el7.noarch 需要
+---> 软件包 bison.x86_64.0.3.0.4-2.el7 将被 安装
+---> 软件包 bzip2.x86_64.0.1.0.6-13.el7 将被 安装
+---> 软件包 gcc-c++.x86_64.0.4.8.5-36.el7_6.1 将被 安装
+--> 正在处理依赖关系 libstdc++-devel = 4.8.5-36.el7_6.1，它被软件包 gcc-c++-4.8.5-36.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 libstdc++ = 4.8.5-36.el7_6.1，它被软件包 gcc-c++-4.8.5-36.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 gcc = 4.8.5-36.el7_6.1，它被软件包 gcc-c++-4.8.5-36.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 libmpfr.so.4()(64bit)，它被软件包 gcc-c++-4.8.5-36.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 libmpc.so.3()(64bit)，它被软件包 gcc-c++-4.8.5-36.el7_6.1.x86_64 需要
+---> 软件包 glibc-devel.x86_64.0.2.17-260.el7_6.4 将被 安装
+--> 正在处理依赖关系 glibc = 2.17-260.el7_6.4，它被软件包 glibc-devel-2.17-260.el7_6.4.x86_64 需要
+---> 软件包 glibc-headers.x86_64.0.2.17-260.el7_6.4 将被 安装
+--> 正在处理依赖关系 kernel-headers >= 2.2.1，它被软件包 glibc-headers-2.17-260.el7_6.4.x86_64 需要
+--> 正在处理依赖关系 kernel-headers，它被软件包 glibc-headers-2.17-260.el7_6.4.x86_64 需要
+---> 软件包 libffi-devel.x86_64.0.3.0.13-18.el7 将被 安装
+---> 软件包 libtool.x86_64.0.2.4.2-22.el7_3 将被 安装
+---> 软件包 openssl-devel.x86_64.1.1.0.2k-16.el7_6.1 将被 安装
+--> 正在处理依赖关系 openssl-libs(x86-64) = 1:1.0.2k-16.el7_6.1，它被软件包 1:openssl-devel-1.0.2k-16.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 krb5-devel(x86-64)，它被软件包 1:openssl-devel-1.0.2k-16.el7_6.1.x86_64 需要
+---> 软件包 patch.x86_64.0.2.7.1-10.el7_5 将被 安装
+---> 软件包 readline-devel.x86_64.0.6.2-10.el7 将被 安装
+--> 正在处理依赖关系 ncurses-devel，它被软件包 readline-devel-6.2-10.el7.x86_64 需要
+---> 软件包 sqlite-devel.x86_64.0.3.7.17-8.el7 将被 安装
+---> 软件包 zlib-devel.x86_64.0.1.2.7-18.el7 将被 安装
+--> 正在检查事务
+---> 软件包 gcc.x86_64.0.4.8.5-36.el7_6.1 将被 安装
+--> 正在处理依赖关系 libgomp = 4.8.5-36.el7_6.1，它被软件包 gcc-4.8.5-36.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 cpp = 4.8.5-36.el7_6.1，它被软件包 gcc-4.8.5-36.el7_6.1.x86_64 需要
+--> 正在处理依赖关系 libgcc >= 4.8.5-36.el7_6.1，它被软件包 gcc-4.8.5-36.el7_6.1.x86_64 需要
+---> 软件包 glibc.x86_64.0.2.17-260.el7 将被 升级
+--> 正在处理依赖关系 glibc = 2.17-260.el7，它被软件包 glibc-common-2.17-260.el7.x86_64 需要
+---> 软件包 glibc.x86_64.0.2.17-260.el7_6.4 将被 更新
+---> 软件包 kernel-headers.x86_64.0.3.10.0-957.10.1.el7 将被 安装
+---> 软件包 krb5-devel.x86_64.0.1.15.1-37.el7_6 将被 安装
+--> 正在处理依赖关系 libkadm5(x86-64) = 1.15.1-37.el7_6，它被软件包 krb5-devel-1.15.1-37.el7_6.x86_64 需要
+--> 正在处理依赖关系 krb5-libs(x86-64) = 1.15.1-37.el7_6，它被软件包 krb5-devel-1.15.1-37.el7_6.x86_64 需要
+--> 正在处理依赖关系 libverto-devel，它被软件包 krb5-devel-1.15.1-37.el7_6.x86_64 需要
+--> 正在处理依赖关系 libselinux-devel，它被软件包 krb5-devel-1.15.1-37.el7_6.x86_64 需要
+--> 正在处理依赖关系 libcom_err-devel，它被软件包 krb5-devel-1.15.1-37.el7_6.x86_64 需要
+--> 正在处理依赖关系 keyutils-libs-devel，它被软件包 krb5-devel-1.15.1-37.el7_6.x86_64 需要
+---> 软件包 libmpc.x86_64.0.1.0.1-3.el7 将被 安装
+---> 软件包 libstdc++.x86_64.0.4.8.5-36.el7 将被 升级
+---> 软件包 libstdc++.x86_64.0.4.8.5-36.el7_6.1 将被 更新
+---> 软件包 libstdc++-devel.x86_64.0.4.8.5-36.el7_6.1 将被 安装
+---> 软件包 m4.x86_64.0.1.4.16-10.el7 将被 安装
+---> 软件包 mpfr.x86_64.0.3.1.1-4.el7 将被 安装
+---> 软件包 ncurses-devel.x86_64.0.5.9-14.20130511.el7_4 将被 安装
+---> 软件包 openssl-libs.x86_64.1.1.0.2k-16.el7 将被 升级
+--> 正在处理依赖关系 openssl-libs(x86-64) = 1:1.0.2k-16.el7，它被软件包 1:openssl-1.0.2k-16.el7.x86_64 需要
+---> 软件包 openssl-libs.x86_64.1.1.0.2k-16.el7_6.1 将被 更新
+---> 软件包 perl-Data-Dumper.x86_64.0.2.145-3.el7 将被 安装
+---> 软件包 perl-Test-Harness.noarch.0.3.28-3.el7 将被 安装
+---> 软件包 perl-Thread-Queue.noarch.0.3.02-2.el7 将被 安装
+--> 正在检查事务
+---> 软件包 cpp.x86_64.0.4.8.5-36.el7_6.1 将被 安装
+---> 软件包 glibc-common.x86_64.0.2.17-260.el7 将被 升级
+---> 软件包 glibc-common.x86_64.0.2.17-260.el7_6.4 将被 更新
+---> 软件包 keyutils-libs-devel.x86_64.0.1.5.8-3.el7 将被 安装
+---> 软件包 krb5-libs.x86_64.0.1.15.1-34.el7 将被 升级
+---> 软件包 krb5-libs.x86_64.0.1.15.1-37.el7_6 将被 更新
+---> 软件包 libcom_err-devel.x86_64.0.1.42.9-13.el7 将被 安装
+---> 软件包 libgcc.x86_64.0.4.8.5-36.el7 将被 升级
+---> 软件包 libgcc.x86_64.0.4.8.5-36.el7_6.1 将被 更新
+---> 软件包 libgomp.x86_64.0.4.8.5-36.el7 将被 升级
+---> 软件包 libgomp.x86_64.0.4.8.5-36.el7_6.1 将被 更新
+---> 软件包 libkadm5.x86_64.0.1.15.1-37.el7_6 将被 安装
+---> 软件包 libselinux-devel.x86_64.0.2.5-14.1.el7 将被 安装
+--> 正在处理依赖关系 libsepol-devel(x86-64) >= 2.5-10，它被软件包 libselinux-devel-2.5-14.1.el7.x86_64 需要
+--> 正在处理依赖关系 pkgconfig(libsepol)，它被软件包 libselinux-devel-2.5-14.1.el7.x86_64 需要
+--> 正在处理依赖关系 pkgconfig(libpcre)，它被软件包 libselinux-devel-2.5-14.1.el7.x86_64 需要
+---> 软件包 libverto-devel.x86_64.0.0.2.5-4.el7 将被 安装
+---> 软件包 openssl.x86_64.1.1.0.2k-16.el7 将被 升级
+---> 软件包 openssl.x86_64.1.1.0.2k-16.el7_6.1 将被 更新
+--> 正在检查事务
+---> 软件包 libsepol-devel.x86_64.0.2.5-10.el7 将被 安装
+---> 软件包 pcre-devel.x86_64.0.8.32-17.el7 将被 安装
+--> 解决依赖关系完成
+
+依赖关系解决
+
+================================================================================
+ Package                 架构       版本                      源           大小
+================================================================================
+正在安装:
+ autoconf                noarch     2.69-11.el7               base        701 k
+ automake                noarch     1.13.4-3.el7              base        679 k
+ bison                   x86_64     3.0.4-2.el7               base        674 k
+ bzip2                   x86_64     1.0.6-13.el7              base         52 k
+ gcc-c++                 x86_64     4.8.5-36.el7_6.1          updates     7.2 M
+ glibc-devel             x86_64     2.17-260.el7_6.4          updates     1.1 M
+ glibc-headers           x86_64     2.17-260.el7_6.4          updates     683 k
+ libffi-devel            x86_64     3.0.13-18.el7             base         23 k
+ libtool                 x86_64     2.4.2-22.el7_3            base        588 k
+ openssl-devel           x86_64     1:1.0.2k-16.el7_6.1       updates     1.5 M
+ patch                   x86_64     2.7.1-10.el7_5            base        110 k
+ readline-devel          x86_64     6.2-10.el7                base        138 k
+ sqlite-devel            x86_64     3.7.17-8.el7              base        104 k
+ zlib-devel              x86_64     1.2.7-18.el7              base         50 k
+为依赖而安装:
+ cpp                     x86_64     4.8.5-36.el7_6.1          updates     5.9 M
+ gcc                     x86_64     4.8.5-36.el7_6.1          updates      16 M
+ kernel-headers          x86_64     3.10.0-957.10.1.el7       updates     8.0 M
+ keyutils-libs-devel     x86_64     1.5.8-3.el7               base         37 k
+ krb5-devel              x86_64     1.15.1-37.el7_6           updates     271 k
+ libcom_err-devel        x86_64     1.42.9-13.el7             base         31 k
+ libkadm5                x86_64     1.15.1-37.el7_6           updates     178 k
+ libmpc                  x86_64     1.0.1-3.el7               base         51 k
+ libselinux-devel        x86_64     2.5-14.1.el7              base        187 k
+ libsepol-devel          x86_64     2.5-10.el7                base         77 k
+ libstdc++-devel         x86_64     4.8.5-36.el7_6.1          updates     1.5 M
+ libverto-devel          x86_64     0.2.5-4.el7               base         12 k
+ m4                      x86_64     1.4.16-10.el7             base        256 k
+ mpfr                    x86_64     3.1.1-4.el7               base        203 k
+ ncurses-devel           x86_64     5.9-14.20130511.el7_4     base        712 k
+ pcre-devel              x86_64     8.32-17.el7               base        480 k
+ perl-Data-Dumper        x86_64     2.145-3.el7               base         47 k
+ perl-Test-Harness       noarch     3.28-3.el7                base        302 k
+ perl-Thread-Queue       noarch     3.02-2.el7                base         17 k
+为依赖而更新:
+ glibc                   x86_64     2.17-260.el7_6.4          updates     3.7 M
+ glibc-common            x86_64     2.17-260.el7_6.4          updates      12 M
+ krb5-libs               x86_64     1.15.1-37.el7_6           updates     803 k
+ libgcc                  x86_64     4.8.5-36.el7_6.1          updates     102 k
+ libgomp                 x86_64     4.8.5-36.el7_6.1          updates     157 k
+ libstdc++               x86_64     4.8.5-36.el7_6.1          updates     305 k
+ openssl                 x86_64     1:1.0.2k-16.el7_6.1       updates     493 k
+ openssl-libs            x86_64     1:1.0.2k-16.el7_6.1       updates     1.2 M
+
+事务概要
+================================================================================
+安装  14 软件包 (+19 依赖软件包)
+升级            (  8 依赖软件包)
+
+总下载量：66 M
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+--------------------------------------------------------------------------------
+总计                                                61 MB/s |  66 MB  00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在更新    : libgcc-4.8.5-36.el7_6.1.x86_64                             1/49 
+  正在更新    : glibc-common-2.17-260.el7_6.4.x86_64                       2/49 
+  正在更新    : glibc-2.17-260.el7_6.4.x86_64                              3/49 
+  正在安装    : mpfr-3.1.1-4.el7.x86_64                                    4/49 
+  正在安装    : libmpc-1.0.1-3.el7.x86_64                                  5/49 
+  正在更新    : 1:openssl-libs-1.0.2k-16.el7_6.1.x86_64                    6/49 
+  正在更新    : krb5-libs-1.15.1-37.el7_6.x86_64                           7/49 
+  正在安装    : m4-1.4.16-10.el7.x86_64                                    8/49 
+  正在更新    : libstdc++-4.8.5-36.el7_6.1.x86_64                          9/49 
+  正在安装    : libstdc++-devel-4.8.5-36.el7_6.1.x86_64                   10/49 
+  正在安装    : libkadm5-1.15.1-37.el7_6.x86_64                           11/49 
+  正在安装    : cpp-4.8.5-36.el7_6.1.x86_64                               12/49 
+  正在更新    : libgomp-4.8.5-36.el7_6.1.x86_64                           13/49 
+  正在安装    : perl-Data-Dumper-2.145-3.el7.x86_64                       14/49 
+  正在安装    : autoconf-2.69-11.el7.noarch                               15/49 
+  正在安装    : libsepol-devel-2.5-10.el7.x86_64                          16/49 
+  正在安装    : kernel-headers-3.10.0-957.10.1.el7.x86_64                 17/49 
+  正在安装    : glibc-headers-2.17-260.el7_6.4.x86_64                     18/49 
+  正在安装    : glibc-devel-2.17-260.el7_6.4.x86_64                       19/49 
+  正在安装    : gcc-4.8.5-36.el7_6.1.x86_64                               20/49 
+  正在安装    : perl-Thread-Queue-3.02-2.el7.noarch                       21/49 
+  正在安装    : ncurses-devel-5.9-14.20130511.el7_4.x86_64                22/49 
+  正在安装    : pcre-devel-8.32-17.el7.x86_64                             23/49 
+  正在安装    : libselinux-devel-2.5-14.1.el7.x86_64                      24/49 
+  正在安装    : perl-Test-Harness-3.28-3.el7.noarch                       25/49 
+  正在安装    : automake-1.13.4-3.el7.noarch                              26/49 
+  正在安装    : zlib-devel-1.2.7-18.el7.x86_64                            27/49 
+  正在安装    : libverto-devel-0.2.5-4.el7.x86_64                         28/49 
+  正在安装    : libcom_err-devel-1.42.9-13.el7.x86_64                     29/49 
+  正在安装    : keyutils-libs-devel-1.5.8-3.el7.x86_64                    30/49 
+  正在安装    : krb5-devel-1.15.1-37.el7_6.x86_64                         31/49 
+  正在安装    : 1:openssl-devel-1.0.2k-16.el7_6.1.x86_64                  32/49 
+  正在安装    : libtool-2.4.2-22.el7_3.x86_64                             33/49 
+  正在安装    : readline-devel-6.2-10.el7.x86_64                          34/49 
+  正在安装    : gcc-c++-4.8.5-36.el7_6.1.x86_64                           35/49 
+  正在安装    : bison-3.0.4-2.el7.x86_64                                  36/49 
+  正在更新    : 1:openssl-1.0.2k-16.el7_6.1.x86_64                        37/49 
+  正在安装    : bzip2-1.0.6-13.el7.x86_64                                 38/49 
+  正在安装    : patch-2.7.1-10.el7_5.x86_64                               39/49 
+  正在安装    : sqlite-devel-3.7.17-8.el7.x86_64                          40/49 
+  正在安装    : libffi-devel-3.0.13-18.el7.x86_64                         41/49 
+  清理        : 1:openssl-1.0.2k-16.el7.x86_64                            42/49 
+  清理        : krb5-libs-1.15.1-34.el7.x86_64                            43/49 
+  清理        : 1:openssl-libs-1.0.2k-16.el7.x86_64                       44/49 
+  清理        : libstdc++-4.8.5-36.el7.x86_64                             45/49 
+  清理        : libgomp-4.8.5-36.el7.x86_64                               46/49 
+  清理        : glibc-common-2.17-260.el7.x86_64                          47/49 
+  清理        : glibc-2.17-260.el7.x86_64                                 48/49 
+  清理        : libgcc-4.8.5-36.el7.x86_64                                49/49 
+  验证中      : glibc-2.17-260.el7_6.4.x86_64                              1/49 
+  验证中      : keyutils-libs-devel-1.5.8-3.el7.x86_64                     2/49 
+  验证中      : libcom_err-devel-1.42.9-13.el7.x86_64                      3/49 
+  验证中      : automake-1.13.4-3.el7.noarch                               4/49 
+  验证中      : libgomp-4.8.5-36.el7_6.1.x86_64                            5/49 
+  验证中      : libstdc++-devel-4.8.5-36.el7_6.1.x86_64                    6/49 
+  验证中      : readline-devel-6.2-10.el7.x86_64                           7/49 
+  验证中      : m4-1.4.16-10.el7.x86_64                                    8/49 
+  验证中      : krb5-devel-1.15.1-37.el7_6.x86_64                          9/49 
+  验证中      : libffi-devel-3.0.13-18.el7.x86_64                         10/49 
+  验证中      : libverto-devel-0.2.5-4.el7.x86_64                         11/49 
+  验证中      : bzip2-1.0.6-13.el7.x86_64                                 12/49 
+  验证中      : glibc-headers-2.17-260.el7_6.4.x86_64                     13/49 
+  验证中      : zlib-devel-1.2.7-18.el7.x86_64                            14/49 
+  验证中      : perl-Test-Harness-3.28-3.el7.noarch                       15/49 
+  验证中      : pcre-devel-8.32-17.el7.x86_64                             16/49 
+  验证中      : ncurses-devel-5.9-14.20130511.el7_4.x86_64                17/49 
+  验证中      : perl-Thread-Queue-3.02-2.el7.noarch                       18/49 
+  验证中      : kernel-headers-3.10.0-957.10.1.el7.x86_64                 19/49 
+  验证中      : libtool-2.4.2-22.el7_3.x86_64                             20/49 
+  验证中      : 1:openssl-1.0.2k-16.el7_6.1.x86_64                        21/49 
+  验证中      : libstdc++-4.8.5-36.el7_6.1.x86_64                         22/49 
+  验证中      : perl-Data-Dumper-2.145-3.el7.x86_64                       23/49 
+  验证中      : sqlite-devel-3.7.17-8.el7.x86_64                          24/49 
+  验证中      : patch-2.7.1-10.el7_5.x86_64                               25/49 
+  验证中      : libmpc-1.0.1-3.el7.x86_64                                 26/49 
+  验证中      : libgcc-4.8.5-36.el7_6.1.x86_64                            27/49 
+  验证中      : libsepol-devel-2.5-10.el7.x86_64                          28/49 
+  验证中      : 1:openssl-devel-1.0.2k-16.el7_6.1.x86_64                  29/49 
+  验证中      : cpp-4.8.5-36.el7_6.1.x86_64                               30/49 
+  验证中      : gcc-4.8.5-36.el7_6.1.x86_64                               31/49 
+  验证中      : bison-3.0.4-2.el7.x86_64                                  32/49 
+  验证中      : glibc-devel-2.17-260.el7_6.4.x86_64                       33/49 
+  验证中      : autoconf-2.69-11.el7.noarch                               34/49 
+  验证中      : libkadm5-1.15.1-37.el7_6.x86_64                           35/49 
+  验证中      : glibc-common-2.17-260.el7_6.4.x86_64                      36/49 
+  验证中      : mpfr-3.1.1-4.el7.x86_64                                   37/49 
+  验证中      : gcc-c++-4.8.5-36.el7_6.1.x86_64                           38/49 
+  验证中      : libselinux-devel-2.5-14.1.el7.x86_64                      39/49 
+  验证中      : 1:openssl-libs-1.0.2k-16.el7_6.1.x86_64                   40/49 
+  验证中      : krb5-libs-1.15.1-37.el7_6.x86_64                          41/49 
+  验证中      : libgcc-4.8.5-36.el7.x86_64                                42/49 
+  验证中      : krb5-libs-1.15.1-34.el7.x86_64                            43/49 
+  验证中      : libstdc++-4.8.5-36.el7.x86_64                             44/49 
+  验证中      : 1:openssl-libs-1.0.2k-16.el7.x86_64                       45/49 
+  验证中      : 1:openssl-1.0.2k-16.el7.x86_64                            46/49 
+  验证中      : libgomp-4.8.5-36.el7.x86_64                               47/49 
+  验证中      : glibc-common-2.17-260.el7.x86_64                          48/49 
+  验证中      : glibc-2.17-260.el7.x86_64                                 49/49 
+
+已安装:
+  autoconf.noarch 0:2.69-11.el7                                                 
+  automake.noarch 0:1.13.4-3.el7                                                
+  bison.x86_64 0:3.0.4-2.el7                                                    
+  bzip2.x86_64 0:1.0.6-13.el7                                                   
+  gcc-c++.x86_64 0:4.8.5-36.el7_6.1                                             
+  glibc-devel.x86_64 0:2.17-260.el7_6.4                                         
+  glibc-headers.x86_64 0:2.17-260.el7_6.4                                       
+  libffi-devel.x86_64 0:3.0.13-18.el7                                           
+  libtool.x86_64 0:2.4.2-22.el7_3                                               
+  openssl-devel.x86_64 1:1.0.2k-16.el7_6.1                                      
+  patch.x86_64 0:2.7.1-10.el7_5                                                 
+  readline-devel.x86_64 0:6.2-10.el7                                            
+  sqlite-devel.x86_64 0:3.7.17-8.el7                                            
+  zlib-devel.x86_64 0:1.2.7-18.el7                                              
+
+作为依赖被安装:
+  cpp.x86_64 0:4.8.5-36.el7_6.1                                                 
+  gcc.x86_64 0:4.8.5-36.el7_6.1                                                 
+  kernel-headers.x86_64 0:3.10.0-957.10.1.el7                                   
+  keyutils-libs-devel.x86_64 0:1.5.8-3.el7                                      
+  krb5-devel.x86_64 0:1.15.1-37.el7_6                                           
+  libcom_err-devel.x86_64 0:1.42.9-13.el7                                       
+  libkadm5.x86_64 0:1.15.1-37.el7_6                                             
+  libmpc.x86_64 0:1.0.1-3.el7                                                   
+  libselinux-devel.x86_64 0:2.5-14.1.el7                                        
+  libsepol-devel.x86_64 0:2.5-10.el7                                            
+  libstdc++-devel.x86_64 0:4.8.5-36.el7_6.1                                     
+  libverto-devel.x86_64 0:0.2.5-4.el7                                           
+  m4.x86_64 0:1.4.16-10.el7                                                     
+  mpfr.x86_64 0:3.1.1-4.el7                                                     
+  ncurses-devel.x86_64 0:5.9-14.20130511.el7_4                                  
+  pcre-devel.x86_64 0:8.32-17.el7                                               
+  perl-Data-Dumper.x86_64 0:2.145-3.el7                                         
+  perl-Test-Harness.noarch 0:3.28-3.el7                                         
+  perl-Thread-Queue.noarch 0:3.02-2.el7                                         
+
+作为依赖被升级:
+  glibc.x86_64 0:2.17-260.el7_6.4      glibc-common.x86_64 0:2.17-260.el7_6.4   
+  krb5-libs.x86_64 0:1.15.1-37.el7_6   libgcc.x86_64 0:4.8.5-36.el7_6.1         
+  libgomp.x86_64 0:4.8.5-36.el7_6.1    libstdc++.x86_64 0:4.8.5-36.el7_6.1      
+  openssl.x86_64 1:1.0.2k-16.el7_6.1   openssl-libs.x86_64 1:1.0.2k-16.el7_6.1  
+
+完毕！

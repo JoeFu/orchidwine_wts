@@ -1,0 +1,61 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">添加产品分类</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>官网产品配置</li>
+    <li>产品分类列表</li>
+    <li class="active">添加产品分类</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-12">
+      <div class="panel">
+        <%= form_tag("/admin/web_product_categories", method: :post, class: 'form-horizontal', id: 'admins-new') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">添加 产品分类 信息</p><br>
+          <div class="row">
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="col-sm-3 control-label" >名称</label>
+                <div class="col-sm-6">
+                  <%= text_field_tag 'name', params[:name], placeholder: "名称", class: "form-control"%>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label" >英文名称</label>
+                <div class="col-sm-6">
+                  <%= text_field_tag 'en_name', params[:en_name], placeholder: "英文名称", class: "form-control"%>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label" >排序</label>
+                <div class="col-sm-6">
+                  <%= text_field_tag 'sort', params[:sort] || 1, placeholder: "排序", class: "form-control"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

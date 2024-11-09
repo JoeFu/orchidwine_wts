@@ -1,0 +1,113 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">编辑酒瓶</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>包材管理</li>
+    <li>酒瓶</li>
+    <li class="active">编辑 <%== @bottle.bottle_code %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/bottles/#{@bottle.id}", method: :put, class: 'form-horizontal', id: 'bottles-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @bottle.bottle_code %>」 信息</p><br>
+          <input type="hidden" id="hidden-cover" name='cover' value="<%== @bottle.cover %>">
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 缩略图</label>
+            <div class="col-sm-6">
+              <span class="pull-left btn btn-default btn-file">
+                  选择图片文件... <input id='cover' type="file" class="img-upload">
+                </span>
+            </div>
+              <div class="col-sm-6 col-sm-offset-3">
+              <img src="<%== @bottle.cover %>" height="100px">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 瓶型</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="bottle_code" value="<%== @bottle.bottle_code %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 封瓶方式</label>
+            <div class="col-sm-6">
+              <input type="text" name="fp_text" class="form-control fp-text" value="<%== Bottle::SEAL[@bottle.seal] %>" readonly="readonly">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 供应商编码</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="vendor_code" value="<%== @bottle.vendor_code %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 瓶高(mm)</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="height" value="<%== @bottle.height.to_f2 %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 容量(ml)</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="volume" value="<%== @bottle.volume.to_f2 %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 重量(g)</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="weight" value="<%== @bottle.weight.to_f2 %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label"><b class="text-danger">*</b> 瓶形状</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="shape" value="<%== @bottle.shape %>">
+            </div>
+          </div>
+
+          <input type="hidden" name="seal" value="<%== @bottle.seal.present? ? @bottle.seal : 2 %>">
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+$('input[name=bottle_code]').change(function(){
+var mvalue = $(this).val();
+var last = mvalue.charAt(mvalue.length-1,1);
+console.log(last)
+if (last == 'B') {
+$('.fp-text').val('B-BVS-螺旋盖');
+$('input[name=seal]').val('2');
+} else {
+$('.fp-text').val('C-CK-木塞');
+$('input[name=seal]').val('1');
+}
+});
+});
+</script>

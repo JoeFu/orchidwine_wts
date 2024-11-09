@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel">
+      <div id="order-nav">
+        <ul class="wz-nav-off wz-icon-inline wz-classic">
+          <li class="col-lg-4 <%== "active" if @action == :transition && @controller == :Delivery %>">
+            <a href="/admin/deliveries/transition"><b>待处理订单（<%== @order_transition_count %>）</b></a>
+          </li>
+
+          <% Delivery::STATUS.map do |k, v| %>
+          <li class="col-lg-4 <%== "active" if params[:status].to_i == k %>"><a href="/admin/deliveries?status=<%== k %>">
+            <b><%== v %>（<%== @delivery_count[k].to_i %>）</b></a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

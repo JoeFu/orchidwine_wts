@@ -1,0 +1,10 @@
+[2019-04-10 05:58:32] __rvm_patch
+__rvm_patch () 
+{ 
+    \patch "$@" || return $?
+}
+current path: /home/orchid/.rvm/src/ruby-2.5.0
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin
+command(8): __rvm_patch -F 25 -p1 -N -f -i /home/orchid/.rvm/patches/ruby/2.5.0/libressl_2_7.patch
+++ patch -F 25 -p1 -N -f -i /home/orchid/.rvm/patches/ruby/2.5.0/libressl_2_7.patch
+patching file ext/openssl/extconf.rb

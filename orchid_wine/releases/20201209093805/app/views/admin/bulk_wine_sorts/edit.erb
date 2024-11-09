@@ -1,0 +1,60 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">商品类别编辑</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>产品信息管理</li>
+    <li>商品类别管理</li>
+    <li class="active">编辑 <%== @bulk_wine_sort.name_zh %></li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <div class="panel">
+        <%= form_tag("/admin/bulk_wine_sorts/#{@bulk_wine_sort.id}", method: :put, class: 'form-horizontal', id: 'bulk_wine_sorts-edit') do -%>
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">编辑 「<%== @bulk_wine_sort.name_zh %>」 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 编码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" class="form-control" value="<%== @bulk_wine_sort.code %>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 中文名</label>
+              <div class="col-sm-6">
+                <input type="text" name="name_zh" class="form-control" value="<%== @bulk_wine_sort.name_zh %>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 英文名</label>
+              <div class="col-sm-6">
+                <input type="text" name="name_en" class="form-control" value="<%== @bulk_wine_sort.name_en %>">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

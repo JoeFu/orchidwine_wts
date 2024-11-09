@@ -1,0 +1,17 @@
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.6.0/ext/wrapper_installer
+/home/orchid/.rvm/rubies/ruby-2.5.0/bin/ruby -I /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/site_ruby/2.5.0 -r ./siteconf20190410-23823-zraou1.rb extconf.rb
+bundler 1.17.3
+rake 12.3.0
+rdoc 6.0.1
+
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.6.0/ext/wrapper_installer
+make "DESTDIR=" clean
+make: *** 没有规则可以创建目标“clean”。 停止。
+
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.6.0/ext/wrapper_installer
+make "DESTDIR="
+make: 对“all”无需做任何事。
+
+current directory: /home/orchid/.rvm/rubies/ruby-2.5.0/lib/ruby/gems/2.5.0/gems/executable-hooks-1.6.0/ext/wrapper_installer
+make "DESTDIR=" install
+make: 对“install”无需做任何事。

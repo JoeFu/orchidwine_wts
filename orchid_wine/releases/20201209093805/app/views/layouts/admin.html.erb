@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%== Const::BASE_TITLE %> 管理后台</title>
+    <link rel="icon" type="image/png" href="<%== asset_path('logo.png') %>" />
+    <%= stylesheet_link_tag    'admin', media: 'all' %>
+    <%= javascript_include_tag 'admin' %>
+  </head>
+  <body>
+    <%= hidden_field_tag 'flash-error', flash[:error] %>
+    <%= hidden_field_tag 'flash-success', flash[:success] %>
+    <div id="container" class="effect aside-float aside-bright mainnav-lg mainnav-fixed">
+      <%= render 'admin/common/header' %>
+      <div class="boxed">
+        <div id="content-container">
+          <%== yield %>
+        </div>
+        
+        <%= render 'admin/common/sidebar' %>
+        <footer id="footer">
+          <div class="hide-fixed pull-right pad-rgt">
+          <a href="https://www.orchidwine.com.au" target="_blank">
+          &copy;
+          <script>
+            document.write(new Date().getFullYear())
+          </script>
+          ORCHID WINE ESTATE (Version 3.0)</a>
+          </div>
+        <button class="scroll-top btn"><i class="pci-chevron chevron-up"></i></button>
+        </footer>
+      </div>
+    </div>
+    <% flash.clear %>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<div id="page-head">
+  <div class="pad-all text-center">
+    <h1 class="page-header text-overflow">
+    澳麒酒业 <%== @admin_session.true_name.present? ? @admin_session.true_name : Admin::ROLE[@admin_session.role.to_i] %>，<span class="wenhou"></span>
+    </h1>
+  </div>
+</div>
+<div id="page-content">
+  <div class="row">
+    <% if @admin_session.role == 2 %>
+    <div class="col-md-2 col-md-offset-3">
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="pad-ver mar-top text-main"><i class="ion-printer icon-4x"></i></div>
+          <p class="text-lg text-semibold mar-no text-main">立即下单</p>
+          <p class="text-muted"> - </p>
+          <p class="text-sm">销售人员代客户下订单，填写产品即可保存订单，保存之后可随时可修改。</p>
+          <button class="btn btn-primary mar-ver"> Enter </button>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="col-md-2">
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="pad-ver mar-top text-main"><i class="ion-printer icon-4x"></i></div>
+          <p class="text-lg text-semibold mar-no text-main">订单管理</p>
+          <p class="text-muted"> - </p>
+          <p class="text-sm">进行中订单（已提交，已下单，备货完成，已发货）和已完成订单的查看和操作。</p>
+          <button class="btn btn-primary mar-ver"> Enter </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="pad-ver mar-top text-main"><i class="demo-pli-consulting icon-4x"></i></div>
+          <p class="text-lg text-semibold mar-no text-main">发货管理</p>
+          <p class="text-muted"> - </p>
+          <p class="text-sm">因为单个集装箱的容量有限，发货前需要先对大的订单进行拆单处理，对小的订单进行拼箱处理。</p>
+          <button class="btn btn-primary mar-ver"> Enter </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="pad-ver mar-top text-main"><i class="demo-pli-consulting icon-4x"></i></div>
+          <p class="text-lg text-semibold mar-no text-main">资源管理</p>
+          <p class="text-muted"> - </p>
+          <p class="text-sm">包括产品、标准品、产品、供应商、酒标、酒瓶、酒帽等初始化数据。</p>
+          <button class="btn btn-primary mar-ver"> Enter </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="pad-ver mar-top text-main"><i class="demo-pli-consulting icon-4x"></i></div>
+          <p class="text-lg text-semibold mar-no text-main">发货管理</p>
+          <p class="text-muted"> - </p>
+          <p class="text-sm">包括新增用户，修改用户信息，以及用户权限。</p>
+          <button class="btn btn-primary mar-ver"> Enter </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+// var hour = calendar.get(Calendar.HOUR_OF_DAY);
+var mydate = new Date();
+var hour = mydate.getHours();
+var greeting="";
+if(hour<=6){
+greeting="现在是凌晨。";
+}else if(hour<=9){
+greeting="早上好！";
+}else if(hour<=12){
+greeting="上午好！";
+}else if(hour<=18){
+greeting="下午好！";
+}else if(hour<=24){
+greeting="晚上好！";
+}else{
+greeting="获得时间出错，请调试!";
+}
+$('.wenhou').html(greeting);
+});
+</script>

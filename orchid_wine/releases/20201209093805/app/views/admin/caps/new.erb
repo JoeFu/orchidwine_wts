@@ -1,0 +1,68 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">添加酒帽</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>基础数据</li>
+    <li>包材管理</li>
+    <li>酒帽</li>
+    <li class="active">添加酒帽</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      <%= form_tag("/admin/caps", method: :post, class: 'form-horizontal', id: 'caps-new') do -%>
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+                <hr/>
+              </div>
+            </div>
+          </div>
+          
+          <p class="text-main text-center text-bold mar-no">添加 酒帽 信息</p><br>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 类型编码</label>
+              <div class="col-sm-6">
+                <input type="text" name="type_code" class="form-control" value="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 类型描述</label>
+              <div class="col-sm-6">
+                <input type="text" name="type_des" class="form-control" value="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 材质编码</label>
+              <div class="col-sm-6">
+                <input type="text" name="texture_code" class="form-control" value="">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><b class="text-danger">*</b> 材质描述</label>
+              <div class="col-sm-6">
+                <input type="text" name="texture_des" class="form-control" value="">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-9 col-sm-offset-3">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

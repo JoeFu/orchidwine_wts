@@ -1,0 +1,12 @@
+[2019-04-10 06:01:21] __rvm_patch
+__rvm_patch () 
+{ 
+    \patch "$@" || return $?
+}
+current path: /home/orchid/.rvm/src/ruby-2.5.0
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin
+command(8): __rvm_patch -F 25 -p1 -N -f -i /home/orchid/.rvm/patches/ruby/2.5.0/prelude_gcc_diagnostic.patch
+++ patch -F 25 -p1 -N -f -i /home/orchid/.rvm/patches/ruby/2.5.0/prelude_gcc_diagnostic.patch
+patching file template/prelude.c.tmpl
+Hunk #1 succeeded at 142 with fuzz 3 (offset 3 lines).
+Hunk #2 succeeded at 159 with fuzz 3 (offset -10 lines).

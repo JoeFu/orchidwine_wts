@@ -1,0 +1,50 @@
+<div class="row hide" id='orders-new-customer-error'>
+  <div class="col-sm-5 col-sm-offset-3">
+    <div class="alert alert-primary">
+      <strong><i class="ion-arrow-down-a"></i></strong> 请先填写客户信息，然后点击下一步。
+    </div>
+  </div>
+</div>
+<%= form_tag(@form_action, method: @form_method, class: 'form-horizontal', id: 'orders-new') do -%>
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 control-label" >客户</label>
+  <div class="col-lg-6 col-md-6">
+    <%== hidden_field_tag :sort, @order.sort %>
+    <%== hidden_field_tag :auto_confirm, @order.auto_confirm %>
+    <% if @order.id.blank? %>
+    <select name='user_id' class="col-sm-12 chosen-select">
+      <option value="0">请选择</option>
+      <%== options_for_select(Hash[@admin_session.my_users].invert, @order.user_id ) %>
+    </select>
+    <% else %>
+    <%== hidden_field_tag :order_id, @order.id %>
+    <%== hidden_field_tag :user_id, @order.user_id %>
+    <input class="form-control" type="text" value="<%== @order.user.full_show %>" readonly />
+    <% end %>
+  </div>
+  <% if @order.id.blank? %>
+  <div class="col-sm-2">
+    <%== new_btn_tag "/admin/users/new", '添加客户' %>
+  </div>
+  <% end %>
+</div>
+<% if @order.sort == 1 %>
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 control-label">交付方式</label>
+  <div class="col-lg-6 col-md-6">
+    <select  class="selectpicker form-control" name="delivery_way_id">
+      <!-- <option value="0">请选择</option> -->
+      <%== options_for_select(Hash[Order::DELIVERY_WAY].invert, @order.delivery_way_id ) %>
+    </select>
+  </div>
+</div>
+<% end %>
+<div class="form-group">
+  <label class="col-lg-3 col-md-3 control-label">支付币种</label>
+  <div class="col-lg-6 col-md-6">
+    <select  class="selectpicker form-control" name="currency">
+      <%== options_for_select(Hash[Order::CURRENCY].invert, @order.currency ) %>
+    </select>
+  </div>
+</div>
+<% end -%>

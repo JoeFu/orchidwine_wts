@@ -1,0 +1,127 @@
+[2019-04-10 06:01:10] requirements_centos_libs_install
+requirements_centos_libs_install () 
+{ 
+    __rvm_try_sudo yum install -y "$@" || return $?
+}
+current path: /home/orchid
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin
+command(2): requirements_centos_libs_install ruby
+++ __rvm_try_sudo yum install -y ruby
+++ typeset -a command_to_run
+++ typeset sudo_path sbin_path missing_paths
+++ command_to_run=("$@")
+++ ((  UID == 0  ))
+++ case "$rvm_autolibs_flag_number" in
+++ is_a_function __rvm_sudo
+++ typeset -f __rvm_sudo
+++ missing_paths=
+++ for sbin_path in /sbin /usr/sbin /usr/local/sbin
+++ [[ -d /sbin ]]
+++ [[ :/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin: != *\:\/\s\b\i\n\:* ]]
+++ missing_paths+=:/sbin
+++ for sbin_path in /sbin /usr/sbin /usr/local/sbin
+++ [[ -d /usr/sbin ]]
+++ [[ :/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin: != *\:\/\u\s\r\/\s\b\i\n\:* ]]
+++ for sbin_path in /sbin /usr/sbin /usr/local/sbin
+++ [[ -d /usr/local/sbin ]]
+++ [[ :/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin: != *\:\/\u\s\r\/\l\o\c\a\l\/\s\b\i\n\:* ]]
+++ [[ -n :/sbin ]]
+++ command_to_run=(/usr/bin/env PATH="${PATH}${missing_paths}" "${command_to_run[@]}")
+++ command_to_run=(__rvm_sudo -p "%p password required for '$*': " "${command_to_run[@]}")
+++ __rvm_sudo -p '%p password required for '\''yum install -y ruby'\'': ' /usr/bin/env PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin:/sbin yum install -y ruby
+++ command sudo -p '%p password required for '\''yum install -y ruby'\'': ' /usr/bin/env PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin:/sbin yum install -y ruby
+++ sudo -p '%p password required for '\''yum install -y ruby'\'': ' /usr/bin/env PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin:/sbin yum install -y ruby
+已加载插件：fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: centos.mirror.serversaustralia.com.au
+ * epel: d2lzkl7pfhq30w.cloudfront.net
+ * extras: centos.mirror.serversaustralia.com.au
+ * updates: centos.mirror.serversaustralia.com.au
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 ruby.x86_64.0.2.0.0.648-34.el7_6 将被 安装
+--> 正在处理依赖关系 ruby-libs(x86-64) = 2.0.0.648-34.el7_6，它被软件包 ruby-2.0.0.648-34.el7_6.x86_64 需要
+--> 正在处理依赖关系 rubygem(bigdecimal) >= 1.2.0，它被软件包 ruby-2.0.0.648-34.el7_6.x86_64 需要
+--> 正在处理依赖关系 ruby(rubygems) >= 2.0.14.1，它被软件包 ruby-2.0.0.648-34.el7_6.x86_64 需要
+--> 正在处理依赖关系 libruby.so.2.0()(64bit)，它被软件包 ruby-2.0.0.648-34.el7_6.x86_64 需要
+--> 正在检查事务
+---> 软件包 ruby-libs.x86_64.0.2.0.0.648-34.el7_6 将被 安装
+---> 软件包 rubygem-bigdecimal.x86_64.0.1.2.0-34.el7_6 将被 安装
+---> 软件包 rubygems.noarch.0.2.0.14.1-34.el7_6 将被 安装
+--> 正在处理依赖关系 rubygem(rdoc) >= 4.0.0，它被软件包 rubygems-2.0.14.1-34.el7_6.noarch 需要
+--> 正在处理依赖关系 rubygem(psych) >= 2.0.0，它被软件包 rubygems-2.0.14.1-34.el7_6.noarch 需要
+--> 正在处理依赖关系 rubygem(io-console) >= 0.4.2，它被软件包 rubygems-2.0.14.1-34.el7_6.noarch 需要
+--> 正在检查事务
+---> 软件包 rubygem-io-console.x86_64.0.0.4.2-34.el7_6 将被 安装
+---> 软件包 rubygem-psych.x86_64.0.2.0.0-34.el7_6 将被 安装
+---> 软件包 rubygem-rdoc.noarch.0.4.0.0-34.el7_6 将被 安装
+--> 正在处理依赖关系 ruby(irb) = 2.0.0.648，它被软件包 rubygem-rdoc-4.0.0-34.el7_6.noarch 需要
+--> 正在处理依赖关系 rubygem(json) >= 1.7.7，它被软件包 rubygem-rdoc-4.0.0-34.el7_6.noarch 需要
+--> 正在检查事务
+---> 软件包 ruby-irb.noarch.0.2.0.0.648-34.el7_6 将被 安装
+---> 软件包 rubygem-json.x86_64.0.1.7.7-34.el7_6 将被 安装
+--> 解决依赖关系完成
+
+依赖关系解决
+
+================================================================================
+ Package                 架构        版本                    源            大小
+================================================================================
+正在安装:
+ ruby                    x86_64      2.0.0.648-34.el7_6      updates       71 k
+为依赖而安装:
+ ruby-irb                noarch      2.0.0.648-34.el7_6      updates       92 k
+ ruby-libs               x86_64      2.0.0.648-34.el7_6      updates      2.8 M
+ rubygem-bigdecimal      x86_64      1.2.0-34.el7_6          updates       83 k
+ rubygem-io-console      x86_64      0.4.2-34.el7_6          updates       54 k
+ rubygem-json            x86_64      1.7.7-34.el7_6          updates       79 k
+ rubygem-psych           x86_64      2.0.0-34.el7_6          updates       82 k
+ rubygem-rdoc            noarch      4.0.0-34.el7_6          updates      322 k
+ rubygems                noarch      2.0.14.1-34.el7_6       updates      219 k
+
+事务概要
+================================================================================
+安装  1 软件包 (+8 依赖软件包)
+
+总下载量：3.8 M
+安装大小：13 M
+Downloading packages:
+--------------------------------------------------------------------------------
+总计                                                17 MB/s | 3.8 MB  00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在安装    : ruby-libs-2.0.0.648-34.el7_6.x86_64                         1/9 
+  正在安装    : rubygem-psych-2.0.0-34.el7_6.x86_64                         2/9 
+  正在安装    : rubygem-json-1.7.7-34.el7_6.x86_64                          3/9 
+  正在安装    : ruby-2.0.0.648-34.el7_6.x86_64                              4/9 
+  正在安装    : ruby-irb-2.0.0.648-34.el7_6.noarch                          5/9 
+  正在安装    : rubygem-bigdecimal-1.2.0-34.el7_6.x86_64                    6/9 
+  正在安装    : rubygem-io-console-0.4.2-34.el7_6.x86_64                    7/9 
+  正在安装    : rubygems-2.0.14.1-34.el7_6.noarch                           8/9 
+  正在安装    : rubygem-rdoc-4.0.0-34.el7_6.noarch                          9/9 
+  验证中      : ruby-irb-2.0.0.648-34.el7_6.noarch                          1/9 
+  验证中      : rubygem-psych-2.0.0-34.el7_6.x86_64                         2/9 
+  验证中      : rubygem-json-1.7.7-34.el7_6.x86_64                          3/9 
+  验证中      : rubygems-2.0.14.1-34.el7_6.noarch                           4/9 
+  验证中      : ruby-2.0.0.648-34.el7_6.x86_64                              5/9 
+  验证中      : rubygem-bigdecimal-1.2.0-34.el7_6.x86_64                    6/9 
+  验证中      : ruby-libs-2.0.0.648-34.el7_6.x86_64                         7/9 
+  验证中      : rubygem-rdoc-4.0.0-34.el7_6.noarch                          8/9 
+  验证中      : rubygem-io-console-0.4.2-34.el7_6.x86_64                    9/9 
+
+已安装:
+  ruby.x86_64 0:2.0.0.648-34.el7_6                                              
+
+作为依赖被安装:
+  ruby-irb.noarch 0:2.0.0.648-34.el7_6                                          
+  ruby-libs.x86_64 0:2.0.0.648-34.el7_6                                         
+  rubygem-bigdecimal.x86_64 0:1.2.0-34.el7_6                                    
+  rubygem-io-console.x86_64 0:0.4.2-34.el7_6                                    
+  rubygem-json.x86_64 0:1.7.7-34.el7_6                                          
+  rubygem-psych.x86_64 0:2.0.0-34.el7_6                                         
+  rubygem-rdoc.noarch 0:4.0.0-34.el7_6                                          
+  rubygems.noarch 0:2.0.14.1-34.el7_6                                           
+
+完毕！

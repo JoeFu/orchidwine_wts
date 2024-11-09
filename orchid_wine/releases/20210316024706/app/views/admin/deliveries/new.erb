@@ -1,0 +1,231 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">预约</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>业务管理</li>
+    <li>订单管理</li>
+    <li class="active">预约</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">预约集装箱信息</p>
+          <hr/>
+          
+          <%= form_tag("/admin/deliveries", method: :post, class: 'form-horizontal', id: 'deliveries-edit') do -%>
+          <div class="col-sm-12">
+            <% {
+            'export' => "出口方",
+            'import' => '进口接货方<span class="text-warning">（必须具有中国进出口接货资质）</span>',
+            }.map do |k, v| %>
+            <p class="bord-btm pad-ver text-main text-bold"><%== v %></p>
+            <% readonly = '' %>
+            <% if ['export'].include?(k) %>
+            <% readonly = 'readonly' if params[:export_default] %>
+            <div class="form-group">
+              <div class="col-sm-4 col-sm-offset-2">
+                <div class="checkbox">
+                  <input id="<%== k %>-checkbox" class="magic-checkbox" name='export_default' type="checkbox" <%== 'checked="checked"' if params[:export_default] %>>
+                  <label for="<%== k %>-checkbox">澳麒销售</label>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <% if 'import' == k %>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 选择公司名称</label>
+              <div class="col-lg-3 col-sm-4">
+                <select class="form-control selectpicker" name="import_company_id" data-live-search="true"
+                  data-width="100%" tabindex="-98">
+                  <option value="">请选择</option>
+                  <% ImportCompany.all.map do |import_company| %>
+                  <option value="<%== import_company.id %>"
+                    data-name="<%== import_company.name %>"
+                    data-contacts="<%== import_company.contacts %>"
+                    data-telephone="<%== import_company.telephone %>"
+                    data-email="<%== import_company.email %>"
+                    data-uscc="<%== import_company.uscc %>"
+                    data-address="<%== import_company.address %>"
+                    ><%== import_company.name %></option>
+                  <% end %>
+                </select>
+              </div>
+              <label class="control-label col-sm-6 text-left">或在下方直接填写，将自动保存到系统。</label>
+            </div>
+            <% end %>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 公司名称</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag "#{k}_company_name",
+                params["#{k}_company_name"],
+                placeholder: "公司名称",
+                'data-default': Const::ORCHID_SHIPPER[:company_name],
+                class: "form-control"
+                %>
+              </div>
+              
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 联系人</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag "#{k}_company_contacts",
+                params["#{k}_company_contacts"],
+                placeholder: "联系人",
+                'data-default': Const::ORCHID_SHIPPER[:company_contacts],
+                class: "form-control"
+                %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 电话</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag "#{k}_company_telephone",
+                params["#{k}_company_telephone"],
+                placeholder: "电话",
+                'data-default': Const::ORCHID_SHIPPER[:company_telephone],
+                class: "form-control"
+                %>
+              </div>
+              
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 电子邮箱</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag "#{k}_company_email",
+                params["#{k}_company_email"],
+                placeholder: "电子邮箱",
+                'data-default': Const::ORCHID_SHIPPER[:company_email],
+                class: "form-control"
+                %>
+              </div>
+            </div>
+            <% if 'import' == k %>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 社会统一信用代码</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag "#{k}_company_uscc",
+                params["#{k}_company_uscc"],
+                placeholder: "社会统一信用代码",
+                'data-default': Const::ORCHID_SHIPPER[:company_uscc],
+                class: "form-control"
+                %>
+              </div>
+            </div>
+            <% else %>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 公司ABN</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag "#{k}_company_abn",
+                params["#{k}_company_abn"],
+                placeholder: "公司ABN",
+                'data-default': Const::ORCHID_SHIPPER[:company_abn],
+                class: "form-control"
+                %>
+              </div>
+            </div>
+            <% end %>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 地址</label>
+              <div class="col-lg-8 col-sm-10">
+                <%= text_field_tag "#{k}_company_address",
+                params["#{k}_company_address"],
+                placeholder: "地址",
+                'data-default': Const::ORCHID_SHIPPER[:company_address],
+                class: "form-control"
+                %>
+              </div>
+            </div>
+            <% end %>
+            <p class="bord-btm pad-ver text-main text-bold">预约信息</p>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 预约号</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag 'booking_number', params[:booking_number], placeholder: '预约号', class: "form-control"%>
+              </div>
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 货代名称</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag 'shipping_company', params[:shipping_company], placeholder: '货代名称', class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 联系电话</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag 'shipping_company_telephone', params[:shipping_company_telephone], placeholder: '联系电话', class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 是否需要隔热棉</label>
+              <div class="col-lg-3 col-sm-4">
+                <select name="cotton_insulation" class="container-type selectpicker form-control">
+                  <%== options_for_select(Delivery::COTTON_INSULATION.invert, params[:cotton_insulation] ) %>
+                </select>
+              </div>
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 是否需要海运保险</label>
+              <div class="col-lg-3 col-sm-4">
+                <select name="ocean_insurance" class="container-type selectpicker form-control">
+                  <option <%== 'selected="selected"' if params[:ocean_insurance].to_i == 0 %> value="0">否</option>
+                  <option <%== 'selected="selected"' if params[:ocean_insurance].to_i == 1 %> value="1">是</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 出发港</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag 'port_of_loading', params[:port_of_loading], placeholder: '出发港', class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><b class="text-danger">*</b> 目的港</label>
+              <div class="col-lg-3 col-sm-4">
+                <%= text_field_tag 'port_of_discharge', params[:port_of_discharge], placeholder: '目的港', class: "form-control"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">截关日期</label>
+              <div class="col-lg-2 col-sm-2">
+                <div class="input-daterange input-group">
+                  <%= text_field_tag 'cutoff_date', params[:cutoff_date], placeholder: '截关日期', class: "form-control", autocomplete: 'off' %>
+                </div>
+              </div>
+              <div class="col-lg-1 col-sm-2">
+                <%= text_field_tag 'cutoff_datetime', params[:cutoff_datetime], class: "form-control input-timepicker"%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">计划发货日期</label>
+              <div class="col-lg-3 col-sm-4">
+                <div class="input-daterange input-group">
+                  <%= text_field_tag 'plan_date', params[:plan_date], placeholder: '计划发货日期', class: "form-control", autocomplete: 'off' %>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">空集装箱取箱日</label>
+              <div class="col-lg-3 col-sm-4">
+                <div class="input-daterange input-group">
+                  <%= text_field_tag 'get_container_date', params[:get_container_date], placeholder: '空集装箱取箱日', class: "form-control", autocomplete: 'off' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <%== submit_save %>
+            </div>
+          </div>
+        </div>
+        <% end -%>
+      </div>
+    </div>
+  </div>
+</div>

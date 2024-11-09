@@ -1,0 +1,370 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require bootstrap/bootstrap
+ *= require_tree ./admin
+ *= require ionicons/ionicons
+ *= require_tree ./../plugins/bootstrap-select
+ *= require_tree ./../plugins/bootstrap-validator
+ *= require_tree ./../plugins/bootstrap-datepicker
+ *= require_tree ./../plugins/bootstrap-timepicker
+ *= require_tree ./../plugins/bootstrap-table
+ *= require_tree ./../plugins/chosen
+ 
+ *= require_self
+ */
+
+.breadcrumb {
+  /*display: none;*/
+}
+.nav-group a {
+  font-size: 14px !important;
+  padding: 15px !important;
+}
+.mainnav-profile .profile-wrap {
+  padding-top: 25px;
+  padding-bottom: 5px;
+}
+
+.navbar-header:before {
+ background: transparent;
+}
+
+.row .dataTables_info {
+ line-height: 32px;
+}
+
+.row .pagination {
+	float: right;
+	-webkit-font-smoothing: antialiased;
+	border-radius: 0;
+	box-sizing: border-box;
+	font-size: 12px;
+	margin: 0;
+	text-align: center;
+	visibility: visible;
+	border: 1px solid #ccc;
+	border-right: none;
+  border-radius: 3px;
+}
+.fixed-table-pagination .pagination {
+  border: none;
+}
+
+.pagination a,
+.pagination em,
+.pagination span {
+	float: left;
+	height: 30px;
+	width: 36px;
+	-webkit-font-smoothing: antialiased;
+	box-sizing: border-box;
+	font-size: 12px;
+	line-height: 30px;
+	border-right: 1px solid #ccc;
+}
+
+.pagination .disabled {
+	color: #ccc;
+}
+
+.pagination em.current {
+	background-color: #25476a;
+	border: 1px solid #25476a;
+	color: #fff;
+	height: 32px;
+	margin-left: -1px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+}
+
+.authority li .checkbox {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.authority li .checkbox.indent {
+	margin-left: 25px;
+}
+
+.label {
+	padding: .3em .6em .3em;
+}
+
+td a.btn,
+td span.label {
+	margin: 1px;
+	float: left;
+}
+
+td.text-center a.btn,
+td.text-center span.label {
+	float: none;
+}
+
+.dropzone-group {
+	background: rgba(0,0,0,0.025);
+  border-style: dashed;
+  border-color: #ddd;
+  border-width: 1px;
+  border-radius: 3px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+dl {
+	margin-bottom: 0;
+}
+dd, dt {
+	line-height: 1.7;
+}
+
+.mar-ver.login{
+	margin-bottom: 0px;
+}
+
+.panel-alert.login {
+	margin-bottom: 10px;
+}
+
+.panel-control .form-right {
+	float: right;
+	margin-top: 10px;
+}
+
+.preview-img {
+	max-width: 100%;
+	float: left;
+	margin-bottom: 10px;
+}
+
+.preview-img.sm {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.input-daterange input {
+	text-align: left;
+}
+
+#calendar {
+  /*max-width: 900px;*/
+  margin: 0 auto;
+}
+
+.checkbox, .radio {
+	margin-top: 5px;
+	margin-bottom: 0;
+}
+
+#tip {
+  background-color: #ddf;
+  color: #333;
+  border: 1px solid silver;
+  box-shadow: 3px 4px 3px 0px silver;
+  position: absolute;
+  top: 60px;
+  right: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  line-height: 20px;
+}
+#tip input[type="text"] {
+  height: 25px;
+  border: 0;
+  padding-left: 5px;
+  width: 280px;
+  border-radius: 3px;
+  outline: none;
+}
+
+#mapContainer {
+	width: 100%;
+	height: 500px;
+}
+
+.progress-log {
+  display: none;
+}
+#container.mainnav-lg .navbar-brand, 
+#container.mainnav-in .navbar-brand {
+  margin-left: 25px;
+}
+
+#container.mainnav-in .navbar-brand,
+#container.mainnav-lg .navbar-brand,
+#container.mainnav-in .brand-title,
+#container.mainnav-lg .brand-title {
+  width: 200px;
+}
+
+#container.mainnav-sm .brand-icon {
+  width: 48px;
+  height: 32px;
+  margin-top: 15px;
+  margin-left: 4px;
+}
+
+#page-title {
+  padding-top: 0;
+}
+
+.placeholderBackground{
+  background-color:#efefef;
+}
+
+#container .table-hover > tbody.ui-sortable > tr:hover {
+  background-color: #efefef;
+}
+
+
+#container .fc-event.white:not(.fc-list),
+#container .fc-event[data-class="white"]:not(.fc-list),
+#container .fc-event.white.fc-list:before,
+#container .fc-event[data-class="white"].fc-list:before {
+  background-color: #ecf0f5;
+  border-color: #ecf0f5;
+  color: #333;
+}
+
+.nav-pills>li+li {
+  margin-left: 0;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover{
+  background: none;
+}
+
+.panel-overlay {
+  top: 42px;
+}
+#panel-work-order-runing {
+  height: 80px;
+}
+
+#panel-work-order-runing .panel-overlay-content {
+  margin-top: -20px;
+}
+
+.mar-top {
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/*.mar-top li {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 0;
+}*/
+
+/*.mar-top li:hover {
+  background-color: #f5f5f5;
+}*/
+
+.eq-height .eq-box-md .panel {
+  margin-bottom: 20px;
+}
+
+/*.breadcrumb {
+  display: none;
+}*/
+
+.brand-icon {
+  height: auto;
+  margin-top: 10px;
+}
+.brand-text {
+  margin-left: 10px;
+}
+
+.pad-btm, 
+.pad-btm hr, 
+.toolbar-left, .toolbar-right, .table-toolbar-left, .table-toolbar-right {
+  margin-bottom: 0;
+}
+
+#order-nav .wz-classic .active ~ li a {
+  opacity: 1;
+}
+#order-nav .wz-classic li.active {
+  background-color: #92c755;
+  color: #fff;
+}
+
+.one-container {
+  background-color: #f5f4f2;
+  padding-top: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+#navbar {
+  z-index: 999;
+}
+
+.modal-backdrop.in {
+  opacity: .5;
+}
+
+.wz-nav-off > li a {
+  cursor: pointer !important;
+}
+
+.p-t-10 {
+  padding-top: 10px;
+}
+
+.price-label span {
+  display: inline-block;
+  width: 26px;
+}
+
+.bg-f5 {
+  background-color: #f5f5f5;
+}
+
+.bg-fff {
+  background-color: #ffffff;
+}
+
+.bg-warning-5 {
+  // background-color: rgba(255, 179, 0, 0.3);
+  background-color: #f6f8fa;
+}
+#container .table td.no-border {
+  border: none;
+}
+
+@media print {
+  header {
+    display: none;
+  }
+
+  .no-print {
+    display: none;
+  }
+
+  #page-head {
+    display: none;
+  }
+  #content-container {
+    padding-top: 0;
+  }
+
+  html,body,div,h5,th,td,strong,small,a {
+    font-size: 12px;
+  }
+
+  a[href]:after { content: none !important; }
+}

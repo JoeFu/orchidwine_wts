@@ -1,0 +1,60 @@
+<header id="navbar">
+  <div id="navbar-container" class="boxed">
+    
+    <div class="navbar-header">
+      <a href="/admin" class="navbar-brand">
+        <%= image_tag("logo.png", {class: 'brand-icon'}) %>
+        <div class="brand-title">
+          <span class="brand-text"><%== Const::BASE_TITLE %></span>
+        </div>
+      </a>
+    </div>
+    
+    <div class="navbar-content">
+      <ul class="nav navbar-top-links">
+        
+        <li class="tgl-menu-btn">
+          <a class="mainnav-toggle" href="#">
+            <i class="ion-ios-list-outline"></i>
+          </a>
+        </li>
+        
+        <li>
+          <div class="custom-search-form">
+            <label class="btn btn-trans" for="search-input" data-toggle="collapse" data-target="#nav-searchbox">
+              <i class="demo-pli-magnifi-glass"></i>
+            </label>
+            <form>
+              <div class="search-container collapse" id="nav-searchbox">
+              </div>
+            </form>
+          </div>
+        </li>
+      </ul>
+      <ul class="nav navbar-top-links">
+        <li id="dropdown-user" class="dropdown">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right" aria-expanded="false">
+            <span class="ic-user pull-right">
+              <i class="ion-person"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default" style="">
+            <ul class="head-list">
+              <li>
+                <a href="/admin/admins/<%== @admin_session.id %>/passwd">
+                  <i class="ion-settings"></i> 修改密码
+                </a>
+              </li>
+              <li>
+                <a href="/admin/logout">
+                  <i class="ion-arrow-left-a"></i> 
+                  退出
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

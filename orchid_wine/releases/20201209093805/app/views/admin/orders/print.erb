@@ -1,0 +1,218 @@
+<div class="navbar-header">
+  <div class="col-sm-12" style="float: left;width: 98%;margin-left: 1%;margin-top: 20px">
+    <img class="brand-icon" style="height: 50px" src="https://wts.orchidwine.com.au/assets/logo-f1eb2b120f8f87fccd2c72104399693115d738c35638740b97ac83d1d7eede6f.png" alt="Logo">
+  </div>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-sm-12" style="float: left;width: 98%;margin-left: 1%;margin-top: 20px">
+      <div class="panel" style="border-radius: 3px;border: 0;box-shadow: none !important;margin-bottom: 20px;background-color: #fff;">
+        <div class="panel-body" style="padding: 15px 20px 25px;">
+          <h3><%== @message %></h3>
+          <!-- <hr/> -->
+          <h3>订单 「PO-<%== @order.order_number %>」 详情</h3>
+          <table style='width:100%;border-spacing: 0;'>
+            <tbody>
+              <tr>
+                <td style='text-align: right;padding: 2px 8px;line-height: 1.42857143;vertical-align: top; width: 60px;'><b>订单号码</b></td>
+                <td style='padding: 2px 8px;line-height: 1.42857143;vertical-align: top; text-align: left;'>PO-<%== @order.order_number %></td>
+              </tr>
+              <tr>
+                <td style='text-align: right;padding: 2px 8px;line-height: 1.42857143;vertical-align: top; width: 60px;'><b>交付方式</b></td>
+                <td style='padding: 2px 8px;line-height: 1.42857143;vertical-align: top; text-align: left;'><%== @order.delivery_way %></td>
+              </tr>
+              <tr>
+                <td style='text-align: right;padding: 2px 8px;line-height: 1.42857143;vertical-align: top;'><b>客户信息</b></td>
+                <td style='padding: 2px 8px;line-height: 1.42857143;vertical-align: top;' colspan="3"><%== @order.user.name %></td>
+              </tr>
+              <tr>
+                <td style='text-align: right;padding: 2px 8px;line-height: 1.42857143;vertical-align: top;'><b>公司名称</b></td>
+                <td style='padding: 2px 8px;line-height: 1.42857143;vertical-align: top;' colspan="3"><%== @order.user.company %></td>
+              </tr>
+              <tr>
+                <td style='text-align: right;padding: 2px 8px;line-height: 1.42857143;vertical-align: top;'><b>订单状态</b></td>
+                <td style='padding: 2px 8px;line-height: 1.42857143;vertical-align: top;' colspan="3"><%== @order.status_show %></td>
+              </tr>
+
+            </tbody>
+          </table>
+          <h3 style="margin-top: 30px;">产品清单</h3>
+          <table style='width:100%;border-spacing: 0;'>
+            <!--  <thead>
+              <tr >
+                <th style="padding: 8px;vertical-align:bottom;">#</th>
+                <th style="padding: 8px;vertical-align:bottom;text-align:left;">分类</th>
+                <th style="padding: 8px;vertical-align:bottom;text-align:left;">描述</th>
+                <th style="padding: 8px;vertical-align:bottom;">标准售价</th>
+              </tr>
+            </thead> -->
+            <tbody style="background-color: #f5f5f5;">
+              <% i = 0; @order.order_productions.map do |order_production| %>
+              <tr>
+                <td rowspan="5" style="padding: 8px;text-align: center;vertical-align: top; background-color: #fff; width: 60px;border-top: 1px solid rgba(0, 0, 0, 0.07); ">
+                  Item-<%== i += 1 %><br/>
+                  <strong><%== order_production.package %></strong>
+                </td>
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);border-top: 1px solid rgba(0, 0, 0, 0.07);">
+                  <small>[<%== order_production.brand %>]</small><br/>
+                  <% if order_production.is_hb == 1 %>
+                  <strong>灌装服务</strong>
+                  <% else %>
+                  <strong><%== order_production.bulk_wine_desc %></strong>
+                  <% end %>
+                </td>
+                <td rowspan="5" style="padding: 8px;background-color: #fff; min-width: 60px; vertical-align: top;border-top: 1px solid rgba(0, 0, 0, 0.07);text-align: center;">
+                  <%== order_production.production_num_show %><br/>
+                  <strong><%== order_production.unit_price.to_f2 %></strong> / 瓶
+                </td>
+              </tr>
+              <tr>
+                <!-- <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">Glass</td> -->
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);"><%== order_production.bottle.bottle_code_show %></td>
+              </tr>
+              <tr>
+                <!-- <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">Cork</td> -->
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">
+                  <%== order_production.cork.desc rescue '-'%>，
+                  <%== order_production.cork_print.zero? ? '无印刷' : '有印刷'%>
+                </td>
+              </tr>
+              <tr>
+                <% if order_production.bottle.present?%>
+                <% if order_production.bottle.seal == 1 %>
+                <!-- <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">Capsule</td> -->
+                <% elsif order_production.bottle.seal == 2 %>
+                <!-- <td>S.cap</td> -->
+                <% else %>
+                <td></td>
+                <% end %>
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">
+                  <%== order_production.cap.desc rescue '-'%>，
+                  <%== order_production.cap_print.zero? ? '无印刷' : '有印刷'%>，
+                  <%== order_production.cap_color_show %>
+                </td>
+              </tr>
+              <% end %>
+              <tr>
+                <!-- <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">Divider</td> -->
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">
+                  <%== order_production.divider.divider_type rescue '-'%> /
+                  <!--
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">Carton</td>
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">
+                  -->
+                  <%== order_production.carton.desc rescue '-'%>
+                </td>
+              </tr>
+              
+              <tr style="background-color: #fff">
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);"></td>
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);">附加费用：<%== order_production.fee_name %></td>
+                <td style="padding: 8px;border-bottom: 1px solid rgba(0, 0, 0, 0.07);border-top: 1px solid rgba(0, 0, 0, 0.07);text-align: center;"><%== order_production.fee.to_f2 rescue '-' %></td>
+              </tr>
+              <tr style="background-color: #fff">
+                <td colspan="1"></td>
+                <td colspan="6" style="padding: 8px;">
+                  <% if order_production.remark.present? %>
+                  备注：<%== order_production.remark %><br />
+                  <% end %>
+                  <br /><br />
+                </td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+          <h3>订单报价</h3>
+          <table style='width:100%;border-spacing: 0;'>
+            <thead>
+              <tr>
+                <th style='padding: 8px;line-height: 1.42857143;text-align: left;font-size: 1.05em;font-weight: 600;border-bottom: 1px solid rgba(0, 0, 0, 0.07);color: #4d627b;' width="55%">产品明细</th>
+                <th style='padding: 8px;line-height: 1.42857143;text-align: left;font-size: 1.05em;font-weight: 600;border-bottom: 1px solid rgba(0, 0, 0, 0.07);color: #4d627b;' width="15%">产品总价</th>
+                <th style='padding: 8px;line-height: 1.42857143;text-align: left;font-size: 1.05em;font-weight: 600;border-bottom: 1px solid rgba(0, 0, 0, 0.07);color: #4d627b;' width="15%">附加费用</th>
+                <th style='padding: 8px;line-height: 1.42857143;text-align: left;font-size: 1.05em;font-weight: 600;border-bottom: 1px solid rgba(0, 0, 0, 0.07);color: #4d627b;' width="15%">合计</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @order.order_productions.map do |order_production| %>
+              <tr>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;border-top: 1px solid rgba(0, 0, 0, 0.07);'><%== order_production.bulk_wine_desc %></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;border-top: 1px solid rgba(0, 0, 0, 0.07);'><%== order_production.price_show %></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;border-top: 1px solid rgba(0, 0, 0, 0.07);'><%== order_production.fee_show %></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;border-top: 1px solid rgba(0, 0, 0, 0.07);'><%== order_production.total_price_show %></td>
+              </tr>
+              <%end%>
+              <tr>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' colspan="3" class="text-right">产品总价</td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;'><%== @order.currency_icon %> <%== @order.total_price.ts %></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="margin-top: 30px;">发货信息</h3>
+          <table class="table table-bordered" style='width:100%;border-spacing: 0;'>
+            <tbody>
+              <tr>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>起运港口</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="20%"><%== Order::SELLER_ELIVERY_WHARF[@order.ocean_start_id] %></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>目的港口</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="20%"><%== @order.ocean_dest_name %></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>海运保险</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="15%"><%== @order.ocean_insurance == 1 ? '是' : '否' %></td>
+              </tr>
+              <tr>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>海运承运方</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="55%" colspan="3">
+                  <b><%== @order.ocean_assign == 1 ? '澳麒指定（Orchid Wine Arrange）' : '客户指定（Customer Arrange）'  %></b><br/>
+                  海运公司名称：<%== @order.ocean_company_name %><br/>
+                  联系人：<%== @order.ocean_company_contacts %><br/>
+                  电话：<%== @order.ocean_company_telephone %><br/>
+                  电子邮箱：<%== @order.ocean_company_email %>
+                </td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>隔热棉要求</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="15%"><%== @order.ocean_felt == 1 ? '否' : '是'  %></td>
+              </tr>
+              <tr>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>出口方</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="35%">
+                  公司名称：<%== @order.export_company_name%><br/>
+                  公司地址：<%== @order.export_company_address%><br/>
+                  联系人：<%== @order.export_company_contacts%><br/>
+                  电话：<%== @order.export_company_telephone%><br/>
+                  邮件：<%== @order.export_company_email%>
+                </td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>接货方</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="35%"colspan="3">
+                  公司名称：<%== @order.import_company_name%><br/>
+                  公司地址：<%== @order.import_company_address%><br/>
+                  联系人：<%== @order.import_company_contacts%><br/>
+                  电话：<%== @order.import_company_telephone%><br/>
+                  邮件：<%== @order.import_company_email%>
+                </td>
+              </tr>
+              <tr>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>卖方</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="35%">
+                  公司名称：<%== @order.seller_company_name%><br/>
+                  公司地址：<%== @order.seller_company_address%><br/>
+                  联系人：<%== @order.seller_company_contacts%><br/>
+                  电话：<%== @order.seller_company_telephone%><br/>
+                  邮件：<%== @order.seller_company_email%>
+                </td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: right; width: 80px;'><b>买方</b></td>
+                <td style='padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;' width="35%" colspan="3">
+                  公司名称：<%== @order.buyer_company_name%><br/>
+                  公司地址：<%== @order.buyer_company_address%><br/>
+                  联系人：<%== @order.buyer_company_contacts%><br/>
+                  电话：<%== @order.buyer_company_telephone%><br/>
+                  邮件：<%== @order.buyer_company_email%>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

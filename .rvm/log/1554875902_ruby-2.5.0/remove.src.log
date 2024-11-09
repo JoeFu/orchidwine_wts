@@ -1,0 +1,20 @@
+[2019-04-10 05:58:22] __rvm_rm_rf
+__rvm_rm_rf () 
+{ 
+    __rvm_rm_rf_verbose "$@"
+}
+current path: /home/orchid
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/orchid/.local/bin:/home/orchid/bin:/home/orchid/.rvm/bin
+command(2): __rvm_rm_rf /home/orchid/.rvm/src/ruby-2.5.0
+++ __rvm_rm_rf_verbose /home/orchid/.rvm/src/ruby-2.5.0
+++ typeset target
+++ target=/home/orchid/.rvm/src/ruby-2.5.0
+++ [[ -n '' ]]
+++ [[ -n 4.2.46(2)-release ]]
+++ builtin shopt -s extglob
+++ case "${target}" in
+++ [[ -z /home/orchid/.rvm/src/ruby-2.5.0 ]]
+++ [[ -d /home/orchid/.rvm/src/ruby-2.5.0 ]]
+++ command rm -rf /home/orchid/.rvm/src/ruby-2.5.0
+++ rm -rf /home/orchid/.rvm/src/ruby-2.5.0
+++ true

@@ -1,0 +1,31 @@
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th class="text-center">类型编码</th>
+        <th class="text-center">类型描述</th>
+        <th class="text-center">材质编码</th>
+        <th class="text-center">材质描述</th>
+        <th class="text-center">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @caps.present? %>
+      <% @caps.map do |cap|%>
+      <tr>
+        <td class="text-center"><%== cap.type_code %></td>
+        <td class="text-center"><%== cap.type_des %></td>
+        <td class="text-center"><%== cap.texture_code %></td>
+        <td class="text-center"><%== cap.texture_des %></td>
+        <td class="text-center">
+          <%== edit_btn_tag(cap) %>
+          <% if can? :destroy,Cap %>
+          <%== destroy_btn_tag(cap) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,86 @@
+I"	(function() {
+  var Xform;
+
+  Xform = function(el) {
+    this.url = $(el).attr('href');
+    this.deleteHtml = '<form action="' + this.url + '" method="post"> <input type="hidden" name="_method" value="delete"/> </form>';
+    this.patchHtml = '<form action="' + this.url + '" method="post"> <input type="hidden" name="_method" value="patch"/> </form>';
+    this.putHtml = '<form action="' + this.url + '" method="post"> <input type="hidden" name="_method" value="put"/> </form>';
+  };
+
+  Xform.prototype = {
+    deleteSubmit: function() {
+      var form;
+      form = $(this.deleteHtml);
+      bootbox.confirm({
+        message: "确定删除吗?",
+        buttons: {
+          confirm: {
+            label: '确定',
+            className: 'btn-danger'
+          },
+          cancel: {
+            label: '取消'
+          }
+        },
+        callback: function(result) {
+          if (result) {
+            $(document.body).append(form);
+            return form.submit();
+          }
+        }
+      });
+    },
+    patchSubmit: function(str) {
+      var form;
+      if (str == null) {
+        str = '';
+      }
+      form = $(this.patchHtml);
+      if (str !== '' && str !== 'undefined') {
+        bootbox.confirm({
+          message: "确定" + str + "吗?",
+          buttons: {
+            confirm: {
+              label: '确定',
+              className: 'btn-danger'
+            },
+            cancel: {
+              label: '取消'
+            }
+          },
+          callback: function(result) {
+            if (result) {
+              $(document.body).append(form);
+              return form.submit();
+            }
+          }
+        });
+      } else {
+        $(document.body).append(form);
+        form.submit();
+      }
+    },
+    putSubmit: function() {
+      var form;
+      form = $(this.putHtml);
+      $(document.body).append(form);
+      form.submit();
+    }
+  };
+
+  $(document).on("click", "a.mtd-patch", function(e) {
+    var str;
+    e.preventDefault();
+    str = $(this).data('option');
+    return new Xform(this).patchSubmit(str);
+  }).on("click", "a.mtd-put", function(e) {
+    e.preventDefault();
+    return new Xform(this).putSubmit();
+  }).on("click", "a.mtd-delete", function(e) {
+    e.preventDefault();
+    return new Xform(this).deleteSubmit();
+  });
+
+}).call(this);
+:ET

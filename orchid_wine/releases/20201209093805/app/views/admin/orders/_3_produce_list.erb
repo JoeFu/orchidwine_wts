@@ -1,0 +1,38 @@
+<div class="panel">
+	<div class="panel-heading">
+		<h3 class="panel-title down-up">订单列表</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="table-responsive">
+					<div class="table-responsive">
+						<table data-toggle="table"
+							data-url="/admin/order_tables/data.json?<%== request.query_string %>"
+							data-sort-name="id"
+							data-page-list="[15, 30, 45]"
+							data-page-size="15"
+							data-pagination="true" data-show-pagination-switch="false">
+							<thead>
+								<tr>
+									<th data-field="order_number" data-sortable="true">订单号</th>
+									<th data-field="user_name" data-sortable="true">客户</th>
+									<th data-field="sort" data-sortable="true">类型</th>
+									<th data-field="bulk_wine" data-sortable="true">产品</th>
+									<th data-field="produce_type" data-sortable="true" class="text-center">生产类型</th>
+									<th data-field="ocean_dest_name" data-sortable="true" class="text-center">发往</th>
+									<th data-field="date_recheck" data-sortable="true" class="text-center">复核日期</th>
+									<% if can?(:cancel_recheck, :Order) %>
+									<th data-field="cancel_recheck" data-sortable="true" class="text-center">撤回复核</th>
+									<% end %>
+									<th data-field="produced" data-sortable="true" class="text-center">灌装</th>
+									<th data-field="produced_no_need" data-sortable="true" class="text-center">无需灌装</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

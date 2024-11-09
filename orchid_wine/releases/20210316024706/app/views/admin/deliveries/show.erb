@@ -1,0 +1,100 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">Shipping Details</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>业务管理</li>
+    <li>发货管理</li>
+    <li class="active">Shipping Details</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="pad-btm form-inline">
+            <div class="row">
+              <div class="col-sm-12 table-toolbar-left">
+                <%== return_list_tag %>
+              </div>
+            </div>
+          </div>
+          <p class="text-main text-center text-bold mar-no">Shipping Details</p>
+          <hr/>
+          <h5>Products Information</h5>
+          <table class="table table-bordered table-vcenter">
+            <thead>
+              <tr>
+                <th width="10%">Order</th>
+                <th width="10%">Customer</th>
+                <th width="60%">Products</th>
+                <th width="10%" class="text-center">Qty(Bottle)</th>
+                <th width="10%" class="text-center">Container</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%
+              order_production_deliveries = @delivery.order_production_deliveries.preload(:container).order(:container_id).group_by{|opd| opd.container_id}
+              order_production_deliveries.map do |container_id, opds|
+              line = opds.size
+              l = 0;
+              opds.map do |opd|
+              l += 1
+              %>
+              <tr>
+                <td>
+                  <a class="btn-link" href="/admin/orders/<%== opd.order_id %>"><%== opd.order_number %></a>
+                </td>
+                <td><%== opd.user.name %></td>
+                <td>
+                  <%== opd.show_in_delivery %><br/>
+                </td>
+                <td class="text-center"><%== opd.num %></td>
+                <% if l == 1 %>
+                <td rowspan="<%== line %>" class="text-center"><%== opd.container.size %></td>
+                <% end %>
+              </tr>
+              <% end %>
+              <% end %>
+            </tbody>
+          </table>
+          <dl class="dl-horizontal">
+            <dt>Booking Number</dt><dd><%== @delivery.booking_number %></dd>
+            <dt>Total Qty (Bottle)</dt><dd><%== @delivery.total_bottle_num.to_i %></dd>
+            <dt>Freight Forwarder</dt><dd><%== @delivery.shipping_company %> (<%== @delivery.shipping_company_telephone %>)</dd>
+            <dt>Cutoff Date</dt><dd><%== @delivery.cutoff_date.strftime('%Y-%m-%d %H:%M') %></dd>
+            <dt>Empty Release Date</dt><dd><%== @delivery.get_container_date %></dd>
+            <dt>Port of Loading</dt><dd><%== @delivery.port_of_loading %></dd>
+            <dt>Port of Discharge</dt><dd><%== @delivery.port_of_discharge %></dd>
+            <dt>Liner Requirement</dt><dd><%== Delivery::COTTON_INSULATION[@delivery.cotton_insulation] %></dd>
+            <dt>Insurance Requirement</dt><dd><%== (@delivery.ocean_insurance == 1 ? 'YES' : 'NO') %></dd>
+          </dl>
+          <hr/>
+          <div class="row">
+            <dl class="dl-horizontal">
+              <dt><h5>Shipper</h5></dt><dd></dd>
+              <dt>Shipper Name </dt><dd><%== @delivery.export_company_name%></dd>
+              <dt>Shipper ABN </dt> <dd><%== @delivery.export_company_abn%></dd>
+              <dt>Shipper Address </dt><dd><%== @delivery.export_company_address%></dd>
+              <dt>Shipper Contact</dt><dd><%== @delivery.export_company_contacts%></dd>
+              <dt>Shipper Tel</dt><dd><%== @delivery.export_company_telephone%></dd>
+              <dt>Shipper E-mail</dt><dd><%== @delivery.export_company_email%></dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt><h5>Consignee </h5></dt><dd></dd>
+              <dt>Consignee Name</dt><dd><%== @delivery.import_company_name%></dd>
+              <dt>Consignee Address</dt><dd><%== @delivery.import_company_address%></dd>
+              <dt>Consignee USCI NO.</dt><dd><%== @delivery.import_company_uscc%></dd>
+              <dt>Consignee Contact</dt><dd><%== @delivery.import_company_contacts%></dd>
+              <dt>Consignee Tel</dt><dd><%== @delivery.import_company_telephone%></dd>
+              <dt>Consignee E-mail</dt><dd><%== @delivery.import_company_email%></dd>
+            </dl>
+          </div>
+          <hr/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

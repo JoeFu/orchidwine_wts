@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<title>Orchid Wine Estate </title>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="favicon.ico">
+	<!-- Web Fonts -->
+	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="/company-assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/company-assets/css/style.css">
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="/company-assets/css/headers/header-v6.css">
+	<link rel="stylesheet" href="/company-assets/css/footers/footer-v1.css">
+	<!-- CSS Implementing Plugins -->
+	<link rel="stylesheet" href="/company-assets/plugins/animate.css">
+	<link rel="stylesheet" href="/company-assets/plugins/line-icons/line-icons.css">
+	<link rel="stylesheet" href="/company-assets/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/company-assets/plugins/animated-headline/css/animated-headline.css">
+	<link rel="stylesheet" href="/company-assets/plugins/parallax-slider/css/parallax-slider.css">
+	<link rel="stylesheet" href="/company-assets/plugins/fancybox/source/jquery.fancybox.css">
+	<link rel="stylesheet" href="/company-assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	<!-- CSS Theme -->
+	<link rel="stylesheet" href="/company-assets/css/theme-colors/red.css" id="style_color">
+	<link rel="stylesheet" href="/company-assets/css/theme-skins/dark.css">
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="/company-assets/css/custom.css">
+</head>
+<body class="header-fixed">
+	<div class="wrapper">
+		<!--=== Header v6 ===-->
+		<div class="header-v6 header-transparent header-dark-dropdown header-sticky">
+			<!-- Navbar -->
+			<div class="navbar mega-menu" role="navigation">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="menu-container">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						</button>
+						<!-- Navbar Brand -->
+						<div class="navbar-brand">
+							<a href="/">
+								<img class="default-logo" src="/company-assets/img/logo3-light.png" alt="Logo">
+								<img class="shrink-logo" src="/company-assets/img/logo3-dark.png" alt="Logo">
+							</a>
+						</div>
+						<!-- ENd Navbar Brand -->
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-responsive-collapse">
+						<div class="menu-container">
+							<ul class="nav navbar-nav">
+								<li><a href="/" class="page-scroll">Index</a></li>
+								<li><a href="/#business" class="page-scroll">Core Business</a></li>
+								<li><a href="/#wts" class="page-scroll">WTS</a></li>
+								<li><a href="/#discovery" class="page-scroll">Explore</a></li>
+								<!-- Blog -->
+								<li class="dropdown">
+									<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+										Orchid Wines
+									</a>
+									<ul class="dropdown-menu">
+										<% WebProductCategory.order('sort asc').select(:id, :en_name).each do |cate| %>
+										<li><a href="/products/<%== cate.id %>"><%== cate.en_name %></a></li>
+										<% end %>
+									</ul>
+								</li>
+								<!-- End product -->
+								
+								<li><a href="/#export" class="page-scroll">Export</a></li>
+								<li><a href="/#contact" class="page-scroll">Contact us</a></li>
+								<li><a href="/cn"><i class="menu-icons-style radius-x fa fa-globe"></i> 中文</a></li>
+							</ul>
+						</div>
+						</div><!--/navbar-collapse-->
+					</div>
+				</div>
+				<!-- End Navbar -->
+			</div>
+			<!--=== End Header v6 ===-->
+			<!--=== Full Height Text Rotater ===-->
+			
+			<div class="fullheight bg-color-darker" style="background-image: url(company-assets/img/bg/1.jpg); position:relative; background-repeat: no-repeat;background-attachment:local;background-position-x: center;background-position-y: center; background-size:cover">
+				<div class="container valign__middle text-center">
+					<span class="promo-text-v1 color-light animated fadeInDown wow margin-bottom-10" data-wow-duration="1.5s" data-wow-delay=".5s">
+						Orchid Wine Estate
+					</span>
+					<h2 class="promo-text-v2 color-light cd-headline letters type margin-bottom-20">
+					Taste Authentic South Australia
+					</h2>
+				</div>
+			</div>
+			<!--=== End Full Height Text Rotater ===-->
+			<!--=== Content Part ===-->
+			<div class="content-md" id="business">
+				<div class="container">
+					<div class="headline-center margin-bottom-60">
+						<div class="col-md-12 md-margin-bottom-50">
+							<div class="row">
+								<div class="col-md-12"><h2 class="headline-brd">Core Business</h2></div>
+								<!--
+								<div class="text-left col-md-12"><p >澳麒酒业作为澳大利亚本土的新兴葡萄酒公司，秉承“专业，高效，创新”的公司理念，为消费者提供最原汁的澳大利亚葡萄酒产品。</p></div>
+								-->
+							</div>
+							<br>
+						</div>
+						</div><!--/end Headline Center-->
+						<!-- Service Box -->
+						<div class="row text-center margin-bottom-60">
+							<div class="col-md-4 md-margin-bottom-50">
+								<div class="row">
+									<div class="col-md-12"><img alt="" src="/company-assets/img/icons/flat/01.png" class="image-md margin-bottom-20"></div>
+									<div class="col-md-12"><h2 class="title-v3-md margin-bottom-10">Sales Agent</h2></div>
+									<div class="text-left col-md-12"><p >Orchid Wines has a vast portfolio, which are grouped into 4 series, containing 8 grape varieties.</p>
+									<p>Our grapes are grown and sourced from prominent areas of South Australia, including Barossa Valley, Langhorne Creek, McLaren Vale, Limestone Coast, Coonawarra and Adelaide Hills.</p>
+								<p>Orchid Wine Estate offers excellent budgeting, exporting, ordering and logistics services. Bringing a superior buying and consumption experience to all of our customers.</div>
+							</div>
+						</div>
+						<div class="col-md-4 md-margin-bottom-50">
+							<div class="row">
+								<div class="col-md-12"><img alt="" src="/company-assets/img/icons/flat/02.png" class="image-md margin-bottom-20"></div>
+								<div class="col-md-12"><h2 class="title-v3-md margin-bottom-10">Customized Wine</h2></div>
+								<div class="text-left col-md-12"><p>Our senior brand design team elaborate on original ideas to create a fresh image, leading to successful brand recognition. </p>
+								<p>Your brand image will be unique to your business and can be tailored to your target market. </p>
+								<p>Orchid Wine Estate production chain offers an efficient one-stop shop for your wine export business. Having a confident buying experience is paramount to us. Delivery straight to your door. </p></div>
+							</div>
+						</div>
+						<div class="col-md-4 md-margin-bottom-50">
+							<div class="row">
+								<div class="col-md-12"><img alt="" src="/company-assets/img/icons/flat/03.png" class="image-md margin-bottom-20"></div>
+								<div class="col-md-12"><h2 class="title-v3-md margin-bottom-10">Wine Industry Access Investment</h2></div>
+								<div class="text-left col-md-12"><p>We create a bridge between Australia and China, using our resources to merge and acquire strong relationships, that bring more opportunities for overseas distribution. </p>
+								<p>Our services include but not limited to: vineyard purchasing and maintenance; ownership transfer; hosting services and grape plantation.
+								</p></div>
+							</div>
+						</div>
+					</div>
+					<!-- End Service Box -->
+					</div><!--/container -->
+					<div class="bg-color-light" id="wts">
+						<div class="container content-sm">
+							<div class="row">
+								<div class="col-md-6 md-margin-bottom-50">
+									<img alt="" src="/company-assets/img/main/imac2.png" class="img-responsive">
+								</div>
+								<div class="col-md-6">
+									<br><br><br>
+									<div class="headline-left margin-bottom-30">
+										<h2 class="headline-brd">WTS Online Ordering System</h2>
+										<p>Advanced WTS online ordering system, implement custom products online order, branded customization and export logistics, real time tracking service.</p>
+									</div>
+									<ul class="list-unstyled lists-v2 margin-bottom-30">
+										<li><i class="fa fa-check"></i> Online ordering customized wine brand</li>
+										<li><i class="fa fa-check"></i> Real time order status tracking system</li>
+										<li><i class="fa fa-check"></i> Orchid wine ordering system</li>
+										<li><i class="fa fa-check"></i> Wine label and trademark digital company-assets management</li>
+									</ul>
+									<a class="btn-u btn-brd btn-brd-hover btn-u-red" href="https://wts.orchidwine.com.au/admin/login" target="_blank">Order now</a>
+									</div><!--/end row-->
+								</div>
+							</div>
+						</div>
+						<div div class="headline-center margin-bottom-20" id="discovery" ></div>
+						<div class="container content-sm" >
+							<div class="text-center margin-bottom-60">
+								<div class="col-md-12 md-margin-bottom-50">
+									<div class="row">
+										<div class="col-md-12 headline-center"><h2>Explore Orchid</h2></div>
+										<div class="text-left col-md-12"><p >Marking high quality wine has always been the core principle of Orchid Wine Estate. To 'Share the best SA wine with the world', We strictly control the whole process from grape growing, wine making, bottling to transportation etc. We are not only making wine, we also dig into the Australian wine culture and admire the Australian life style 'Perfect balance of work, life and family'.</p></div>
+									</div>
+									<br>
+								</div>
+								</div><!--/end Headline Center-->
+								<!-- Portfolio Box -->
+								<ul class="list-unstyled row portfolio-box">
+									<li class="col-sm-4 md-margin-bottom-50">
+										<a href="/company-assets/img/main/img9.jpg" title="Planting" data-rel="gallery" class="thumbnail fancybox">
+											<img alt="" src="/company-assets/img/main/img9.jpg" class="full-width img-responsive">
+										</a>
+										<div class="headline-left margin-bottom-10"><h3 class="headline-brd">Viticulture</h3></div>
+										<p>Good grape is the key to the good wine. Orchid vineyards scatter in 4 major wine regions in South Australia, with 3 viticulture experts, which guarantees orchid wines are always made of best grapes.</p>
+									</li>
+									<li class="col-sm-4 md-margin-bottom-50">
+										<a href="/company-assets/img/main/img22.jpg" title="Project Two" data-rel="gallery" class="thumbnail fancybox">
+											<img alt="" src="/company-assets/img/main/img22.jpg" class="full-width img-responsive">
+										</a>
+										<div class="headline-left margin-bottom-10"><h3 class="headline-brd">Wine Making</h3></div>
+										<p>Orchid winery and vineyard sits atop cave pocketed limestone on the very edge of the South Australian coastline. Far removed from famous wine regions and manipulative viticulture this biodynamic winery is unique. Wines aim at expressing the vineyard… wines with a sense of place; and reflecting the people, with the aim of embracing innovative ideas and wine styles</p>
+									</li>
+									<li class="col-sm-4">
+										<a href="/company-assets/img/main/img18.jpg" title="Project Three" data-rel="gallery" class="thumbnail fancybox">
+											<img alt="" src="/company-assets/img/main/img18.jpg" class="full-width img-responsive">
+										</a>
+										<div class="headline-left margin-bottom-10"><h3 class="headline-brd">Wine Tasting</h3></div>
+										<p>Orchid wine makers with over 40 years wine making experience strictly control the wine quality by picking the best grapes, rating and tasting at different stage. Present the best selection of wines to consumers.</p>
+									</li>
+								</ul>
+								<!-- End Portfolio Box -->
+								</div><!--/end container-->
+								<!-- Flat Background Block -->
+								<div class="flat-bg-block-v1 parallaxBg margin-bottom-60 " id="product">
+									<div class="container">
+										<div class="row">
+											<div class="col-md-2 md-margin-bottom-60">
+												<div class="headline-left margin-bottom-20">
+													<h2 class="headline-brd">Orchid Wines</h2>
+													<p>Tasting original South Australia, enjoy the free life style. Orchid wines present you rich wine experiences.</p>
+													</div><!--/end Headline Left-->
+												</div>
+												<div class="col-md-10">
+													<img alt="" src="/company-assets/img/main/products.png" class="img-responsive">
+													<div class="row">
+														<% WebProductCategory.order('sort asc').select(:id, :en_name).each do |cate| %>
+														<div class="col-lg-2 col-md-2 col-xs-4"><a class="margin20 product" href="http://www.orchidwine.com.au/products/<%== cate.id %>" target="_blank"><i class="fa fa-chevron-circle-right "></i> <%== cate.en_name %></a></div>
+														<% end %>
+													</div>
+												</div>
+												
+											</div>
+											
+											</div><!--/end container-->
+										</div>
+										<!-- End Flat Background Block -->
+										
+										<div class="container">
+											<div class="headline-left margin-bottom-40">
+												<h2 class="headline-brd">Orchid Wine Estate</h2>
+												</div><!--/end Headline Left-->
+												<div class="row margin-bottom-60">
+													<!-- Owl Carousel v5 -->
+													<div class="col-sm-6">
+														<div class="owl-carousel-v5">
+															<div class="owl-slider-v5">
+																<div class="item">
+																	<img class="full-width img-responsive" src="/company-assets/img/main/img1.jpg" alt="">
+																</div>
+																<div class="item">
+																	<img class="full-width img-responsive" src="/company-assets/img/main/img2.jpg" alt="">
+																</div>
+																<div class="item">
+																	<img class="full-width img-responsive" src="/company-assets/img/main/img3.jpg" alt="">
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- End Owl Carousel v5 -->
+													<div class="col-sm-6">
+														<p><a href="#" target="_blank">[CBD Office] </a>Located in CBD in Adelaide. Australia Post is just 200 meters away. Main functions: Business Negotiation, Product Design, Production Coordination, Enterprise Training.</p><br>
+													</div>
+													</div><!--/end row-->
+													</div><!--/end container-->
+													<div class="bg-color-light" id="export">
+														<div class="container" >
+															<div class="headline-center margin-bottom-60 " ></div>
+															<div class="headline-center" >
+																<h2>Efficient Export</h2>
+																</div><!--/end Headline Center-->
+																<div class="row margin-bottom-60">
+																	<div class="col-md-4">
+																		<div class="content-boxes-v5 margin-bottom-30">
+																			<i class="rounded-x icon-layers"></i>
+																			<div class="overflow-h">
+																				<h3 class="no-top-space"><a href="" target="blank">Product Range</a></h3>
+																				<p>Diverse wine selections, over 20 different wines</p>
+																			</div>
+																		</div>
+																		<div class="content-boxes-v5 md-margin-bottom-30">
+																			<i class="rounded-x icon-earphones-alt"></i>
+																			<div class="overflow-h">
+																				<h3 class="no-top-space"><a href="" target="blank">Customer Service</a></h3>
+																				<p>10 staff customer service team, follow up your orders</p>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="content-boxes-v5 margin-bottom-30">
+																			<i class="rounded-x icon-wrench "></i>
+																			<div class="overflow-h">
+																				<h3 class="no-top-space"><a href="https://wts.orchidwine.com.au/" target="blank">Branded Customization</a></h3>
+																				<p>Professional design team tailoring your wine brands</p>
+																			</div>
+																		</div>
+																		<div class="content-boxes-v5 md-margin-bottom-30">
+																			<i class="rounded-x icon-user "></i>
+																			<div class="overflow-h">
+																				<h3 class="no-top-space"><a href="https://wts.orchidwine.com.au/" target="blank">Order Tracking System</a></h3>
+																				<p>Advanced WTS Online Ordering System, Real time order status tracking</p>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-4">
+																		<div class="content-boxes-v5 margin-bottom-30">
+																			<i class="rounded-x icon-settings"></i>
+																			<div class="overflow-h">
+																				<h3 class="no-top-space"><a href="http://harbourbottling.com/" target="blank">Hi-speed Production</a></h3>
+																				<p>A new bottling line from Italy, which can fill, label and pack 3000 bottles per hour</p>
+																			</div>
+																		</div>
+																		<div class="content-boxes-v5 md-margin-bottom-30">
+																			<i class="rounded-x icon-star"></i>
+																			<div class="overflow-h">
+																				<h3 class="no-top-space"><a href="" target="blank">SA One-stop bottling Shop</a></h3>
+																				<p>Just 500 meters from the main export hub.</p>
+																			</div>
+																		</div>
+																	</div>
+																	</div><!--/end row-->
+																	</div><!--/end container-->
+																	</div><!--/end export-->
+																</div>
+																<!-- End Content Part -->
+																<!--=== Footer Version 1 ===-->
+																<div class="footer-v1" id="contact">
+																	<div class="footer">
+																		<div class="container">
+																			<div class="row">
+																				<!-- About -->
+																				<div class="col-md-3 md-margin-bottom-40">
+																					<a href="/"><img id="logo-footer" class="footer-logo" src="/company-assets/img/logo2-default.png" alt=""></a>
+																					<p>Founded in 2013, our company philosophy "Be Professional, Efficient and Innovative". Professional team is the escort of your products.</p>
+																					<p>The vertically-integrated development of the whole industrial chain and diversified products and services will meet your various demands.</p>
+																					<p>You are welcome to contact and visit us.</p>
+																					</div><!--/col-md-3-->
+																					<!-- End About -->
+																					<!-- Latest -->
+<div class="col-md-2 md-margin-bottom-40">																	<div class="posts">
+	<div class="headline"><h2>Orchid Wine Adelaide</h2></div>
+	     <ul class="list-unstyled latest-list">
+		   <li>
+		      <small>Address</small>
+		      <a href="https://www.orchidwine.com.au/contact">234/236 Grote Street, Adelaide, SA 5000</a>															</li>
+		   <li>																						   <small>Phone</small>
+		      <a href="#">＋61 8 8410 4635</a>																	        </li>
+		   <li>																						<small>E-mail</small>
+		       <a href="mailto:info@orchidwine.com.au">info@orchidwine.com.au</a>												        </li>
+	    </ul>																				       </div>
+																						</div><!--/col-md-3-->
+																						<!-- End Latest -->
+																						<!-- Link List -->
+																						<div class="col-md-2 md-margin-bottom-40">
+																							<div class="headline"><h2>Melbourne Office</h2></div>
+																							<ul class="list-unstyled latest-list">
+																								<li>
+																									<small>Address</small>
+																									<a href="#"> Unit 42/31-39 Norcal Road Nunawading, VIC 3131</a>
+																									
+																								</li>
+																								<li>
+																									<small>Phone</small>
+																									<a href="#"> +61 3 88381017</a>
+																								</li>
+																								<li>
+																									<small>E-mail</small>
+																									<a href="mailto: info.mel@orchidwine.com.au"> info.mel@orchidwine.com.au</a>
+																								</li>
+																							</ul>
+																							</div><!--/col-md-3-->
+																							<!-- End Link List -->
+																							<!-- Address -->
+																							<div class="col-md-2 map-img md-margin-bottom-40">
+																								<div class="headline"><h2>Perth Office</h2></div>
+																								<ul class="list-unstyled latest-list">
+																									<li>
+																										<small>Address</small>
+																										<a href="#">6 Birchgrove Court, Bibra Lake, WA6163</a>
+																										
+																									</li>
+																									<li>
+																										<small>Phone</small>
+																										<a href="#"> +61 448 066 101</a>
+																									</li>
+																									<li>
+																										<small>E-mail</small>
+																										<a href="mailto:stella.w@orchidwine.com.au">stella.w@orchidwine.com.au</a>
+																									</li>
+																								</ul>
+																								</div><!--/col-md-3-->
+																								<!-- End Address -->
+<div class="col-md-2 md-margin-bottom-40">                                                                                                                                      <div class="posts">
+        <div class="headline"><h2>Brisbane Office</h2></div>
+             <ul class="list-unstyled latest-list">
+                   <li>
+                      <small>Address</small>
+                      <a href="#">150 Didbrook st，Robertson，QLD, 4109</a>                                                                                                                      </li>
+                   <li>                                                                                                                                                                            <small>Phone</small>
+                      <a href="#">+61 422 556 888</a>                                                                                                                                          </li>
+                   <li>                                                                                                                                                                         <small>E-mail</small>
+                       <a href="mailto:johnny.chen@orchidwine.com.au">johnny.chen@orchidwine.com.au</a>                                                                                                       </li>
+            </ul>                                                                                                                                                                      </div>
+
+   </div>
+
+																							</div>
+																						</div>
+																						</div><!--/footer-->
+																						<section class="bg-gray">
+																							<div class="copyright">
+																								<div class="container">
+																									<div class="row">
+																										<div class="col-md-6">
+																											<p> 2013 - 2019 &copy; Orchid Wine Group All Rights Reserved.
+																											</p>
+																										</div>
+																										<!-- Social Links -->
+																										<div class="col-md-6">
+																											<ul class="footer-socials list-inline">
+																												<li>
+																													<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+																														<i class="fa fa-facebook"></i>
+																													</a>
+																												</li>
+																												<li>
+																													<a href="#" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+																														<i class="fa fa-google-plus"></i>
+																													</a>
+																												</li>
+																											</ul>
+																										</div>
+																										<!-- End Social Links -->
+																									</div>
+																								</div>
+																								</div><!--/copyright-->
+																							</div>
+																							<!--=== End Footer Version 1 ===-->
+																							</div><!--/wrapper-->
+																						</section>
+																						
+																						<!-- JS Global Compulsory -->
+																						<script src="/company-assets/plugins/jquery/jquery.min.js"></script>
+																						<script src="/company-assets/plugins/jquery/jquery-migrate.min.js"></script>
+																						<script src="/company-assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+																						<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+																						<!-- JS Implementing Plugins -->
+																						<script src="/company-assets/plugins/back-to-top.js"></script>
+																						<script src="/company-assets/plugins/smoothScroll.js"></script>
+																						<!-- <script src="/company-assets/plugins/backstretch/backstretch-ini.js"></script> -->
+																						<script src="/company-assets/plugins/wow-animations/js/wow.min.js"></script>
+																						<!-- <script src="/company-assets/plugins/animated-headline/js/modernizr.js"></script> -->
+																						<!-- <script src="/company-assets/plugins/animated-headline/js/animated-headline.js"></script> -->
+																						<script src="/company-assets/plugins/jquery.parallax.js"></script>
+																						<script src="/company-assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+																						<script src="/company-assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+																						<!-- JS Customization -->
+																						<!-- <script src="/company-assets/js/creative.js"></script> -->
+																						<!-- <script src="/company-assets/js/creative.min.js"></script> -->
+																						<script src="/company-assets/js/custom.js"></script>
+																						<!-- JS Page Level -->
+																						<script src="/company-assets/js/app.js"></script>
+																						<script src="/company-assets/js/plugins/fancy-box.js"></script>
+																						<script src="/company-assets/js/plugins/owl-carousel.js"></script>
+																						<script src="/company-assets/js/plugins/style-switcher.js"></script>
+																						<script type="text/javascript">
+																							jQuery(document).ready(function() {
+																								App.init();
+																								new WOW().init();
+																								App.initParallaxBg();
+																								FancyBox.initFancybox();
+																								OwlCarousel.initOwlCarousel();
+																								StyleSwitcher.initStyleSwitcher();
+																							});
+																						</script>
+																						<!--[if lt IE 9]>
+																						<script src="/company-assets/plugins/respond.js"></script>
+																						<script src="/company-assets/plugins/html5shiv.js"></script>
+																						<script src="/company-assets/plugins/placeholder-IE-fixes.js"></script>
+																						<![endif]-->
+																					</body>
+																				</html>

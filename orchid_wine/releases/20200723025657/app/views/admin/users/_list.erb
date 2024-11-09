@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-striped table-vcenter">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>名称缩写</th>
+        <th>电话/邮箱</th>
+        <th>地址</th>
+        <th class="text-center" width="5%">订单</th>
+        <th class="text-center" width="8%">销售</th>
+        <th class="text-center" width="1%">操作</th>
+        <th class="text-center" width="1%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.map do |user|%>
+      <tr>
+        <td><%== user.a_link %></td>
+        <td><%== user.company_code %></td>
+        <td><%== user.telphone %><br/><%== user.email %></td>
+        <td><%== user.address %></td>
+        <td class="text-center"><%== user.a_link user.orders.size %></td>
+        <td class="text-center"><%== user.admin_name %></td>
+        <td class="text-center">
+          <%== edit_btn_tag(user) if can?(:edit, :User) %>
+        </td>
+        <td class="text-center">
+            <% if @admin_session.role == 0 && user.orders.size.zero? %>
+          <%== destroy_btn_tag(user) if can?(:destroy, :User) %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

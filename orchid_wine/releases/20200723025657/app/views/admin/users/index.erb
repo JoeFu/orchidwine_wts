@@ -1,0 +1,40 @@
+<div id="page-head">
+  <div id="page-title">
+    <h1 class="page-header text-overflow">客户管理</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><i class="ion-home"></i></li>
+    <li>用户管理</li>
+    <li class="active">客户管理</li>
+  </ol>
+</div>
+<div id="page-content">
+  <div class="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">客户列表</h3>
+    </div>
+    <div class="panel-body">
+      <div class="pad-btm form-inline">
+        <%= form_tag("/admin/users", method: :get) do -%>
+        <div class="row">
+          <div class="col-sm-3 table-toolbar-left">
+            <%== new_btn_tag("/admin/users/new", '添加客户') if can?(:new, :User) %>
+          </div>
+          <div class="col-sm-9 table-toolbar-right">
+            <div class="form-group">
+              <%= text_field_tag 'q', params[:q], placeholder: '搜索客户姓名', class: "form-control"%>
+            </div>
+            <%== submit_tag %>
+            <%== clear_tag "/admin/users" %>
+          </div>
+          
+        </div>
+        <% end -%>
+      </div>
+      <%= render 'admin/users/list' %>
+      <div class="row">
+        <%== table_footer_tag(@users) %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<%= form_tag(@form_action + '?step=3', method: @form_method, class: 'form-horizontal', id: 'orders-new-ocean') do -%>
+<div class="panel">
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">起运港口</label>
+			<div class="col-lg-6 col-md-6">
+				<select class="form-control" name="ocean_start_id">
+					<%== options_for_select(Hash[Order::SELLER_ELIVERY_WHARF].invert, @order.ocean_start_id) %>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">目的港口</label>
+			<div class="col-lg-6 col-md-6">
+				<input type="text" name='ocean_dest_name' placeholder="目的港口" class="form-control"
+					value="<%== @order.ocean_dest_name %>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">海运保险</label>
+			<div class="col-lg-6 col-md-6">
+				<select class="form-control" name="ocean_insurance">
+					<%== options_for_select({1 => '是', 2 => '否'}.invert, @order.ocean_insurance) %>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-8 col-lg-offset-2">
+				<hr />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">海运承运方</label>
+			<div class="col-lg-6 col-md-6">
+				<select class="form-control" name="ocean_assign">
+					<%== options_for_select({1 => '澳麒指定（Orchid Wine Arrange）', 2 => '客户指定（Customer Arrange）'}.invert, @order.ocean_assign) %>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">隔热棉要求</label>
+			<div class="col-lg-6 col-md-6">
+				<select class="form-control" name="ocean_felt">
+					<%== options_for_select({1 => '否', 2 => '是'}.invert, @order.ocean_felt) %>
+				</select>
+			</div>
+		</div>
+		<!-- <div class="form-group">
+			<div class="col-lg-8 col-lg-offset-2">
+				<hr />
+			</div>
+		</div> -->
+		<!-- <div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">海运公司名称</label>
+			<div class="col-lg-6 col-md-6">
+				<input type="text" name='ocean_company_name' placeholder="公司名称" class="form-control"
+					value="<%== @order.ocean_company_name %>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">联系人</label>
+			<div class="col-lg-6 col-md-6">
+				<input type="text" name='ocean_company_contacts' placeholder="联系人" class="form-control"
+					value="<%== @order.ocean_company_contacts %>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">电话</label>
+			<div class="col-lg-6 col-md-6">
+				<input type="text" name='ocean_company_telephone' placeholder="电话" class="form-control"
+					value="<%== @order.ocean_company_telephone %>">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-lg-3 col-md-3 control-label">电子邮箱</label>
+			<div class="col-lg-6 col-md-6">
+				<input type="text" name='ocean_company_email' placeholder="电子邮箱" class="form-control"
+					value="<%== @order.ocean_company_email %>">
+			</div>
+		</div> -->
+	</div>
+</div>
+<% end -%>

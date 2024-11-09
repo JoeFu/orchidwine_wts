@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%== Const::BASE_TITLE %></title>
+    <link rel="icon" type="image/png" href="<%== asset_path('logo.png') %>" />
+    <%= stylesheet_link_tag    'admin', media: 'all' %>
+    <%= javascript_include_tag 'admin' %>
+  </head>
+  <body>
+    <div id="container" class="cls-container">
+      <div id="bg-overlay" class="bg-img img-balloon" style="background-image: url(<%= asset_path('bg.jpg') %>);"></div>
+
+      <div class="cls-content">
+        <div class="cls-content-sm panel">
+          
+          <div class="panel-body">
+            <div class="mar-ver pad-btm login">
+              <h1 class="h3"><%== Const::BASE_TITLE %></h1>
+            </div>
+            <% if flash[:error] %>
+            <div class="panel-alert login">
+              <div class="alert-wrap in">
+                <div class="alert alert-danger" role="alert">
+                  <div class="media">
+                    <h4 class="alert-title"><%== flash[:error] %></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+
+            <% if flash[:success] %>
+            <div class="panel-alert login">
+              <div class="alert-wrap in">
+                <div class="alert alert-success" role="alert">
+                  <div class="media">
+                    <h4 class="alert-title"><%== flash[:success] %></h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+
+            <%= form_tag("/admin/login_post", method: :post, id: 'admin-login') do -%>
+            <div class="form-group">
+              <%= text_field_tag 'user_name', nil, placeholder: '用户名', class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= password_field_tag 'password', nil, placeholder: '密码', class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= rucaptcha_input_tag(class: 'form-control', placeholder: '输入下图中的验证码') %>
+            </div>
+            <div class="form-group">
+              <img alt="验证码" class="rucaptcha-image" src="/rucaptcha" onclick="this.src='/rucaptcha?'+Math.random()">
+            </div>
+            
+            <button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
+            <% end -%>
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+        <p>© <%== Time.now.year %> Orchid Wine.</p>
+      </footer>
+    </div>
+  </body>
+</html>
